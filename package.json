@@ -9,6 +9,9 @@
         "lint": "next lint && stylelint --allow-empty-input 'pages/**/*.css' 'styles/**/*.css'"
     },
     "dependencies": {
+        "@headlessui/react": "^1.7.4",
+        "@heroicons/react": "^2.0.13",
+        "marked": "^4.2.2",
         "next": "13.0.2",
         "react": "18.2.0",
         "react-dom": "18.2.0",
@@ -18,10 +21,9 @@
         "@babel/core": "^7.20.2",
         "@babel/eslint-parser": "^7.19.1",
         "@babel/preset-env": "^7.20.2",
-        "@headlessui/react": "^1.7.4",
-        "@heroicons/react": "^2.0.13",
         "@tailwindcss/typography": "^0.5.7",
         "@tailwindcss/ui": "^0.7.2",
+        "@types/marked": "^4.0.7",
         "@types/node": "^18.11.9",
         "@types/react": "^18.0.25",
         "@types/react-dom": "^18.0.8",

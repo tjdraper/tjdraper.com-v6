@@ -86,7 +86,8 @@
             }
         ],
         "newline-before-return": 1,
-        "import/no-named-default": "off"
+        "import/no-named-default": "off",
+        "react/no-danger": "off"
     },
     "overrides": [
         {
