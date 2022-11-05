@@ -52,7 +52,7 @@ const AppShell = (
                                 <div className="flex flex-1 items-center md:absolute md:inset-y-0 md:left-0">
                                     <div className="flex flex-row-reverse w-full items-center justify-between md:w-auto">
                                         <div className="-mr-2 flex items-center md:hidden">
-                                            <Popover.Button className="inline-flex items-center justify-center rounded-md bg-gray-50 p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+                                            <Popover.Button className="inline-flex items-center justify-center rounded-md bg-gray-50 p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-tjd-red-300">
                                                 <span className="sr-only">Open main menu</span>
                                                 <Bars3Icon className="h-6 w-6" aria-hidden="true" />
                                             </Popover.Button>
@@ -61,7 +61,7 @@ const AppShell = (
                                 </div>
                                 <div className="hidden md:flex md:space-x-10">
                                     {navigation.map((item) => {
-                                        const classes = 'font-medium text-gray-500 hover:text-gray-900';
+                                        const classes = 'font-medium text-tjd-red-500 hover:text-tjd-red-300';
 
                                         if (item.type === NavType.External) {
                                             return (
@@ -105,7 +105,7 @@ const AppShell = (
                                 <div className="overflow-hidden rounded-lg bg-white shadow-md ring-1 ring-black ring-opacity-5">
                                     <div className="flex flex-row-reverse items-center justify-between px-5 pt-1">
                                         <div className="-mr-2">
-                                            <Popover.Button className="inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+                                            <Popover.Button className="inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-tjd-red-300">
                                                 <span className="sr-only">Close main menu</span>
                                                 <XMarkIcon className="h-6 w-6" aria-hidden="true" />
                                             </Popover.Button>
