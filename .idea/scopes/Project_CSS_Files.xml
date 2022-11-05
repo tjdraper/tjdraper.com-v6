@@ -1,0 +1,3 @@
+<component name="DependencyValidationManager">
+  <scope name="Project CSS Files" pattern="file[tjdraper.com-v6]:pages//*||file[tjdraper.com-v6]:styles//*" />
+</component>
