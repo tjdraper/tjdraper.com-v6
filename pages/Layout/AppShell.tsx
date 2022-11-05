@@ -45,9 +45,9 @@ const AppShell = (
         </Head>
         <div>
             <div className="relative">
-                <div className="relative pb-2">
+                <div className="relative py-1 bg-gray-50">
                     <Popover>
-                        <div className="mx-auto max-w-7xl px-4 sm:px-6 pt2 bg-gray-50">
+                        <div className="mx-auto max-w-7xl px-4 sm:px-6">
                             <nav className="relative flex items-center justify-between sm:h-10 md:justify-center" aria-label="Global">
                                 <div className="flex flex-1 items-center md:absolute md:inset-y-0 md:left-0">
                                     <div className="flex flex-row-reverse w-full items-center justify-between md:w-auto">
