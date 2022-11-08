@@ -19,14 +19,14 @@ const Page: NextPage = () => {
             <div className="mx-auto mt-2 max-w-7xl px-4 sm:mt-4 sm:px-6">
                 <div className="text-center">
                     <h1 className="mx-auto max-w-2xl tracking-tight text-gray-900">
-                        <span className="block font-bold text-4xl sm:text-5xl mb-2">
+                        <span className="block font-bold text-4xl sm:text-5xl mb-3">
                             {marked.parseInline(data.heading)}
                         </span>
                         <span className="block text-tjd-red-500 text-md sm:text-xl">
                             {marked.parseInline(data.subHeading)}
                         </span>
                     </h1>
-                    <p className="mx-auto mt-3 max-w-md text-base text-gray-500 sm:text-lg md:mt-5 md:max-w-4xl md:text-xl">
+                    <p className="mx-auto mt-2 max-w-md text-base text-gray-500 sm:text-lg md:mt-3 md:max-w-4xl">
                         {marked.parseInline(data.subHeading2)}
                     </p>
                 </div>
