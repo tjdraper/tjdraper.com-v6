@@ -4,16 +4,39 @@
     "private": true,
     "scripts": {
         "dev": "next dev",
-        "build": "next build",
+        "build": "yarn run build-cli && ./cli hello-world && next build",
         "start": "next start",
-        "lint": "next lint && stylelint --allow-empty-input 'pages/**/*.css' 'styles/**/*.css'"
+        "lint": "next lint && stylelint --allow-empty-input 'pages/**/*.css' 'styles/**/*.css'",
+        "build-cli": "rm -rf cliSrc/dist && yarn tsc --project cliSrc"
     },
+    "oclif": {
+        "bin": "cli",
+        "dirname": "cliSrc",
+        "commands": "./cliSrc/dist",
+        "plugins": [
+            "@oclif/plugin-help",
+            "@oclif/plugin-plugins"
+        ],
+        "topicSeparator": " ",
+        "topics": {}
+    },
+    "files": [
+        "/bin",
+        "/dist",
+        "/npm-shrinkwrap.json",
+        "/oclif.manifest.json"
+    ],
     "dependencies": {
         "@headlessui/react": "^1.7.4",
         "@heroicons/react": "^2.0.13",
         "@mdx-js/loader": "^2.0.0-rc.2",
         "@mdx-js/react": "^2.0.0-rc.2",
         "@next/mdx": "^13.0.2",
+        "@oclif/core": "^1.20.4",
+        "@oclif/plugin-help": "^5.1.18",
+        "@oclif/plugin-plugins": "^2.1.7",
+        "cli-color": "^2.0.3",
+        "cli-output": "^1.0.0",
         "fs-extra": "^10.1.0",
         "gray-matter": "^4.0.3",
         "marked": "^4.2.2",
@@ -38,6 +61,8 @@
         "@babel/preset-env": "^7.20.2",
         "@tailwindcss/typography": "^0.5.7",
         "@tailwindcss/ui": "^0.7.2",
+        "@types/cli-color": "^2.0.2",
+        "@types/fs-extra": "^9.0.13",
         "@types/marked": "^4.0.7",
         "@types/mdast": "^3.0.10",
         "@types/mdx": "^2.0.3",
