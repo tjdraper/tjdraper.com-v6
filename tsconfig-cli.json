@@ -2,6 +2,9 @@
     "include": [
         "cliSrc/src/**/*"
     ],
+    "ts-node": {
+        "esm": true
+    },
     "compilerOptions": {
         "esModuleInterop": true,
         "declaration": true,

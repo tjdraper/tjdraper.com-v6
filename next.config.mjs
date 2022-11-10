@@ -1,9 +1,6 @@
 import remarkFrontmatter from 'remark-frontmatter';
 import remarkMdxFrontmatter from 'remark-mdx-frontmatter';
 import smartypants from 'remark-smartypants';
-import PublishBlogPages from './PublishBlogPages.mjs';
-
-await PublishBlogPages();
 
 export default {
     poweredByHeader: false,

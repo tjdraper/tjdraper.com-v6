@@ -15,8 +15,6 @@ if (process.argv[2] === 'dev-mode') {
 
     // Start the CLI
     oclif.run().then(oclif.flush).catch(oclif.Errors.handle);
-
-    return;
+} else {
+    oclif.run().then(require('@oclif/core/flush')).catch(require('@oclif/core/handle'));
 }
-
-oclif.run().then(require('@oclif/core/flush')).catch(require('@oclif/core/handle'));
