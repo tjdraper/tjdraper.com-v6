@@ -43,8 +43,8 @@ const getPosts = async (props?: GetPostsProps): Promise<Array<Post>> => {
             hasStarted = true;
 
             return true;
-        }).join('/').split('.')
-            .at(0)}`;
+            // eslint-disable-next-line newline-per-chained-call
+        }).join('/').split('.').at(0)}`;
 
         const rawMarkdown = String(fs.readFileSync(file)).toString();
 
@@ -62,9 +62,22 @@ const getPosts = async (props?: GetPostsProps): Promise<Array<Post>> => {
 
         const metaData: MetaData = frontMatter as MetaData;
 
+        let imagePath = null;
+
+        if (metaData.image) {
+            const uriArray = uri.split('/');
+
+            uriArray.pop();
+
+            const uriDir = uriArray.join('/');
+
+            imagePath = `/images${uriDir}/${metaData.image}`;
+        }
+
         return {
             ...metaData,
             uri,
+            imagePath,
             body: String(renderedMarkdown).toString(),
         };
     })) as Array<Post>;

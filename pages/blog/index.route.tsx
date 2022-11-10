@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import AppShell from '../Layout/AppShell';
 import { getIndexData } from './BlogData';
 import IndexData from './BlogData/IndexData';
@@ -33,8 +34,22 @@ const Page = (
                     {indexData.posts.map((post) => (
                         <div key={post.title} className="flex flex-col overflow-hidden rounded-lg shadow-lg">
                             <a href={post.uri} className="block flex-shrink-0">
-                                {/* TODO */}
-                                <img className="h-48 w-full object-cover" src="" alt="" />
+                                {(() => {
+                                    if (post.imagePath) {
+                                        return (
+                                            <Image
+                                                width={414}
+                                                height={414}
+                                                src={post.imagePath}
+                                                alt={post.title}
+                                                className="h-48 w-full object-cover"
+                                                priority
+                                            />
+                                        );
+                                    }
+
+                                    return <div className="bg-red-50 h-48 w-full object-cover" />;
+                                })()}
                             </a>
                             <div className="flex flex-1 flex-col justify-between bg-white p-6">
                                 <div className="flex-1">

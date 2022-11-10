@@ -1,6 +1,5 @@
 ---
 title: On the SCOTUS Marriage Ruling
-isPublished: false
 time: 0944
 type: article
 ---

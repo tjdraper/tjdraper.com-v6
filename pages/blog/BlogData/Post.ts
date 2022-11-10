@@ -8,14 +8,15 @@ enum PostType {
 export interface MetaData {
     uri: string;
     title: string;
-    isPublished: boolean;
     time: number;
     type: PostType;
     linkTitle?: string;
     linkUrl?: string;
+    image?: string;
 }
 
 interface Post extends MetaData {
+    imagePath?: string | null;
     body: string;
 }
 

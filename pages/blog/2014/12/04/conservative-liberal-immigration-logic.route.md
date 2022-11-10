@@ -1,8 +1,8 @@
 ---
 title: Conservative and Liberal Immigration Logic
-isPublished: true
 time: 1300
 type: article
+image: stop-immigration-return-to-sender.jpg
 ---
 
 <p>(<em>by the way, the post image I used above makes me sick to my stomach</em>)</p>
