@@ -6,6 +6,7 @@ enum PostType {
 }
 
 export interface MetaData {
+    uri: string;
     title: string;
     isPublished: boolean;
     time: number;

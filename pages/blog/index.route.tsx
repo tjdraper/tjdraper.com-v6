@@ -32,10 +32,10 @@ const Page = (
                 <div className="mx-auto mt-12 grid max-w-lg gap-5 lg:max-w-none lg:grid-cols-3">
                     {indexData.posts.map((post) => (
                         <div key={post.title} className="flex flex-col overflow-hidden rounded-lg shadow-lg">
-                            <div className="flex-shrink-0">
+                            <a href={post.uri} className="block flex-shrink-0">
                                 {/* TODO */}
                                 <img className="h-48 w-full object-cover" src="" alt="" />
-                            </div>
+                            </a>
                             <div className="flex flex-1 flex-col justify-between bg-white p-6">
                                 <div className="flex-1">
                                     <p className="text-sm font-medium text-indigo-600">
@@ -43,28 +43,14 @@ const Page = (
                                             TODO: Cat Name
                                         </a>
                                     </p>
-                                    <a href="#TODO" className="mt-2 block">
+                                    <a href={post.uri} className="mt-2 block">
                                         <p className="text-xl font-semibold text-gray-900">{post.title}</p>
                                         <p className="mt-3 text-base text-gray-500">TODO</p>
                                     </a>
                                 </div>
                                 <div className="mt-6 flex items-center">
-                                    <div className="flex-shrink-0">
-                                        <a href="#TODO">
-                                            <span className="sr-only">TODO</span>
-                                            <img className="h-10 w-10 rounded-full" src="#" alt="" />
-                                        </a>
-                                    </div>
-                                    <div className="ml-3">
-                                        <p className="text-sm font-medium text-gray-900">
-                                            <a href="#TODO" className="hover:underline">
-                                                TODO
-                                            </a>
-                                        </p>
-                                        <div className="flex space-x-1 text-sm text-gray-500">
-                                            <time dateTime="">Date Todo</time>
-                                            <span aria-hidden="true">&middot;</span>
-                                        </div>
+                                    <div className="flex space-x-1 text-sm text-gray-500">
+                                        <time dateTime="">Date Todo</time>
                                     </div>
                                 </div>
                             </div>

@@ -9,7 +9,7 @@ import remarkParseFrontmatter from 'remark-parse-frontmatter';
 import rehypeRaw from 'rehype-raw';
 import Post, { MetaData } from './Post';
 import getFilesFromDirectory from '../../FileSystem/getFilesFromDirectory';
-import { BlogDirectory } from './constants';
+import { BlogDirectory, BlogFolderName } from './constants';
 
 interface GetPostsProps {
     limit?: number;
@@ -32,8 +32,21 @@ const getPosts = async (props?: GetPostsProps): Promise<Array<Post>> => {
 
     files = files.slice(start, end);
 
-    return await Promise.all(files.map(async (post) => {
-        const rawMarkdown = String(fs.readFileSync(post)).toString();
+    return await Promise.all(files.map(async (file) => {
+        let hasStarted = false;
+
+        const uri = `/${file.split('/').filter((part) => {
+            if (!hasStarted && part !== BlogFolderName) {
+                return false;
+            }
+
+            hasStarted = true;
+
+            return true;
+        }).join('/').split('.')
+            .at(0)}`;
+
+        const rawMarkdown = String(fs.readFileSync(file)).toString();
 
         const renderedMarkdown = await unified()
             .use(remarkParse)
@@ -51,6 +64,7 @@ const getPosts = async (props?: GetPostsProps): Promise<Array<Post>> => {
 
         return {
             ...metaData,
+            uri,
             body: String(renderedMarkdown).toString(),
         };
     })) as Array<Post>;
