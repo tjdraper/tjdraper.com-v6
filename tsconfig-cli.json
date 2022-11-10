@@ -1,13 +1,14 @@
 {
     "include": [
-        "src/**/*"
+        "cliSrc/src/**/*"
     ],
     "compilerOptions": {
+        "esModuleInterop": true,
         "declaration": true,
         "importHelpers": true,
         "module": "commonjs",
-        "outDir": "dist",
-        "rootDir": "src",
+        "outDir": "cliSrc/dist",
+        "rootDir": ".",
         "strict": true,
         "target": "es2019"
     }
