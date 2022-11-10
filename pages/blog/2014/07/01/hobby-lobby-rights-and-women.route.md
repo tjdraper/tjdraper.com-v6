@@ -1,0 +1,50 @@
+---
+title: Hobby Lobby, Rights, and Women
+type: article
+image: hobby-lobby-scotus.jpg
+tags:
+  - Life
+  - Opinion
+  - Politics
+---
+
+<p>The Supreme Court of the United States <a href="http://www.politico.com/story/2014/06/supreme-court-hobby-lobby-decision-contraception-mandate-108429.html">handed down their decision</a> in the Hobby Lobby case. That decision was in favor of liberty. Hobby Lobby has been fighting for the right to <em>not</em> provide and pay for the type of "healthcare" that can cause an abortion of a tiny little baby in the womb. The Supreme Court has ruled that they do indeed have the right, as one would expect in a free country.</p>
+
+<p>After that decision was handed down, my Twitter stream lit up in a blaze of righteous anger from those on the side of death. The general consensus from moderates to liberals is that Hobby Lobby is being allowed to flaunt the law of the land and, what's next, someone refusing healthcare altogether? The shock and horror.</p>
+
+<p>Let me be clear, I think it is immoral and repugnant that any entity is required by the laws of our land to provide anything for anyone. A corporation is run by people with convictions and morals. You would not require of me that I provide for the general welfare of my neighbor <sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup> so why do we require it of employers? We've made corporations this faceless entity that obviously has resources beyond our comprehension so they just need to buckle up, the CEO should sell a yacht or three, and provide whatever we the people want.</p>
+
+<p>It occurs to me that if I had my way, and corporations were not these big legal entities that we see them as today, but were simply seen as individuals who formed a partnership together, perhaps a lot of this wrongheaded thinking would go away. But I digress.</p>
+
+<p>The tack I wish to take here is this; I keep seeing this type of phrase tossed around negatively about the SCOTUS decision:</p>
+
+<pre>
+<code>We live in a country where corporations have more rights than women.
+</code></pre>
+
+<p>This is at best a misleading statement, meant to stir up an emotional response <sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup>. The very premise of the statement is based on a false assumption. The assumption is that a right was taken away from women in this decision to allow Hobby Lobby to not fund murder.</p>
+
+<p>In fact, no rights were taken away from Women, and some were given back to Hobby Lobby. Women may still have an abortion in this country, as sick and sad as that may be. What has changed, however, is that Women may not expect Hobby Lobby to be forced to fund such a heinous act. Note that we can still expect Hobby Lobby to be forced to fund all manor of other healthcare needs. <sup id="fnref:3"><a href="#fn:3" rel="footnote">3</a></sup></p>
+
+<p>But we have devolved in this country — in our modern society — to the point where we perceive that whatever our heart desires is a right. We desire that woman should be able to murder their unborn children and that this service should be rendered unto them for no cost out of their own pocket. Someone has to foot the bill, why not the employers? To us, freedom means free things for the masses. But this is not liberty, this is tyranny.</p>
+
+<p>To illustrate, let us suppose that what I and everyone else in the country these days wants, is for employers to provide a Ferrari to all employees. One of the companies decides they can't afford to do this and so they don't provide it to me. Is my liberty now infringed upon because my employer would not provide me with what I want? Would I say that the employer has invaded my garage and denied me access to a Ferrari? No one in their right mind would answer this in the affirmative, and yet that's exactly what's going on. Only in this case the stakes are much higher. Those in charge at Hobby Lobby have a moral issue with the murder of babies (I mean, I can't imagine why, right?) and so they do not want to be party to those murders. The loony leftists would like to require that Hobby Lobby provide this type of healthcare.</p>
+
+<p>Look, I'm just going to come right out and say this. You can call me out over on Facebook or Twitter if you like. You can accuse me of making this an "us versus them" debate, and that's fine because I am. I draw the line at murder, so sue me. Anyone who cannot see this issue for what it is is party to the evil that has been spreading over this country like a plague. God has sent a blindness upon us so that we no longer recognize good from evil. We cannot recognize the clarity of this situation and what is happening. We can no longer distinguish between freedom and liberty, and the will of a people whose hearts and minds want nothing but wickedness.</p>
+
+<p>So yes, this is about liberty. It is about those who do not want liberty, but want to have their desires met without regard for others, and those who want liberty to be evenly applied to all.</p>
+
+<div class="footnotes">
+<hr />
+<ol>
+	<li id="fn:1">
+	<p>Well, at least not directly, but that’s another post. <a href="#fnref:1" rev="footnote">↩</a></p>
+	</li>
+	<li id="fn:2">
+	<p>A more cynical view is that it is an outright attempt at guilt manipulation. <a href="#fnref:2" rev="footnote">↩</a></p>
+	</li>
+	<li id="fn:3">
+	<p>Which I still find morally repugnant. Government should in no way be involved in a business negotiation, which is what is going on in an agreement between employer and employee. <a href="#fnref:3" rev="footnote">↩</a></p>
+	</li>
+</ol>
+</div>
