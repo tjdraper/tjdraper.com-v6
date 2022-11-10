@@ -37,66 +37,76 @@ const Page = (
                         </h2>
                     </div>
                     <div className="mx-auto mt-12 grid max-w-lg gap-5 lg:max-w-none lg:grid-cols-3">
-                        {indexData.posts.map((post) => (
-                            <div key={post.title} className="flex flex-col overflow-hidden rounded-lg shadow-lg">
-                                <a href={post.uri} className="block flex-shrink-0">
-                                    {(() => {
-                                        if (post.imagePath) {
-                                            return (
-                                                <Image
-                                                    width={414}
-                                                    height={414}
-                                                    src={post.imagePath}
-                                                    alt={post.title}
-                                                    className="h-48 w-full object-cover"
-                                                    priority
-                                                />
-                                            );
-                                        }
+                        {indexData.posts.map((post) => {
+                            const { yyyy, mm, dd } = post;
 
-                                        return <div className="bg-tjd-red-100 h-48 w-full object-cover" />;
-                                    })()}
-                                </a>
-                                <div className="flex flex-1 flex-col justify-between bg-white p-6">
-                                    <div className="flex-1">
-                                        <p className="text-sm font-medium">
-                                            {(() => {
-                                                if (!post.tags || post.tags?.length < 1) {
-                                                    return '';
-                                                }
+                            const date = new Date(`${yyyy}-${mm}-${dd}T13:00:00`);
 
+                            return (
+                                <div key={post.title} className="flex flex-col overflow-hidden rounded-lg shadow-lg">
+                                    <a href={post.uri} className="block flex-shrink-0">
+                                        {(() => {
+                                            if (post.imagePath) {
                                                 return (
-                                                    <>
-                                                        Tags:
-                                                        {' '}
-                                                        {post.tags.map((tag, index) => (
-                                                            <span key={`blog-tag-${tag}`}>
-                                                                {index !== 0 && ', '}
-                                                                <Link
-                                                                    href={`/blog/tag/${tag}`}
-                                                                    className="text-tjd-red-500 hover:underline"
-                                                                >
-                                                                    {tag}
-                                                                </Link>
-                                                            </span>
-                                                        ))}
-                                                    </>
+                                                    <Image
+                                                        width={414}
+                                                        height={414}
+                                                        src={post.imagePath}
+                                                        alt={post.title}
+                                                        className="h-48 w-full object-cover"
+                                                        priority
+                                                    />
                                                 );
-                                            })()}
-                                        </p>
-                                        <a href={post.uri} className="mt-2 block">
-                                            <p className="text-xl font-semibold text-gray-900">{post.title}</p>
-                                            <p className="mt-3 text-base text-gray-500">TODO</p>
-                                        </a>
-                                    </div>
-                                    <div className="mt-6 flex items-center">
-                                        <div className="flex space-x-1 text-sm text-gray-500">
-                                            <time dateTime="">Date Todo</time>
+                                            }
+
+                                            return <div className="bg-tjd-red-100 h-48 w-full object-cover" />;
+                                        })()}
+                                    </a>
+                                    <div className="flex flex-1 flex-col justify-between bg-white p-6">
+                                        <div className="flex-1">
+                                            <p className="text-sm font-medium">
+                                                {(() => {
+                                                    if (!post.tags || post.tags?.length < 1) {
+                                                        return '';
+                                                    }
+
+                                                    return (
+                                                        <>
+                                                            Tags:
+                                                            {' '}
+                                                            {post.tags.map((tag, index) => (
+                                                                <span key={`blog-tag-${tag}`}>
+                                                                    {index !== 0 && ', '}
+                                                                    <Link
+                                                                        href={`/blog/tag/${tag}`}
+                                                                        className="text-tjd-red-500 hover:underline"
+                                                                    >
+                                                                        {tag}
+                                                                    </Link>
+                                                                </span>
+                                                            ))}
+                                                        </>
+                                                    );
+                                                })()}
+                                            </p>
+                                            <a href={post.uri} className="mt-2 block group">
+                                                <p className="text-xl font-semibold text-gray-900 group-hover:text-tjd-red-500">
+                                                    {post.title}
+                                                </p>
+                                                {/* <p className="mt-3 text-base text-gray-500">excerpt</p> */}
+                                            </a>
+                                        </div>
+                                        <div className="mt-6 flex items-center">
+                                            <div className="flex space-x-1 text-sm text-gray-500">
+                                                <time dateTime={`${yyyy}-${mm}-${dd}`}>
+                                                    {date.toLocaleDateString()}
+                                                </time>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        ))}
+                            );
+                        })}
                     </div>
                 </div>
             </div>

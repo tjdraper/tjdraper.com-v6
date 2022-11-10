@@ -1,6 +1,5 @@
 ---
 title: Conservative and Liberal Immigration Logic
-time: 1300
 type: article
 image: stop-immigration-return-to-sender.jpg
 tags:

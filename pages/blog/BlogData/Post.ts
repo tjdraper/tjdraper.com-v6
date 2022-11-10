@@ -8,7 +8,6 @@ enum PostType {
 export interface MetaData {
     uri: string;
     title: string;
-    time: number;
     type: PostType;
     linkTitle?: string;
     linkUrl?: string;
@@ -18,6 +17,10 @@ export interface MetaData {
 
 interface Post extends MetaData {
     imagePath?: string | null;
+    yyyy: string;
+    mm: string;
+    dd: string;
+    slug: string;
     body: string;
 }
 

@@ -74,10 +74,24 @@ const getPosts = async (props?: GetPostsProps): Promise<Array<Post>> => {
             imagePath = `/images${uriDir}/${metaData.image}`;
         }
 
+        const uriParts = uri.split('/');
+
+        const yyyy = uriParts[2];
+
+        const mm = uriParts[3];
+
+        const dd = uriParts[4];
+
+        const slug = uriParts[5];
+
         return {
             ...metaData,
             uri,
             imagePath,
+            yyyy,
+            mm,
+            dd,
+            slug,
             body: String(renderedMarkdown).toString(),
         };
     })) as Array<Post>;

@@ -1,6 +1,5 @@
 ---
 title: "Releasing Collective: Clarifications and Apologies"
-time: 0932
 type: article
 image: collective-macbook-short-large.jpg
 tags:

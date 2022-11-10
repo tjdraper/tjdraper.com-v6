@@ -1,6 +1,5 @@
 ---
 title: On the SCOTUS Marriage Ruling
-time: 0944
 type: article
 tags:
   - Politics
