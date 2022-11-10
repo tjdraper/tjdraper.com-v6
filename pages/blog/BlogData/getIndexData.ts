@@ -11,8 +11,7 @@ interface GetIndexDataProps {
 const getIndexData = async (props?: GetIndexDataProps): Promise<IndexData> => {
     const totalPosts = await getTotalPosts();
     const currentPageNum = props?.currentPageNum || 1;
-    // const perPage = props?.perPage || 12;
-    const perPage = props?.perPage || 2;
+    const perPage = props?.perPage || 12;
     const totalPages = Math.ceil(totalPosts / perPage);
 
     return ({
