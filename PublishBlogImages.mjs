@@ -1,52 +1,9 @@
-import { promisify } from 'util';
-import path, { resolve } from 'path';
-import fs, { Dirent } from 'fs';
-
-const BlogFolderName = 'blog';
-const BlogDirectory = path.join(process.cwd(), 'pages', BlogFolderName);
-const PublicDirectory = path.join(process.cwd(), 'public');
-const ImagesDirectory = path.join(PublicDirectory, 'images');
-
-const readdir = promisify(fs.readdir);
-
-const stat = promisify(fs.stat);
-
-const getFilesFromDirectory = async ({
-    directory,
-    allowedExtensions,
-}) => {
-    const subDirs = await readdir(directory, {
-        withFileTypes: true,
-    });
-
-    const intermediateFiles = await Promise.all(
-        subDirs.map(async (subDir) => {
-            const res = resolve(directory, subDir.name);
-
-            return (await stat(res)).isDirectory() ? getFilesFromDirectory({
-                directory: res,
-            }) : res;
-        }),
-    );
-
-    let files = intermediateFiles.reduce((
-        a,
-        f,
-    ) => a.concat(f), []);
-
-    if (allowedExtensions) {
-        files = files.filter((file) => {
-            const hasExt = allowedExtensions.map((ext) => file.endsWith(ext));
-
-            return hasExt.indexOf(true) > -1;
-        });
-    }
-
-    return files;
-};
+import fs  from 'fs';
+import { BlogFolderName, BlogDirectory, ImagesDirectory } from './Constants.mjs';
+import GetFilesFromDirectory from './GetFilesFromDirectory.mjs';
 
 const PublishBlogImages = async () => {
-    const files = await getFilesFromDirectory({
+    const files = await GetFilesFromDirectory({
         directory: BlogDirectory,
         allowedExtensions: [
             '.jpg',

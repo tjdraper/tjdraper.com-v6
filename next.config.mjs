@@ -2,8 +2,10 @@ import remarkFrontmatter from 'remark-frontmatter';
 import remarkMdxFrontmatter from 'remark-mdx-frontmatter';
 import smartypants from 'remark-smartypants';
 import PublishBlogImages from './PublishBlogImages.mjs';
+import PublishBlogPages from './PublishBlogPages.mjs';
 
 await PublishBlogImages();
+await PublishBlogPages();
 
 export default {
     poweredByHeader: false,

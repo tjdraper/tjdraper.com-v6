@@ -1,8 +1,8 @@
-import { getIndexData } from './BlogData';
-import BlogListing from './BlogListing';
+import { getIndexData } from '../BlogData';
+import BlogListing from '../BlogListing';
 
 export async function getStaticProps () {
-    const currentPageNum = 1;
+    const currentPageNum = {pageNum};
 
     return {
         props: {

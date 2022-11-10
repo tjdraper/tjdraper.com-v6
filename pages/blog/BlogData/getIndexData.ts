@@ -13,6 +13,7 @@ const getIndexData = async (props?: GetIndexDataProps): Promise<IndexData> => {
     const currentPageNum = props?.currentPageNum || 1;
     const perPage = props?.perPage || 12;
     const totalPages = Math.ceil(totalPosts / perPage);
+    const offset = (currentPageNum * perPage) - perPage;
 
     return ({
         currentPageNum,
@@ -21,6 +22,7 @@ const getIndexData = async (props?: GetIndexDataProps): Promise<IndexData> => {
         perPage,
         posts: await getPosts({
             limit: perPage,
+            offset,
         }),
     });
 };
