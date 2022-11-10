@@ -2,6 +2,9 @@
 title: On the SCOTUS Marriage Ruling
 time: 0944
 type: article
+tags:
+  - Politics
+  - Theology
 ---
 
 <p>Everyone has a <em>hot take</em> on the ruling, so I know I'm only adding my voice to a cacophony of voices — but I do have an opinion to share. As usual it will offend most people on both sides of the isle.</p>

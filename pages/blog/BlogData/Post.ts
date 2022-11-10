@@ -13,6 +13,7 @@ export interface MetaData {
     linkTitle?: string;
     linkUrl?: string;
     image?: string;
+    tags?: Array<string>;
 }
 
 interface Post extends MetaData {

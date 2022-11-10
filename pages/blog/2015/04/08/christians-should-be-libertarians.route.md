@@ -5,6 +5,9 @@ type: linkedList
 linkTitle: Why Christians Should Immediately Become Libertarians — Ben Lewis
 linkUrl: http://www.voicesofliberty.com/article/why-christians-should-immediately-become-libertarians/
 image: liberty-statue.jpg
+tags:
+  - Politics
+  - Recommended Resource
 ---
 
 <blockquote>

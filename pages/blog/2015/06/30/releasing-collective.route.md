@@ -3,6 +3,9 @@ title: "Releasing Collective: Clarifications and Apologies"
 time: 0932
 type: article
 image: collective-macbook-short-large.jpg
+tags:
+  - Info
+  - Technology
 ---
 
 <p>I don't maintain a separate blog for development stuff anymore because I've found two blogs hard to maintain. But posts like this make me think I should. In any event, if you're not interested in my development stuff, then you may want to skip this one.</p>

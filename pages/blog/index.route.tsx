@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import { marked } from 'marked';
+import Link from 'next/link';
 import AppShell from '../Layout/AppShell';
 import { getIndexData } from './BlogData';
 import IndexData from './BlogData/IndexData';
@@ -53,15 +54,35 @@ const Page = (
                                             );
                                         }
 
-                                        return <div className="bg-red-50 h-48 w-full object-cover" />;
+                                        return <div className="bg-tjd-red-100 h-48 w-full object-cover" />;
                                     })()}
                                 </a>
                                 <div className="flex flex-1 flex-col justify-between bg-white p-6">
                                     <div className="flex-1">
-                                        <p className="text-sm font-medium text-indigo-600">
-                                            <a href="#TODO" className="hover:underline">
-                                                TODO: Cat Name
-                                            </a>
+                                        <p className="text-sm font-medium">
+                                            {(() => {
+                                                if (!post.tags || post.tags?.length < 1) {
+                                                    return '';
+                                                }
+
+                                                return (
+                                                    <>
+                                                        Tags:
+                                                        {' '}
+                                                        {post.tags.map((tag, index) => (
+                                                            <span key={`blog-tag-${tag}`}>
+                                                                {index !== 0 && ', '}
+                                                                <Link
+                                                                    href={`/blog/tag/${tag}`}
+                                                                    className="text-tjd-red-500 hover:underline"
+                                                                >
+                                                                    {tag}
+                                                                </Link>
+                                                            </span>
+                                                        ))}
+                                                    </>
+                                                );
+                                            })()}
                                         </p>
                                         <a href={post.uri} className="mt-2 block">
                                             <p className="text-xl font-semibold text-gray-900">{post.title}</p>
