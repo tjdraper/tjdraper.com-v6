@@ -12,6 +12,12 @@ At some point I got my own domain, and the blog existed as a subset of the main 
 
 With the upgrade to ExpressionEngine 2, EllisLab killed the free for non-commercial use ExpressionEngine Core. I like free software if it's good, but I also understand the need for good software to be paid for. So I bit the bullet and purchased ExpressionEngine 2.
 
+This site remained and ExpressionEngine 2 site long after EE 3, 4, 5, 6, and now 7 came out. It was time to do something.
+
+Over the years, as I've started writing more and more custom software, and using more and different/interesting tools, I've used EE less and less (though I still love it and write add-ons for it). And I just haven't been publishing to this site (since 2015, until this new iteration in November of 2022) because it just felt like a pain and a slog to log into such an old control panel.
+
+So in this iteration of the site, I've gone to a statically generated site, not a database CMS.
+
 [^blogspotaddress]: [tjdraper.blogspot.com](https://tjdraper.blogspot.com) was the address of the old Blogspot blog, but that now redirects back to this site
 [^blogspotcopypaste]: Yeah, I was a little bit insane to do that back then and I probably wouldn't do it again if I were in the same position again today.
 
@@ -23,7 +29,7 @@ This is the 6th major re-design of my site. It is a culmination of the years I h
 
 I'm a software engineer, so naturally, I feel compelled to include a section about the technology stack that powers this site.
 
-[This iteration of the site](https://github.com/tjdraper/tjdraper.com-v6) is [statically generated](https://nextjs.org/docs/basic-features/pages#static-generation) at deploy time using [Next.js](https://nextjs.org/), a lot of [JSX](https://reactjs.org/docs/introducing-jsx.html), [TypeScript](https://www.typescriptlang.org/), [GitHub Flavored](https://github.github.com/gfm/) [Markdown](https://daringfireball.net/projects/markdown/) via [MDX](https://mdxjs.com/), and some custom code to generate a few pages statically that Next can't quite handle, [Tailwind CSS](https://tailwindcss.com/) with components used and modified from [Tailwind UI](https://tailwindui.com/), and deploys on [Vercel](https://vercel.com/)'s serverless infrastructure.
+[This iteration of the site](https://github.com/tjdraper/tjdraper.com-v6) is [statically generated](https://nextjs.org/docs/basic-features/pages#static-generation) at deploy time using [Next.js](https://nextjs.org/), a lot of [JSX](https://reactjs.org/docs/introducing-jsx.html), [TypeScript](https://www.typescriptlang.org/), [GitHub Flavored](https://github.github.com/gfm/) [Markdown](https://daringfireball.net/projects/markdown/) via [MDX](https://mdxjs.com/), and some custom code to generate a few page routes that Next can't quite handle statically, [Tailwind CSS](https://tailwindcss.com/) with components used and modified from [Tailwind UI](https://tailwindui.com/), and it deploys on [Vercel](https://vercel.com/)'s serverless infrastructure.
 
 ## Why No Comments?
 
