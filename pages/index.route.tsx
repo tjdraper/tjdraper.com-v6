@@ -4,6 +4,7 @@ import { marked } from 'marked';
 import AppShell from './Layout/AppShell';
 import FamilyBanner from './index/index-family-banner.jpg';
 import * as PageData from './index/PageData.md';
+import Content from './Layout/Content';
 
 interface IndexPageData {
     heading: string;
@@ -45,6 +46,10 @@ const Page: NextPage = () => {
                     />
                 </div>
             </div>
+            <Content>
+                {/* eslint-disable-next-line react/jsx-pascal-case */}
+                <PageData.default />
+            </Content>
         </AppShell>
     );
 };

@@ -20,7 +20,6 @@ interface NavItem {
 
 const navigation = [
     { name: 'Home', href: '/', type: NavType.Local },
-    { name: 'About', href: '/about', type: NavType.Local },
     { name: 'Blog', href: '/blog', type: NavType.Local },
     { name: 'RSS Feed', href: '/blog/feed', type: NavType.Local },
 ] as Array<NavItem>;

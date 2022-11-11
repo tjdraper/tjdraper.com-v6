@@ -39,6 +39,8 @@ const getPosts = async (props?: GetPostsProps): Promise<Array<Post>> => {
 
     const rehypeRaw = await import('rehype-raw');
 
+    const remarkGfm = await import('remark-gfm');
+
     return await Promise.all(files.map(async (file) => {
         let hasStarted = false;
 
@@ -59,6 +61,7 @@ const getPosts = async (props?: GetPostsProps): Promise<Array<Post>> => {
             .use(remarkParse.default)
             .use(remarkFrontmatter.default)
             .use(remarkParseFrontmatter)
+            .use(remarkGfm.default)
             .use(remarkRehype.default, { allowDangerousHtml: true })
             .use(rehypeRaw.default)
             .use(rehypeSanitize.default)
