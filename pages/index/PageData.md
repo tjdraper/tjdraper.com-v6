@@ -23,7 +23,7 @@ This is the 6th major re-design of my site. It is a culmination of the years I h
 
 I'm a software engineer, so naturally, I feel compelled to include a section about the technology stack that powers this site.
 
-This iteration of the site is statically generated at deploy time using [Next.js](https://nextjs.org/), a lot of [JSX](https://reactjs.org/docs/introducing-jsx.html), [TypeScript](https://www.typescriptlang.org/), [GitHub Flavored](https://github.github.com/gfm/) [Markdown](https://daringfireball.net/projects/markdown/) via [MDX](https://mdxjs.com/), and some custom code to generate a few pages statically that Next can't quite handle, and deploys on [Vercel](https://vercel.com/)'s serverless infrastructure.
+[This iteration of the site](https://github.com/tjdraper/tjdraper.com-v6) is [statically generated](https://nextjs.org/docs/basic-features/pages#static-generation) at deploy time using [Next.js](https://nextjs.org/), a lot of [JSX](https://reactjs.org/docs/introducing-jsx.html), [TypeScript](https://www.typescriptlang.org/), [GitHub Flavored](https://github.github.com/gfm/) [Markdown](https://daringfireball.net/projects/markdown/) via [MDX](https://mdxjs.com/), and some custom code to generate a few pages statically that Next can't quite handle, [Tailwind CSS](https://tailwindcss.com/) with components used and modified from [Tailwind UI](https://tailwindui.com/), and deploys on [Vercel](https://vercel.com/)'s serverless infrastructure.
 
 ## Why No Comments?
 
