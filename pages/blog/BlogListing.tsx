@@ -4,6 +4,7 @@ import Link from 'next/link';
 import IndexData from './BlogData/IndexData';
 import * as PageData from './PageData.md';
 import AppShell from '../Layout/AppShell';
+import Pagination from '../Pagination/Pagination';
 
 interface PageDataMarkdown {
     heading: string;
@@ -98,6 +99,15 @@ const BlogListing = (
                                 </div>
                             );
                         })}
+                    </div>
+                    <div className="mt-16">
+                        <Pagination
+                            parameters={{
+                                currentPageNum: indexData.currentPageNum,
+                                totalPages: indexData.totalPages,
+                                basePath: '/blog',
+                            }}
+                        />
                     </div>
                 </div>
             </div>
