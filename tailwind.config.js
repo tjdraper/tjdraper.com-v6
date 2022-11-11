@@ -49,6 +49,9 @@ module.exports = {
                             'line-height': '1.2rem',
                             'margin-top': '4rem',
                             'padding-top': '2rem',
+                        },
+                        '.data-footnote-backref': {
+                            'text-decoration': 'none',
                         }
                     },
                 },
