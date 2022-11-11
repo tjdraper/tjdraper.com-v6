@@ -67,7 +67,7 @@ const Content = (
                                 }
 
                                 return (
-                                    <p className="mt-8 text-xl leading-8 text-gray-500">
+                                    <p className="mt-8 text-xl leading-8 text-gray-800">
                                         {marked.parseInline(heading.content)}
                                     </p>
                                 );
@@ -76,7 +76,7 @@ const Content = (
                     );
                 })()}
                 <div className="py-8">
-                    <div className="prose prose-lg prose-indigo mx-auto mt-6 text-gray-500">
+                    <div className="prose prose-lg mx-auto mt-6">
                         {children}
                     </div>
                 </div>
