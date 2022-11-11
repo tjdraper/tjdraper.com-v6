@@ -27,9 +27,11 @@ const navigation = [
 const AppShell = (
     {
         pageTitle,
+        activeNavItem,
         children,
     }: {
         pageTitle?: string;
+        activeNavItem?: string;
         children?: JSX.Element | JSX.Element[] | string | string[];
     },
 ) => {
@@ -43,7 +45,7 @@ const AppShell = (
             </Head>
             <div>
                 <div className="relative">
-                    <div className="relative py-1 bg-gray-50">
+                    <div className="relative py-1 bg-gray-100 border-tjd-red-500 border-t-8">
                         <Popover>
                             <div className="mx-auto max-w-7xl px-4 sm:px-6">
                                 <nav
@@ -56,7 +58,7 @@ const AppShell = (
                                         >
                                             <div className="-mr-2 flex items-center md:hidden">
                                                 <Popover.Button
-                                                    className="inline-flex items-center justify-center rounded-md bg-gray-50 p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-tjd-red-300"
+                                                    className="inline-flex items-center justify-center rounded-md bg-gray-50 p-2 text-gray-400 hover:bg-tjd-red-100 hover:text-gray-500 focus:outline-none"
                                                 >
                                                     <span className="sr-only">Open main menu</span>
                                                     <Bars3Icon className="h-6 w-6" aria-hidden="true" />
@@ -66,7 +68,13 @@ const AppShell = (
                                     </div>
                                     <div className="hidden md:flex md:space-x-10">
                                         {navigation.map((item) => {
-                                            const classes = 'font-medium text-tjd-red-500 hover:text-tjd-red-300';
+                                            let classes = 'font-medium';
+
+                                            if (activeNavItem === item.href) {
+                                                classes += ' border-b-2 border-black';
+                                            } else {
+                                                classes += ' text-tjd-red-500 hover:text-tjd-red-300 hover:border-b-2 hover:border-tjd-red-300';
+                                            }
 
                                             if (item.type === NavType.External) {
                                                 return (
@@ -113,7 +121,7 @@ const AppShell = (
                                         <div className="flex flex-row-reverse items-center justify-between px-5 pt-1">
                                             <div className="-mr-2">
                                                 <Popover.Button
-                                                    className="inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-tjd-red-300"
+                                                    className="inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-tjd-red-100 hover:text-gray-500 focus:outline-none"
                                                 >
                                                     <span className="sr-only">Close main menu</span>
                                                     <XMarkIcon className="h-6 w-6" aria-hidden="true" />
@@ -122,7 +130,13 @@ const AppShell = (
                                         </div>
                                         <div className="space-y-1 px-2 pt-2 pb-3">
                                             {navigation.map((item) => {
-                                                const classes = 'block rounded-md px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-gray-900';
+                                                let classes = 'block rounded-md px-3 py-2 text-base font-medium';
+
+                                                if (activeNavItem === item.href) {
+                                                    classes += ' bg-red-800 text-gray-100 pointer-events-none';
+                                                } else {
+                                                    classes += ' text-tjd-red-500 hover:bg-tjd-red-100 hover:text-gray-900';
+                                                }
 
                                                 if (item.type === NavType.External) {
                                                     return (
@@ -163,6 +177,7 @@ const AppShell = (
 
 AppShell.defaultProps = {
     pageTitle: undefined,
+    activeNavItem: undefined,
     children: undefined,
 };
 

@@ -19,7 +19,7 @@ const BlogListing = (
     const data = PageData as unknown as PageDataMarkdown;
 
     return (
-        <AppShell pageTitle="Blog">
+        <AppShell pageTitle="Blog" activeNavItem="/blog">
             <div className="relative px-4 pt-10 pb-20 sm:px-6 lg:px-8 lg:pb-28">
                 <div className="relative mx-auto max-w-7xl">
                     <div className="text-center">

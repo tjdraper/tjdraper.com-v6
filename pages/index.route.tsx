@@ -16,7 +16,7 @@ const Page: NextPage = () => {
     const data = PageData as unknown as IndexPageData;
 
     return (
-        <AppShell>
+        <AppShell activeNavItem="/">
             <div className="mx-auto mt-2 max-w-7xl px-4 sm:mt-4 sm:px-6">
                 <div className="text-center">
                     <h1 className="mx-auto max-w-2xl tracking-tight text-gray-900">
