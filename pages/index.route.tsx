@@ -1,10 +1,9 @@
 import Image from 'next/image';
-import { NextPage } from 'next';
 import { marked } from 'marked';
-import AppShell from './Layout/AppShell';
 import FamilyBanner from './index/index-family-banner.jpg';
 import * as PageData from './index/PageData.md';
 import Content from './Layout/Content';
+import CustomPage from './CustomPage';
 
 interface IndexPageData {
     heading: string;
@@ -12,11 +11,11 @@ interface IndexPageData {
     subHeading2: string;
 }
 
-const Page: NextPage = () => {
+const Page: CustomPage = () => {
     const data = PageData as unknown as IndexPageData;
 
     return (
-        <AppShell activeNavItem="/">
+        <>
             <div className="mx-auto mt-2 max-w-7xl px-4 sm:mt-4 sm:px-6">
                 <div className="text-center">
                     <h1 className="mx-auto max-w-2xl tracking-tight text-gray-900">
@@ -50,7 +49,7 @@ const Page: NextPage = () => {
                 {/* eslint-disable-next-line react/jsx-pascal-case */}
                 <PageData.default />
             </Content>
-        </AppShell>
+        </>
     );
 };
 

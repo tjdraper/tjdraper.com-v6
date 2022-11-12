@@ -6,14 +6,16 @@ const Content = (
         children,
     }: {
         heading?: {
-            preHeading?: string;
-            heading?: string;
-            content?: string;
+            preHeading?: JSX.Element | JSX.Element[] | string | string[] | null;
+            preHeading2?: JSX.Element | JSX.Element[] | string | string[] | null;
+            heading?: JSX.Element | JSX.Element[] | string | string[] | null;
+            content?: JSX.Element | JSX.Element[] | string | string[] | null;
         };
         children?: JSX.Element | JSX.Element[] | string | string[];
     },
 ) => {
     const hasHeading = heading?.preHeading
+        || heading?.preHeading2
         || heading?.heading
         || heading?.content;
 
@@ -42,8 +44,35 @@ const Content = (
                                             }
 
                                             return (
-                                                <span className="block text-center text-lg font-semibold text-tjd-red-500">
-                                                    {marked.parseInline(heading.preHeading)}
+                                                <span className="block text-center text-sm font-semibold text-tjd-red-500">
+                                                    {(() => {
+                                                        if (typeof heading.preHeading === 'string' || heading.preHeading instanceof String) {
+                                                            const content = heading.preHeading as string;
+
+                                                            return marked.parseInline(content);
+                                                        }
+
+                                                        return heading.preHeading;
+                                                    })()}
+                                                </span>
+                                            );
+                                        })()}
+                                        {(() => {
+                                            if (!heading.preHeading2) {
+                                                return null;
+                                            }
+
+                                            return (
+                                                <span className="block text-center text-sm font-semibold">
+                                                    {(() => {
+                                                        if (typeof heading.preHeading2 === 'string' || heading.preHeading2 instanceof String) {
+                                                            const content = heading.preHeading2 as string;
+
+                                                            return marked.parseInline(content);
+                                                        }
+
+                                                        return heading.preHeading2;
+                                                    })()}
                                                 </span>
                                             );
                                         })()}
@@ -53,8 +82,16 @@ const Content = (
                                             }
 
                                             return (
-                                                <span className="mt-2 block text-center text-3xl font-bold leading-8 tracking-tight text-gray-900 sm:text-4xl">
-                                                    {marked.parseInline(heading.heading)}
+                                                <span className="mt-2 block text-center text-4xl font-bold leading-8 tracking-tight text-gray-900 sm:text-5xl">
+                                                    {(() => {
+                                                        if (typeof heading.heading === 'string' || heading.heading instanceof String) {
+                                                            const content = heading.heading as string;
+
+                                                            return marked.parseInline(content);
+                                                        }
+
+                                                        return heading.heading;
+                                                    })()}
                                                 </span>
                                             );
                                         })()}
@@ -68,7 +105,15 @@ const Content = (
 
                                 return (
                                     <p className="mt-8 text-xl leading-8 text-gray-800">
-                                        {marked.parseInline(heading.content)}
+                                        {(() => {
+                                            if (typeof heading.content === 'string' || heading.content instanceof String) {
+                                                const content = heading.content as string;
+
+                                                return marked.parseInline(content);
+                                            }
+
+                                            return heading.content;
+                                        })()}
                                     </p>
                                 );
                             })()}

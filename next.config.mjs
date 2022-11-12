@@ -1,7 +1,8 @@
 import remarkFrontmatter from 'remark-frontmatter';
-import remarkMdxFrontmatter from 'remark-mdx-frontmatter';
 import smartypants from 'remark-smartypants';
 import remarkGfm from 'remark-gfm';
+
+const remarkMDXNext = await import('remark-mdx-next');
 
 export default {
     poweredByHeader: false,
@@ -21,7 +22,7 @@ export default {
                             remarkGfm,
                             smartypants,
                             remarkFrontmatter,
-                            remarkMdxFrontmatter,
+                            remarkMDXNext.remarkMdxNext,
                         ],
                     }
                 }

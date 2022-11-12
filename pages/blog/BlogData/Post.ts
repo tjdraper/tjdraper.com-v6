@@ -13,14 +13,14 @@ export interface MetaData {
     linkUrl?: string;
     image?: string;
     tags?: Array<string>;
-}
-
-interface Post extends MetaData {
     imagePath?: string | null;
     yyyy: string;
     mm: string;
     dd: string;
     slug: string;
+}
+
+interface Post extends MetaData {
     body: string;
 }
 

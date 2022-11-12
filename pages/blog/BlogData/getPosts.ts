@@ -3,6 +3,7 @@ import remarkParseFrontmatter from 'remark-parse-frontmatter';
 import Post, { MetaData } from './Post';
 import getFilesFromDirectory from '../../FileSystem/getFilesFromDirectory';
 import { BlogDirectory, BlogFolderName, DefaultPerPage } from './constants';
+import transformFrontMatterToMetaData from './transformFrontMatterToMetaData';
 
 interface GetPostsProps {
     limit?: number;
@@ -68,40 +69,15 @@ const getPosts = async (props?: GetPostsProps): Promise<Array<Post>> => {
             .use(rehypeStringify.default)
             .process(rawMarkdown);
 
-        const frontMatter = renderedMarkdown.data.frontmatter as unknown;
+        const frontMatter = renderedMarkdown.data.frontmatter as MetaData;
 
-        const metaData: MetaData = frontMatter as MetaData;
-
-        let imagePath = null;
-
-        if (metaData.image) {
-            const uriArray = uri.split('/');
-
-            uriArray.pop();
-
-            const uriDir = uriArray.join('/');
-
-            imagePath = `/images${uriDir}/${metaData.image}`;
-        }
-
-        const uriParts = uri.split('/');
-
-        const yyyy = uriParts[2];
-
-        const mm = uriParts[3];
-
-        const dd = uriParts[4];
-
-        const slug = uriParts[5];
+        const metaData = transformFrontMatterToMetaData(
+            frontMatter,
+            uri,
+        );
 
         return {
             ...metaData,
-            uri,
-            imagePath,
-            yyyy,
-            mm,
-            dd,
-            slug,
             body: String(renderedMarkdown).toString(),
         };
     })) as Array<Post>;
