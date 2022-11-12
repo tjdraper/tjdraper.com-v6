@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Content from '../Layout/Content';
 import { MetaData } from './BlogData/Post';
 import TagsMarkup from './TagsMarkup';
+import Breadcrumbs from '../Layout/Breadcrumbs';
 
 const Page = (
     { metaData, children }:
@@ -16,6 +17,14 @@ const Page = (
 
     return (
         <>
+            <Breadcrumbs breadcrumbs={[
+                {
+                    name: 'Blog',
+                    href: '/blog',
+                },
+                { name: 'Post' },
+            ]}
+            />
             {(() => {
                 if (!metaData.imagePath) {
                     return null;
