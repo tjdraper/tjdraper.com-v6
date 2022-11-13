@@ -19,13 +19,13 @@ export default {
                     options: {
                         providerImportSource: '@mdx-js/react',
                         remarkPlugins: [
+                            remarkFrontmatter,
                             remarkGfm,
                             smartypants,
-                            remarkFrontmatter,
                             remarkMDXNext.remarkMdxNext,
                         ],
-                    }
-                }
+                    },
+                },
             ],
         });
 
