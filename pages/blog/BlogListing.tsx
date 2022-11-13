@@ -3,7 +3,7 @@ import Image from 'next/image';
 import IndexData from './BlogData/IndexData';
 import * as PageData from './PageData.md';
 import Pagination from '../Pagination/Pagination';
-import CustomPage from '../CustomPage';
+import CustomPage, { ComponentType } from '../CustomPage';
 import TagsMarkup from './TagsMarkup';
 import Breadcrumbs, { Breadcrumb } from '../Layout/Breadcrumbs';
 
@@ -112,5 +112,7 @@ const BlogListing: CustomPage = (
         </>
     );
 };
+
+BlogListing.type = ComponentType.standardPage;
 
 export default BlogListing;

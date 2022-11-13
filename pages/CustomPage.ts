@@ -1,7 +1,13 @@
 import { NextComponentType, NextPageContext } from 'next/dist/shared/lib/utils';
 
+export enum ComponentType {
+    raw,
+    standardPage,
+    markdownPage,
+}
+
 interface ComponentProperties {
-    raw?: boolean;
+    type?: ComponentType;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

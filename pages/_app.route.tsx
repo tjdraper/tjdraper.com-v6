@@ -1,7 +1,7 @@
 import './global.css';
 import type { AppProps } from 'next/app';
 import { useRouter } from 'next/router';
-import CustomPage from './CustomPage';
+import CustomPage, { ComponentType } from './CustomPage';
 import AppShell from './Layout/AppShell';
 import BlogPost from './blog/BlogPost';
 import transformFrontMatterToMetaData from './blog/BlogData/transformFrontMatterToMetaData';
@@ -13,9 +13,11 @@ interface Props extends AppProps {
 const App = ({ Component, pageProps }: Props) => {
     const router = useRouter();
 
-    const { raw } = Component;
+    // Check the component type
+    const { type } = Component;
 
-    if (raw) {
+    // If it's ComponentType.raw, just return the Component
+    if (type === ComponentType.raw) {
         return <Component {...pageProps} />;
     }
 
@@ -23,13 +25,17 @@ const App = ({ Component, pageProps }: Props) => {
 
     const seg1 = uri.substring(1).split('/').at(0);
 
-    if (Component.name !== 'MDXContent') {
+    // If it's ComponentType.standardPage, put the AppShell around it
+    if (type === ComponentType.standardPage) {
         return (
             <AppShell activeNavItem={`/${seg1}`}>
                 <Component {...pageProps} />
             </AppShell>
         );
     }
+
+    // Now we'll assume that it's a markdown page because we can't control the
+    // `type` property on that
 
     const metaData = transformFrontMatterToMetaData(
         pageProps,

@@ -3,7 +3,8 @@ import { marked } from 'marked';
 import FamilyBanner from './index/index-family-banner.jpg';
 import * as PageData from './index/PageData.md';
 import Content from './Layout/Content';
-import CustomPage from './CustomPage';
+import CustomPage, { ComponentType } from './CustomPage';
+import BlogListing from './blog/BlogListing';
 
 interface IndexPageData {
     heading: string;
@@ -52,5 +53,7 @@ const Page: CustomPage = () => {
         </>
     );
 };
+
+Page.type = ComponentType.standardPage;
 
 export default Page;
