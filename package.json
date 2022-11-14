@@ -8,9 +8,10 @@
         "start": "yarn run publish && next start",
         "lint": "next lint && stylelint --allow-empty-input 'pages/**/*.css' 'styles/**/*.css'",
         "build-cli": "rm -rf cliSrc/dist && yarn tsc --project tsconfig-cli.json",
-        "publish": "yarn build-cli && yarn publish-blog-images && yarn publish-blog-pages",
+        "publish": "yarn build-cli && yarn publish-blog-images && yarn publish-blog-pages && yarn publish-blog-tag-pages",
         "publish-blog-images": "./cli publish blog-images",
-        "publish-blog-pages": "./cli publish blog-pages"
+        "publish-blog-pages": "./cli publish blog-pages",
+        "publish-blog-tag-pages": "./cli publish blog-tag-pages"
     },
     "oclif": {
         "bin": "cli",

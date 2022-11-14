@@ -6,6 +6,7 @@ interface IndexData {
     totalPages: number;
     perPage: number;
     posts: Array<Post>;
+    tag: string | null;
 }
 
 export default IndexData;

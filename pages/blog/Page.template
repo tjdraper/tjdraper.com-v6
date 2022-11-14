@@ -1,14 +1,17 @@
-import { getIndexData } from '../BlogData';
-import BlogListing from '../BlogListing';
+import { getIndexData } from '{projectRoot}/pages/blog/BlogData';
+import BlogListing from '{projectRoot}/pages/blog/BlogListing';
 
 export async function getStaticProps () {
     const currentPageNum = {pageNum};
+    const tag = {tag};
 
     return {
         props: {
             indexData: await getIndexData({
                 currentPageNum,
+                tag,
             }),
+            tag,
         },
     };
 }

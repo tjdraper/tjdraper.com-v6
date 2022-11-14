@@ -22,6 +22,10 @@
         "parser": "babel-eslint",
         "project": "./tsconfig.json"
     },
+    "ignorePatterns": [
+        "pages/blog/page/**",
+        "pages/blog/tag/**"
+    ],
     "rules": {
         "@typescript-eslint/member-delimiter-style": "error",
         "@typescript-eslint/method-signature-style": "error",
@@ -94,12 +98,6 @@
             "files": ["*.jsx", "*.tsx"],
             "rules": {
                 "max-len": "off"
-            }
-        },
-        {
-            "files": ["PriorityList.tsx", "PatientHistoryChart.tsx"],
-            "settings": {
-                "disable/plugins": ["no-jquery"]
             }
         }
     ]

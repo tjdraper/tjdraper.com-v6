@@ -60,7 +60,7 @@ export default class BlogImages extends Command {
             );
         });
 
-        this.log(style.cyan(
+        this.log(style.green(
             'Blog images published',
         ));
     }

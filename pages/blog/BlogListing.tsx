@@ -9,18 +9,27 @@ import Breadcrumbs, { Breadcrumb } from '../Layout/Breadcrumbs';
 
 interface PageDataMarkdown {
     heading: string;
+    tagHeading: string;
 }
 
 const BlogListing: CustomPage = (
     {
         indexData,
+        tag,
     }: {
         indexData: IndexData;
+        tag?: string | null | undefined;
     },
 ) => {
     const data = PageData as unknown as PageDataMarkdown;
 
     let breadcrumbs = [{ name: 'Blog' }] as Array<Breadcrumb>;
+
+    let basePath = '/blog';
+
+    if (tag) {
+        basePath += `/tag/${tag.split(' ').join('-')}`;
+    }
 
     if (indexData.currentPageNum > 1) {
         breadcrumbs = [
@@ -28,8 +37,31 @@ const BlogListing: CustomPage = (
                 name: 'Blog',
                 href: '/blog',
             },
-            { name: `Page ${indexData.currentPageNum}` },
         ];
+
+        if (tag) {
+            breadcrumbs.push({
+                name: `Tagged ${tag}`,
+                href: `/blog/tag/${tag.split(' ').join('-')}`,
+            });
+        }
+
+        breadcrumbs.push({ name: `Page ${indexData.currentPageNum}` });
+    } else if (tag) {
+        breadcrumbs = [
+            {
+                name: 'Blog',
+                href: '/blog',
+            },
+        ];
+
+        breadcrumbs.push({ name: `Tagged ${tag}` });
+    }
+
+    let { heading } = data;
+
+    if (tag) {
+        heading = data.tagHeading.replace('{tag}', tag);
     }
 
     return (
@@ -39,7 +71,7 @@ const BlogListing: CustomPage = (
                 <div className="relative mx-auto max-w-7xl">
                     <div className="text-center">
                         <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-                            {marked.parseInline(data.heading)}
+                            {marked.parseInline(heading)}
                         </h2>
                     </div>
                     <div className="mx-auto mt-12 grid max-w-lg gap-5 lg:max-w-none lg:grid-cols-3">
@@ -103,7 +135,7 @@ const BlogListing: CustomPage = (
                             parameters={{
                                 currentPageNum: indexData.currentPageNum,
                                 totalPages: indexData.totalPages,
-                                basePath: '/blog',
+                                basePath,
                             }}
                         />
                     </div>
@@ -114,5 +146,9 @@ const BlogListing: CustomPage = (
 };
 
 BlogListing.type = ComponentType.standardPage;
+
+BlogListing.defaultProps = {
+    tag: undefined,
+};
 
 export default BlogListing;
