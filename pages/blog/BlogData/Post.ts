@@ -1,8 +1,6 @@
 enum PostType {
     article = 'article',
     linkedList = 'linkedList',
-    photoEntry = 'photoEntry',
-    photosOnly = 'photosOnly',
 }
 
 export interface MetaData {

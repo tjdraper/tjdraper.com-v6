@@ -3,8 +3,8 @@ import type { AppProps } from 'next/app';
 import { useRouter } from 'next/router';
 import CustomPage, { ComponentType } from './CustomPage';
 import AppShell from './Layout/AppShell';
-import BlogPost from './blog/BlogPost';
 import transformFrontMatterToMetaData from './blog/BlogData/transformFrontMatterToMetaData';
+import BlogPost from './blog/BlogPost/BlogPost';
 
 interface Props extends AppProps {
     Component: CustomPage;

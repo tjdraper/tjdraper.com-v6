@@ -1,8 +1,9 @@
 import Image from 'next/image';
-import Content from '../Layout/Content';
-import { MetaData } from './BlogData/Post';
-import TagsMarkup from './TagsMarkup';
-import Breadcrumbs from '../Layout/Breadcrumbs';
+import { MetaData } from '../BlogData/Post';
+import Breadcrumbs from '../../Layout/Breadcrumbs';
+import Content from '../../Layout/Content';
+import TagsMarkup from '../TagsMarkup';
+import LinkedListHeading from './LinkedListHeading';
 
 const Page = (
     { metaData, children }:
@@ -52,7 +53,10 @@ const Page = (
                     heading: metaData.title,
                 }}
             >
-                {children}
+                <>
+                    <LinkedListHeading metaData={metaData} />
+                    {children}
+                </>
             </Content>
         </>
     );
@@ -61,5 +65,4 @@ const Page = (
 Page.defaultProps = {
     children: undefined,
 };
-
 export default Page;
