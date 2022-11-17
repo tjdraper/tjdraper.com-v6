@@ -1,0 +1,37 @@
+---
+title: TJDraper.com for iPhone and iPod Touch
+type: article
+tags:
+  - Blog News
+---
+
+![image](/images/uploads/mobile-tjdraper.jpg)
+
+Announcing the mobile version of TJDraper.com for iPhone and iPod Touch.
+
+Now Live!
+
+I was very careful to offer the full access and functionality while still formatting it for the small screen real-estate of the iPhone. I can’t stand sites that offer limited functionality on the iPhone version. Usually I'd rather just have the full site when that happens. So I think I have avoided that on this mobile version of the site.
+
+And the nice thing is, you don’t have to visit a special URL. All the URLs are the same. I’m detecting the browser type with PHP. If the browser loading the page identifies itself with “iPhone” or “iPod” in the string, the page is served up in mobile format. If the browser does not identify itself as one of those two, the normal site loads. This is great because it prevents confusion and preserves permalinks etc.
+
+To you Android users, I'm sorry! I thought the mobile version would work on Android, but I had a friend load it up on his Android phone and said it didn’t work right at all. So for now I'm serving the regular desktop version of the site to you Android users. Unfortunately I simply can't afford to get an Android device just for testing websites so I can’t develop an Android version at this time.
+
+The rest of this post may get a bit geeky so if you do not have an inner geek, please feel free to ignore the rest. You have been warned.
+
+So I'm kinda excited seeing as how I really am not any good at PHP programing and despise it in general (don't get me wrong, I think PHP is a good thing, I'm just more of an HTML/CSS person). The code was actually fairly simple to implement. And believe it or not, I didn’t actually even find this exact code, I found the principle and modified it to fit my needs. So here's what it looks like:
+
+```php
+<?php
+
+$iphone = strpos($_SERVER['HTTP_USER_AGENT'],”iPhone”);
+$ipod = strpos($_SERVER['HTTP_USER_AGENT'],”iPod”);
+if ($iphone||$ipod == true)  { echo 'Mobile Code Goes Here'; }
+
+else { echo 'Normal Code Goes Here'; }
+?>
+```
+
+It's actually fairly straight forward. The first two lines find out if the browser is identifying itself as iPhone or iPod, the second line says, if either one of those is true ( the double vertical bar means “or”) then use the code in the “echo” section.
+
+And of course “else” delivers the desktop version of the site. I must admit it took me about a week of evenings to get it just right, but I got it none the less. Now I have a few other sites I'd like to implement this on!

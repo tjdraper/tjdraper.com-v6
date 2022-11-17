@@ -1,0 +1,21 @@
+---
+title: Rebuilding Facebook for iOS
+type: linkedList
+linkUrl: https://www.facebook.com/notes/facebook-engineering/under-the-hood-rebuilding-facebook-for-ios/10151036091753920
+tags:
+  - Linked
+  - Recommended Resource
+  - Software I Use
+---
+
+> So while utilizing web technology has allowed us to support more than 500 million people using Facebook on more than 7000 supported devices, we realized that when it comes to platforms like iOS, people expect a fast, reliable experience and our iOS app was falling short. Now that our mobile services had breadth, we wanted depth. So, we rewrote Facebook for iOS from the ground up (I really did open up Xcode and click “New Project”) with a focus on quality and leveraging the advances that have been made in iOS development.
+
+The new Facebook for iOS app is certainly a vast improvement. I’m still a little irritated that core features, such as re-sharing someone’s link, are missing. Maybe they’ll add those things later.
+
+This part concerns me though:
+
+> To solve this, we came up with a different plan to let you use the newest features without requiring you to update the entire app: a “fallback” renderer. When the news feed team designs a new type of story, Facebook for iOS downloads something it doesn’t quite understand. When we detect this, we use a “fallback” renderer to show the pertinent information in the new story in a format the app already understands. In the meantime, we create a new custom renderer and have it ready for our next app update. For areas within the app where we anticipate making changes more often, we will continue to utilize HTML5 code, as we can push updates server side without requiring people to download a new version of the app.
+
+So the HTML5 renderer that made the old app so horrible is there and when Facebook decides to update something and push it out to the app, it will fall back to HTML5 rendering. This is really bad news if I understand this correctly. It would make much more sense to plan the feature roll out, put those features in the app in native code, submit it to the app store, and release everything simultaneously.
+
+Well, we’ll see what happens and if the app slows down the first time Facebook decides to do this.

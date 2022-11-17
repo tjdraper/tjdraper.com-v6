@@ -1,0 +1,87 @@
+---
+title: Why ExpressionEngine
+type: article
+linkUrl: http://appleuserpro.com/site/why-expression-engine
+tags:
+  - ExpressionEngine
+  - Fun
+  - HTML/CSS
+---
+
+_warning: more geekery/nerdiness about HTML, CSS and Content Management Systems in this article_
+
+I received at least one comment asking me to do more posts about web design.
+
+Anyone who talks to me about web design for longer than 60 seconds will quickly discover that I don’t like Wordpress. Or more accurately, that I hate Wordpress with a fiery burning passion. Why is that? one wonders. Well, back in the early days of my design experience (around 2004 or 2005) with blog systems and content managers (or CMSes for Content Management Systems) I worked with a Wordpress site. I was eventually able with some effort to make it do what I wanted but it left a pretty bad taste in my mouth. The templating system assumes things, you have to work with the templates as pre-defined. This template is for the “header” this template is for the “sidebar” this template is for “content” and this template is for the “footer” and so on. Well what if my design fits awkwardly in that structure? What if for some reason I want to have a page completely free of that templating system altogether but still be able to pull certain things from the database? I flailed around with a few more Wordpress sites before I determined that there must be something better. So I began a search for a better CMS. For a couple years I never really found one, probably due to the fact that web design has never been my bread and butter, but something I do on the side.
+
+Finally sometime in 2007, I was introduced to ExpressionEngine (EE). The designer of the site at the company I work for built it using EE. Shortly thereafter I built a site with EE and I **LOVED** it. It was sort of my “Eureka” moment.
+
+So why do I love EE so much? Well, simply put, EE assumes nothing about your design. You create any templates you want, you write the HTML and CSS you want, you put it where you want, and you call what you want from the EE database. There is no pre-defined template structure. That may seem like a pain if you are caught up in the Wordpress world, but it is actually very freeing. When I design a site, I don’t worry about how to implement it within a templating system. It just doesn’t enter my mind. I’m free to focus on the design, HTML and CSS.
+
+So let’s look at the basics of deploying an EE website. There are two basic components to EE design, and they are Templates and Channels. A Template accepts HTML and EE Template Tags. Templates exist in Template Groups. In order to make a template, you have to make a Template Group. The main Template Group on Apple User Pro is named “Site.” Every Template Group has a default template named “index,” and the first segment of a URL (the part after the base URL, in this case the base URL is “http://appleuserpro.com”) always refers to a Template Group (well, unless you are using the “pages module”). So when you type, “http://appleuserpro.com/site” that will load the “index” template of the Template Group “site.” So that’s Templates.
+
+Now what are Channels. Channels can be almost anything you want. In the case of Apple User Pro, I have two primary Channels — “Article” and “Linked List” — and a “Page” channel (through which I publish my only page, the Colophon page, using the Pages Module). Channels can be customized in many ways, you can add custom fields, custom statuses for entires and so on. In the case of Apple User Pro, the Channels through which I publish my links and articles have 4 fields (fields are stored in “Field Groups” and I have the same field group assigned to both Channels):
+
+1.  The Title field - this is a default field for all Channels you create
+    
+2.  The URL Title (Permalink) field - this is again a default field for all channels, it auto populates as you type a title, but you can alter it to be custom too, or you can ignore it if it’s irrelevant to the type of data you will be using the channel for, of course in the case of a blog, URL Permalinks are important
+    
+3.  Link URL field - This is a custom field. If I’m posting a “Linked List” item, this is where I put the URL to the item I’m linking to. I have this field hidden on my ”Article“ channel.
+    
+4.  Body field - This is a custom field set to use [Markdown](http://daringfireball.net/projects/markdown/). It’s where I’m writing this article right now.
+    
+
+Here’s a screen shot so you can get an idea of what I’m describing:
+
+[![apple-user-pro-channel-entry-small](http://appleuserpro.com/assets/uploads/2011-11-15/apple-user-pro-channel-entry-revised-small.jpg)](http://appleuserpro.com/assets/uploads/2011-11-15/apple-user-pro-channel-entry-revised.jpg)  
+_click the image to see it full size_
+
+Alright, so with those two components, how do you build a site?
+
+I typically start with Photoshop, mockup what I want, figure out how to turn that into HTML, and write my basic HTML. Then I put in the appropriate ExpressionEngine template tags, as in the case of this site, I figure out what parts of the template need to “loop” for the entires etc.
+
+So let’s look at a basic implementation with just the entry body part of my template.
+
+```
+{exp:channel:entries channel="appleuserpro|linkedlist" orderby="date" sort="desc" limit="10"}
+<article>
+
+    [if channel_id == "9"]<h1><a href="/article/{url_title}">&diams; {title}</a></h1>[/if]
+    [if channel_id == "13"]<h1><a href="{rss-link}">&rarr; {title}</a></h1>[/if]
+    <div class="article-subtitle">{entry_date format=' %l, %F %j, %Y '}</div>
+
+    <div class="article-wrapper">
+
+        {postcontent}
+
+    <div class="article-footer">
+
+        <div class="article-footer-item"><strong>Categories:</strong> {categories backspace="8"}<a href="/category/{category_url_title}">{category_name}</a> &bull; {/categories}</div>
+        [if channel_id == "9"]<div class="article-footer-item permalinks"><a href="/article/{url_title}">Permalink</a>&nbsp;&nbsp;&nbsp;<a href="http://aupro.us/s/{entry_id}">Short URL</a></div>[/if]
+        [if channel_id=="13"]<div class="article-footer-item permalinks"><a href="/linkedlist/{url_title}">Permalink</a>&nbsp;&nbsp;&nbsp;<a href="http://aupro.us/s/{entry_id}">Short URL</a></div>[/if]
+
+    </div>
+
+    </div>
+
+</article>
+{/exp:channel:entries}
+```
+
+_The brackets around the “if” statements are supposed to be curly braces, but ExpressionEngine won’t display them in Channel Entries. So if you do happen to try to use code like this in EE, just beware you should change the brackets to curly braces._
+
+The items in curly braces are all ExpressionEngine tags, but what do they mean? Well in this case, I’m opening the Channel loop at the very start of my code there, and closing it at the bottom:
+
+```
+{exp:channel:entries channel="appleuserpro|linkedlist" orderby="date" sort="desc" limit="10"}
+
+{/exp:channel:entries}
+```
+
+Everything between the opening and closing of that tag will loop with each article. There are also pagination tags that I’m not including here for the sake of simplicity, but obviously with a limit of 10 you would need pagination.
+
+So once I’ve opened the Channel loop, I can now use tags that refer to the Channel Fields. I think it’s fairly self explanatory except for perhaps the “if” statements. Since I’m using two channels for my primary content, I’m determining what to display based on the Channel. Basically, if the article is posted in the Linked List, the title will link to the item I’m linking to. If it’s posted in the Article Channel, it will be a permalink. Same principle applies in the post footer.
+
+There are other ways to use Channels. As I said, a Channel can be used for almost anything you can think of. For instance, I’m using a channel on my Church’s website to post sermons. I use the title field for the title of the Sermon. And then I created custom fields for the name of the person preaching (usually our Pastor, but sometimes we have guest speakers), the passage being preached from, the name of the mp3 file on the server etc. I use EE’s Channel Categories for sermon series and the publish date for the date stamp of the sermon. And from that one Channel, I call the sermon entires on the [sermon page](http://heritagecenterville.org/sermons), the most recent sermon appears on the [home page](http://heritagecenterville.org), and of course the Podcast (just a special RSS feed) is powered from that Channel by an RSS template in EE.
+
+There’s a lot more to it as you start to get into working with EE, but that’s the very basic idea of constructing a site in EE. You create your HTML, and call things from EE with the curly brace tags as you need them. There’s no silly template structure that you must work within. As far as I know, EE is the only CMS that works in this way and it is extremely flexible. So hopefully that explains a little bit of why I love EE so much. EE is extremely flexible and I think any HTML/CSS designer would learn to love EE pretty quickly once they begin using it.

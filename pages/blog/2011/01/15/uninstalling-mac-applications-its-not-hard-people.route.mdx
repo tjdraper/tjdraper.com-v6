@@ -1,0 +1,29 @@
+---
+title: >
+  Uninstalling Mac Applications, it's not hard people!
+type: article
+tags:
+  - Ranting
+---
+
+[Macworld: Ten changes we’d like to see at the Mac App Store](http://www.macworld.com/article/157180/2011/01/mac_app_store_10_missing_features.html)
+
+Mostly not a bad list, but I do have one little thing in the article that bugs me. It’s really a broader complaint actually, and they bring it up here:
+
+> **Easier uninstalling**
+> 
+> The Mac App Store makes it dead-simple to install new software: You just click the Buy (or Free) button next to an application’s icon in the store, and the software is instantly downloaded and installed. But what about uninstalling an application? On iOS devices, the process is as simple as entering the jiggly-icon “edit Home screen” mode and tapping the little X icon on an app’s icon. But on Mac OS X, uninstalling an App Store-installed app requires you to manually drag the application from the Applications folder to the Trash—an action that requires an admin username and password. And that procedure doesn’t get rid of any support files the application may have installed in, say, the Preferences and Application Support folders inside /Library or ~/Library.
+
+But here’s the deal, uninstalling an application (and installing for that matter) is dead simple. It’s just as simple as iOS. In iOS, you press the “x” button to delete the application from edit mode as Macworld described. In OS X, you delete the application. Not really much of a difference. As to the “support files” the article references, except for certain large applications (Final Cut Pro, Adobe Creative Suite) these “support files” amount to basically a few files of 1 or 2 kb in size, preference files that are created when the application is launched. It’s nothing.
+
+You see, the idea that you need this complicated control system for managing apps is Windows thinking. Windows has to have something in place because applications are not really bundled at all in Windows. Programs scatter files all over the known and unknown universe in Windows (well okay, I exaggerate, but only slightly). Typically the executable (.exe) and a few of the supporting files are thrown in a folder of the program’s name in the “Program Files” folder, then .dll files are scattered throughout the file system, registry entires must be made (and consequently deleted and appropriately modified when uninstalled, and don’t get me started on “The Registry” and the nightmares that still gives me!).
+
+OS X suffers from none of this mess. Applications in OS X are bundles (folders packed in a particular way by the developer and given the extension “.app”). They contain (in most cases) all the application’s resources, the unix executable, and the base set of preferences. All the end user sees is that one file (the one with the .app extension). OS X recoginzes this specially marked folder with the .app extension as an Application. This app file resides in the Applications folder on the root of the hard drive. 95% of all Mac OS X applications are self contained in this way, the exceptions being some higher end professional applications that require large media files. Final Cut Pro for instance has media support files, and pluggins in the “/Library” folder. Except for those few cases of larger pro apps, all a user need do is delete the application if he wants to “uninstall” it (even the idea of “uninstalling” is so windowish, and I hate the paradigm). The files left are going to be “.plist” preference files that the user need never even know or worry about.
+
+Additionally, applications from the Mac App Store must be self contained in just this way. So, how would Macworld make this better? On iOS, you don’t use “App Store” to uninstall applications, you delete them from the location at which they are installed, just like you do in OS X.
+
+Now, “perhaps” (and I stress _perhaps_ because I don’t even think the current system is broken), just perhaps Apple could make the Applications folder a special folder recognized by the system when displayed (like the trash folder) and provide a special toolbar (again much like the trash folder) that shows the options like deleting the selected application(s) (where it would just move the app to the trash for you since that seems to be too complicated for people).
+
+So in summary, Mac OS X is easy people, I don’t get what the gripe is. The only problems I’ve seen new users run into (myself included back in the days when I first switched), had to do with upside-down, backwards paradigms set up by Windows use. Once you throw away those paradigms and start thinking in more sensible ways, Mac OS X makes much more sense than Windows users ever even dreamed of.
+
+Anecdotally, whenever I do need to go back through the exercise of using Windows for some reason or other, I am very much reminded of how good we Mac users have it. I do find myself with complaints about OS X from time to time, and they just melt away after I’ve used Windows for any length of time (like oh, say, sixty seconds…).

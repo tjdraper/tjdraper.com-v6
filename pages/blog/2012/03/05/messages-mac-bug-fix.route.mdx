@@ -1,0 +1,25 @@
+---
+title: Messages for Mac Bug Fix
+type: article
+tags:
+  - Annoyances
+  - OS X
+  - Tips
+---
+
+It’s beta software and so it’s bound to have bugs. There are two bugs that I’ve run across that really _bug_ me (see what I did there?). One I do not have the fix for [1](#fn:unfixedbug) and one I do have the fix for.
+
+The bug I can tell you how to fix goes like this. You are having a conversation with someone on your iPhone. You get back to your Mac, wake it from sleep, and start madly typing a reply while a flurry of messages from the conversation you have been having on your iPhone load in on your Mac as it madly tries to catch up because it was asleep and not on the network. But for some reason after this happens, the unread message badge in the dock never updates after this. It gets stuck. Try as you might, you can’t get that unread message badge to go away even though you’ve read the messages, you’ve quit the app, you‘ve clicked away and clicked back. You even looked through the menus for a “Mark conversation as read” command. No luck. This has happened often to me and it drives me nuts.
+
+I stumbled on the solution though. I noticed the dock badge would go away after a computer restart. So I thought to try this solution which does not require a computer restart, and works like a charm.
+
+1.  Quit Messages for Mac
+2.  Open Terminal (located in “/Applications/Utilities” or you can just do what I always do and open Terminal from Spotlight)
+3.  Type “killall Dock” (no quotation marks)
+4.  Start “Messages” back up.
+
+That’s it. The unread dock badge will be gone.
+
+* * *
+
+1.  The bug that I do not have a fix for is really annoying. If your Mac has been asleep, and you’ve been chatting it up on your iOS device, Messages for Mac will not, upon waking, update the conversation… until you’ve sent a message, to anyone, whether to the same person who’s conversation needs updating or not. Then, and only then, will all the missed messages come flying in. Trust me, it’s not good. Not a complete show-stopper, but extremely annoying. [↩](#fnref:unfixedbug)

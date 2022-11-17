@@ -1,0 +1,23 @@
+---
+title: Runaway Kernel
+type: linkedList
+linkUrl: http://www.rdoxenham.com/?p=259
+tags:
+  - Linked
+---
+
+So, I was having this exact problem:
+
+> The biggest problem I’ve been having with this machine on Lion (didn’t have it on Snow Leopard) is to do with kernel\_task. Instead of splitting all of the underlying kernel operations into their own individual processes (and associated threads) they are all consumed by a single ‘task’ (more of a representation of the underpinnings of the microkernel architecture) that appears in the process list. **What I’ve been noticing is that this ‘task’ sometimes goes out of control, consumes CPU resources with the utmost priority.** For a long time I wasn’t sure what it was doing, it seemed to be kicking in when I was doing something that was relatively intensive (for a Mac anyway), e.g. YouTube.
+
+(emphasis mine)
+
+Mine was intermittent, and has only been happening for the last two weeks or so, but seemingly getting worse. Today was the last straw. I was trying to do some heave duty work in After Effects, and the CPU would suddenly spike and get out of control and all input would become sluggish, but it was the Kernel spiking the CPU, which means of course that it takes top priority. And these spikes usually last at least five minutes, during which time the computer is practically unusable. It's maddening!
+
+And long gone are the days that I care to wipe out my hard drive and do a clean install. I just want the computer to work, I want all my settings and user info in place, and I don't want to go through the pain of getting everything back just the way I like it. So I was pretty motivated to find a fix that did not involve formatting the hard drive. I finally I found this piece I'm linking to:
+
+> Thankfully, this “feature” is built into a kext, in which each model identifier specifies how to control the temperature of the CPU via this invasive action. The simple fix is to remove the entry for your model identifier from this kext- if it “doesn’t know” what to do with your particular model, it won’t take any action. Now, here comes the disclaimer… by taking the same action as I will outline below, **I take absolutely no responsibility for any damage or loss caused to you or your property, you do this of your own free will**. You’re over-ruling functionality that was designed to prolong the life of your equipment, despite the fact that it’s invasive and very annoying it’s there for a reason. Anyway, on to the fun stuff…
+
+Click on through for the full details of the fix. Be warned, you will need to muck about in the terminal a bit. It involves diving into an Apple provided Kernel extension and deleting the system management plist file for your specific model of Apple computer. I'm crossing my fingers but, but it seemed to fix my computer completely. I've been keeping an eye on my CPU and GPU temps and such, and working the computer pretty hard, and have not seen any adverse effects. And honestly, the hardware should take care of itself without the Kernel getting all interfery like anyway.
+
+This is probably a completely niche thing that 10 other people in the whole world are running into. And seriously, OS X is such a dream to use, and has such low maintenance needs, that when something like this comes up, you feel like your world is collapsing. I was extremely glad to find this fix.

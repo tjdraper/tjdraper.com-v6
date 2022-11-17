@@ -1,0 +1,104 @@
+---
+title: Just how flexible is ExpressionEngine?
+type: article
+linkUrl: http://appleuserpro.com/article/just-how-flexible-is-expressionengine
+tags:
+  - ExpressionEngine
+  - HTML/CSS
+---
+
+To answer the question of the headline, flexible enough to let me create a URL shortener just for this site. It should be noted I’m not a huge fan of URL shorteners. I used to use Goo.gl a lot so I could see how many people were clicking my links, but I stopped doing that. That is because I have a problem with URL shorteners in general. They hide stuff. You can’t actually see the link you are clicking on. Who knows where it's taking you.
+
+However, having my own personal URL shortener for this site fixes that at least partly because anytime you see a URL that starts with aupro.us, you know it’s going to take you somewhere on this site. And short URLs are often necessary when sharing a link on social networking, or even in other mediums. So I decided to build one. It took me about 10 minutes.
+
+Building the URL Shortener
+--------------------------
+
+So how did I build it? Obviously first of all I acquired the domain aupro.us and added it to my hosting account. It is important for the short URL domain to be on the same hosting account. Why? Because ExpressionEngine works by declaring the server path to the system files in it’s index.php file. Actually, the ExpressionEngine system files could be anywhere on the server as long as you tell ExpressionEngine the absolute server path in index.php. [1](#fn:flexee1) You will see why this is important in a moment.
+
+Next I created a template group called “u” which stands for URL. In the index template of the template group “u” I placed the magic code that makes the URL shortening possible.
+
+```
+<?php
+
+{exp:channel:entries channel="appleuserpro|linkedlist"}
+
+{if segment_1 != ""}// Permanent redirection
+header("HTTP/1.1 301 Moved Permanently");
+header("Location: http://appleuserpro.com/article/{url_title}/");
+exit();{/if}
+
+{if segment_1 == ""}// Permanent redirection
+header("HTTP/1.1 301 Moved Permanently");
+header("Location: http://appleuserpro.com");
+exit();{/if}
+
+{/exp:channel:entries}
+?>
+```
+
+So what am I doing here?
+
+```
+{exp:channel:entries channel="appleuserpro|linkedlist"}
+```
+
+This is opening the channel entries tag so that I can retrieve the URL for the entry.
+
+Then, with the “if” statements, I’m determining whether or not someone is visiting just the URL aupro.us, or if the URL contains more.
+
+```
+{if segment_1 != ""}
+```
+
+“segment_1” refers to the part of the URL that immediately follows the base URL of aupro.us. If segment_1 is not empty, then the code for URL re-direction will be used.
+
+```
+{if segment_1 == ""}
+```
+
+This second “if” says that if segment_1 is empty, then we should use the code to re-direct to the home page of Apple User Pro.
+
+One ExpressionEngine install on two domains
+-------------------------------------------
+
+The next step is to copy the index.php and .htaccess file from Apple User Pro’s web-root to the aupro.us web-root. But we aren’t quite done yet. Since I’m copying the index.php from the main site, the system path is already declared in the document, but there are some other variables I need to configure. Lines 89 through 93 of EE’s index.php contain some variables that are commented out.
+
+```
+//  $assign_to_config['template_group'] = '';
+//  $assign_to_config['template'] = '';
+//  $assign_to_config['site_index'] = '';
+//  $assign_to_config['site_404'] = '';
+//  $assign_to_config['global_vars'] = array(); // This array must be associative
+```
+
+For this purpose, I only need two of those. I need to declare the “template_group” and “template” to override the defaults I have set in the EE control panel. That way, if someone loads up aupro.us without anything more to the URL, EE will not serve the default template, but will instead load my URL shortening template and redirect them to the Apple User Pro home page.
+
+So I configured like so:
+
+```
+$assign_to_config['template'] = 'u';
+$assign_to_config['site_index'] = 'index';
+```
+
+The URL
+-------
+
+Now the way this works is as follows. Every entry in ExpressionEngine has a text URL (this entry’s text URL is “just-how-flexible-is-expressionengine”). And so you link to an article with “template-group/optionally-declare-template-from-group/entry-URL” format. But entries also have entry ID numbers and can be called with “template-group/entry-id” format. This entry’s entry ID number is 792. So with those templates in place the url [aupro.us/u/792](http://aupro.us/u/792) will redirect to this article’s URL of [appleuserpro.com/article/just-how-flexible-is-expressionengine.](http://appleuserpro.com/article/2011/12/just-how-flexible-is-expressionengine)
+
+Adding a short URL link
+-----------------------
+
+I then took the additional step of adding a short URL link to each entry so that I, or anyone else could easily use it. The code is as follows.
+
+```
+<div class="permalink"><a href="http://aupro.us/u/{entry_id}">short url ♦</a></div>
+```
+
+The `{entry_id}` tag does the obvious. It calls the entry ID number. And that parameter is within the `{exp:channel:entries}` tag of my template.
+
+And that’s it. That’s how to easily build a custom URL shortener for your site with ExpressionEngine.
+
+* * *
+
+1. One of the recommended procedures if you have an environment that supports it is to place the EE system directory one level above webroot. This provides the greatest security because the system files are entirely inaccessible from the web. I actually rearranged all my domains to employ a directory structure that is not typical for a Cpanel hosted site. I have a directory in my user root called “domains” in which there is a corresponding directory for each domain I host on the account. Inside that directory I place a directory called “html.” This is the webroot for that domain. This therefore creates a whole directory level above webroot for each domain. It is here that I place my EE system directory. [↩](#fnref:flexee1)

@@ -1,0 +1,116 @@
+---
+title: Templating with ExpressionEngine
+type: article
+tags:
+  - ExpressionEngine
+  - Fun
+  - HTML/CSS
+  - Info
+---
+
+I’m writing this here because at the moment, I have no better place to write it. I can’t write about this sort of techie thing on [MovieByte](http://moviebyte.com), because you know, that’s for movies. I can’t write about it on [my personal musings blog](http://tjdraper.com) (for lack of a better name), because nobody who reads that cares in the slightest. And when I do write there, it’s about politics that might offend you, or my cute kiddos.
+
+And even though most of you probably don’t care, it’s something I want to write about because I’m excited about it. So here it is.
+
+One of the advantages of ExpressionEngine is that it does not box you in to a certain way of doing things. I worked with WordPress a little in the early days, built one site in WordPress and messed around with a couple other sites. WordPress is just not my style at all. You see, WordPress renders the HTML you see on the front end from a very specific set of templates, things like header.html, sidebar.html, nav.html, footer.html etc. etc. A tag that you open in one might be closed in another template and so on. Yes I know that you can modify this scheme and do things in a different way to some extent, but to a very large extent WordPress has a predetermined box for you to work in or around. It’s no way to work for a guy like me.
+
+And when I discovered EE, I thought I had died and gone to heaven. You see, what you see when you visit any given URL is the contents of the rendering of one template in which you can put whatever markup you want.
+
+The way EE URLs and templates work looks like this:
+
+```
+http://mysite.com/the_template_group/the_template
+```
+
+If no template group is specified in the URL, then the index template in that group is used (every template group must have an index template).
+
+You can build each template on it’s own and put any markup you want in that template on a per-template basis (not very DRY), or you can split it up into chunks as you see fit.
+
+Back in the EE 1 days, the way to do this was by embedding another template into your template.
+
+```
+{embed="the_template_group/the_template"}
+```
+
+So in those days you might create a template group called “includes” and make all kinds of templates in there for your global markup that you would embed in your other templates. But doing that came at a cost. For every embed, the EE template parser would run again from the beginning. Embed about five templates and you are looking at some serious server overhead to crank out that page for your viewer. This might lead to a delay of 3 to 4 seconds, or more if you got crazy with embeds.
+
+EE 2 debuted something new. EE 1 had something called Global Variables where you could store HTML markup to call in your template, but no EE template tags, because those would not get parsed. EE 2 built upon that premise by introducing Snippets. Snippets can contain both HTML markup AND EE template tags. And a snippet call does not restart the template parser.
+
+So with EE 2 we have a low overhead way to slice up the template and include global markup. But even though this is an infinitely better solution than WP’s box approach, I was never complete satisfied with this.
+
+A New Approach
+--------------
+
+Enter Mark Croxton’s excellent EE add-on called _[Stash](http://devot-ee.com/add-ons/stash)_. I don’t know when he released it exactly, but I discovered it last year and it’s fantastic. There are a lot of uses this plugin can be put to that I will probably never in a million years figure out, but allow me to tell you how I use it.
+
+Bye bye includes (via embeds or snippets) and hello one template to rule them all!
+
+Here’s the structure. EE allows us to have hidden templates which may not be called by URL, but only by embed so I create a template group called `_layouts` where I store what I call my layout templates. The first and primary one I create is called `_default` (for a very large majority of sites, you will only need one). All my global markup goes in this layout template. If I need more than one layout template, I might break out the “super” global markup into snippets but for most sites, I just have the one template and keep all global markup there. So that’s the layout template.
+
+In each actual site template, I call the layout template via embed:
+
+```
+{!-- Embed the Primary Template --}
+{embed="_layouts/_default"}
+```
+
+Okay, so now what? Each site template is going to have markup or variable content that we need to display somewhere in the embedded layout template. How do we get it there? Ahh, glad you asked. This is what I’m excited about. This is where Stash comes in.
+
+EE template parse order is my nemesis. To this day I have trouble really internalizing the concepts and what gets rendered when, in what order and all that jazz. But I can tell you essentially how it works so far as I understand.
+
+1. EE looks at your URL and loads the template you have called.
+2. That template gets parsed, all EE template tags in that template get parsed.
+3. If the template has any embeds, the template parser starts over on the embedded template
+4. All template tags in the embedded template get parsed
+5. The final parsed and rendered output is displayed
+
+So this is how [Stash](http://devot-ee.com/add-ons/stash) helps us. After embedding the layout template, we can set stuff in the template being called by URL with stash:set, and call it in the embedded template with stash:get because the called template gets parsed first, then the embedded template is parsed. So:
+
+Setting content in the template called by URL:
+
+```
+{!-- Set some content --}
+{exp:stash:set name="stuff"}stuff goes here{/exp:stash:set}
+```
+
+Retrieving content:
+
+```
+{!-- Get some content --}
+{exp:stash:get name='stuff'}
+```
+
+Are you getting it? See the possibilities? After embedding the primary template, we wrap everything in the template called by URL in stash:set tags and essentially inject that content into the embedded template with the stash:get call. And that stash:get call can be anywhere in the embedded template. For instance, on this site I want to change the `<title>` area in the head of the page depending on the URL and page visited. So in my embedded layout template the title looks like this:
+
+```
+<title>{exp:stash:get name='head_title'} | BuzzingPixel</title>
+```
+
+And in the URL called template I have set the title that stash is retrieving like so:
+
+```
+{exp:stash:set name="head_title"}This is the page title{/exp:stash:set}
+```
+
+Now do you see it? This is some seriously powerful mojo! And the fun doesn’t end there. What if I want to control various aspects of the layout template based on the URL? What if when I call a page template I want to turn certain aspects of the layout on or off. If it’s as easy as displaying or not displaying code we can still do it all with one layout template using Stash (for complicated sites, this is where you may need more than one layout template, but when you really get into this workflow, there is not actually a need to have more than one layout template very often).
+
+An example is that on a site I recently developed, some templates required a sidebar layout and some did not. So I created a method with Stash to tell the layout template whether to display the sidebar. I used [Switchee](http://devot-ee.com/add-ons/switchee) case logic (another great add-on by Croxton) to reduce template overhead, but I’ll use native EE `{if}` statements here for the simplicity of the demonstration:
+
+Here is the value I set in my URL called template:
+
+```
+{!-- Show the Sidebar? Possible Values are: "sidebar" "nosidebar" --}
+{exp:stash:set name="template_type"}sidebar{/exp:stash:set}
+```
+
+And in the embedded layout template:
+
+```
+{if "{exp:stash:set name="template_type"}" == "sidebar"}
+Sidebar Code
+{/if}
+```
+
+You can see the power of this method. But there is another benefit: speed. One embed per template. This is a really low overhead approach to keeping things DRY and I love it. This is the sort of thing I get excited about.
+
+And I hope by writing about it here, someone comes across this and finds it useful. If you have any questions, or want to tell me about a better way to do things, shoot me an email. You will find the contact link in the menu above.

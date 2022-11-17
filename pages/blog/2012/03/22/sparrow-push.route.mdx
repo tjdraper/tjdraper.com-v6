@@ -1,0 +1,38 @@
+---
+title: Sparrow Push
+type: article
+tags:
+  - Annoyances
+  - Apple Stupidity
+  - Info
+  - iOS
+  - iPhone
+  - Opinion
+---
+
+I’m a big fan of Sparrow. In fact, it is my second favorite email client on the Mac. There are days when Sparrow is the only email client I use (most of the time I do use Apple Mail and like it just a tad better, though I wish I could merge the best features of both into one client).
+
+As everyone is no doubt aware by now, Sparrow released their iOS app last week. I, like most good geeks ran out to buy and download the app. And it is superb. It is to me, what a good iOS app should be: well done, well polished, good looking, easy to use, nice visual cues, and not cluttered. I went an entire two days with iOS’s built in Mail disabled and used only Sparrow. It is a great app. But there is one major problem, and it is not Sparrow’s or the development team’s fault. There is no push of any kind, no push notifications, no background email loading, nothing. There is a reason for this. Apple has only a specific set of background APIs that developers can “legally” use. One of those APIs that Sparrow could have tapped into is Push notifications. Push does nothing for loading emails in the background, but it would at least notify you when you have a new email. Then you would have to open Sparrow and let it load in the new emails.
+
+There are problems with the notification approach. There are two ways I can see that this could be implemented.
+
+1.  The developers of Sparrow could run a server that would store your email login credentials and poll your mail provider at a set frequency to check for new mail. When there’s new mail, the Sparrow servers could send a push notification to your phone.
+    
+2.  They could have the end user set up a forwarder to forward their email to a special Sparrow user address. Sparrows servers could send out a push notification then discard the email.
+    
+
+There are problems with both of these approaches to solving push notifications. First of all there’s security. To many people, email security is a big deal. Allowing an intermediate server to store those credentials and log on to poll for new mail is not a good thing. The third party company would need to be pretty good at security. Then there’s the problem with the first option of polling from the Sparrow third party server that push notifications probably wouldn’t be instant because most mail servers don’t allow constant polling, that could overload the server. I suppose some form of IMAP IDLE could be implemented, but it’s all very complicated. The second option of forwarding is also complicated. And though if the email that is forwarded is discarded, there’s still security questions. There’s also the fact that setting up forwarding properly is asking a lot of many users, not to mention some email services don’t even support forwarding.
+
+Then there’s cost. I don’t know how many users Sparrow has but it’s a lot. Running a third party server for push notifications would be very expensive for the developer. And the service would have to be reliable. It would have to always work. To me, there’s just way too many problems with this approach.
+
+There is another background API that could be used. It’s the VOIP API. Apple provides a background API that allows an app to open a network connection and listen for incoming requests. They make this API available only to VOIP apps, but there’s no technical reason why it couldn’t work for all kinds of apps. The app itself (as far as I understand) will still go into a suspended state when in the background, and iOS keeps the connection open to listen for incoming requests. If a request comes in, the app is woken from suspension and allowed then to execute code in the background. Sparrow actually did implement usage of this API to open an IMAP IDLE connection to the IMAP server and listen for new emails. It’s not any more or less battery efficient than a VOIP app. Yet, because Apple has arbitrarily limited this background API to VOIP apps only, Apple rejected this implementation in Sparrow.
+
+Don’t misunderstand me, I understand why Apple wants to keep this API limited. If they didn’t, developers would probably find all sorts of uses for this, which accumulated app by app would probably have a significant negative impact on battery life. But third party mail apps would seem to have a legitimate need for this functionality to me.
+
+This is really all about choice. It’s not that I’m unhappy with Apple’s built in Mail client. But I do like Sparrow a little bit better, however because of the push issue, and the fact that Sparrow can’t even just check for email occasionally in the background, it is unusable as my primary iOS email client.
+
+There is in fact one other issue that prevents me from doing it as well, and that is that iOS has no way to specify default applications for specific things. I can’t tell iOS that all mail should now be handled by Sparrow like I can on the Mac (the same goes for web browsers for that matter). It’s frustrating actually.
+
+I propose that Apple allow both the background API usage for email clients, as well as allowing users to specify the default apps for things like email and web. It seems like there’s a lot more benefit than not to me.
+
+If you would like to sign Sparrow’s petition to Apple to allow them to use the background API, [click here](http://www.sprw.me/push.php).

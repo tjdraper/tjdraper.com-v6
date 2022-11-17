@@ -1,0 +1,29 @@
+---
+title: Why the Facebook Mobile App is so Horrible
+type: linkedList
+linkUrl: http://blog.mobtest.com/2012/05/heres-why-the-facebook-ios-app-is-so-bad-uiwebviews-and-no-nitro/
+tags:
+  - Annoyances
+  - Design
+  - Info
+  - Linked
+---
+
+> In spite of growing numbers, not a whole lot of users actually like the current iOS app. In the US iTunes store, the rating average is 2 stars, with out the 21,803 ratings, 11,839 1 star ratings (!). One star ratings are often a sign of frustration, and you can see that in the comments. For most of the apps an average of 2 stars is deadly, but we all use Facebook so yes we will all have to use its iOS app if you own an iPhone or iPad.
+
+…
+
+> 1.  **app is slow**
+> 2.  **inconsistent information** notification icons say there are new messages or responses, actual window does not show anything new.
+> 3.  **app is slower than mobile web site** while everybody is used to speedy apps, the Facebook mobile web site is faster than iOS app, and offers almost the same functionality.
+> 4.  **tons of other bugs** scrambled views, photo upload, text boxes disappear, no sharing.
+
+…
+
+> I did some network sniffing (I like sniffing ) and found out that the data that the iOS app downloads from facebook.com is a mixture of REST (XML format, no JSON) and HTML.
+
+…
+
+> To display HTML in an app, a developer uses a Safari component called UIWebView. Very convenient, but also dangerous. The HTML downloaded is pretty big (15kb), and contains links to images, stylesheets and JavaScript. For a starter, caching of unchanged content cannot be controlled by the developer. The FB app downloads the whole timeline HTML every time, and it is up to the UIWebView to determine whether it needs to download images, stylesheets etc. again.
+
+Pretty much the reasons that I thought the Facebook Mobile app was aweful. Read the whole article, even of you don’t use Facebook. It’s a good example of how not to do an app. I understand the reasons Facebook thinks that the way they are doing it is correct, but the results are such a subpar app that it is totally not worth it!

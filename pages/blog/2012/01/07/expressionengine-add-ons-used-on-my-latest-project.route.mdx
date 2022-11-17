@@ -1,0 +1,157 @@
+---
+title: ExpressionEngine add-ons used on my latest project
+type: article
+tags:
+  - ExpressionEngine
+  - Recommended Resource
+  - Software I Use
+---
+
+I just finished rolling out my latest ExpressionEngine project; a redesigned website for my Church. You can take a gander here: [HeritageCenterville.org](http://heritagecenterville.org)
+
+There were several things that I did, and several EE Add-ons that I used, which I’ll be writing about (because I’m geeky like that). And I’m going to start with some great Add-ons that I used.
+
+[Allow EE Code](http://expressionengine.com/downloads/details/allow_ee_code)
+----------------------------------------------------------------------------
+
+This wonderful little plugin allows the use of ExpressionEngine tags in Channel Entries. Normally, you can’t use EE tags in Channel Entries, only HTML (or if you’ve installed a MarkDown plugin which I’ll get to in a minute, you can use MarkDown).
+
+This was extremely useful for one specific page I was working on. All the pages in this project that aren’t special purpose pages are served using one of two templates I created for pages, in conjunction with the _Pages_ module that ships as a part of ExpressionEngine that let’s me set specific URLs for a page. The problem was I wanted to make a page that called for some EE code: the Contact page. Specifically, I wanted to use the tag: `{exp:email:contact_form recipients="someone@somesite.org"}`. But I wanted to do that within a channel entry since there was no need for it to exist outside my normal page structure. Google revealed this Add-on and it does exactly what you would expect. In your template, you simply wrap your channel field tag with `{exp:allow_eecode}` and you’re all set.
+
+[Blis Download File](http://devot-ee.com/add-ons/blis-download-file)
+--------------------------------------------------------------------
+
+On this particular project, I needed to add the ability to download MP3s of the sermons. Of course I included a web player, and you can get the most recent 20 sermons via the podcast (also powered by EE via an RSS template), but there also needs to be the ability to directly download the MP3 file of the sermons. In the past on this website, I’ve provided a direct link to the MP3, but most browsers will simply load that MP3 and start playing it. I wanted a way to click a link and have the MP3 file download, not play in the browser. And I “could” (and have) accomplished this with PHP, but it’s not the most elegant solution. As well, I was having trouble getting the PHP to work in a single template with dynamic expression engine variables. Google again came to the rescue with this simple, but quite effective plugin.
+
+It’s actually very simple to use. You set up a template which I elected to call “download” and put in a single line of template code:
+
+```
+{exp:download_file:serve  remove_path="/path/to/file/"}
+```
+
+_footnote on `remove_path` [1](#fn:eeaddons1)_
+
+Then you use some special template code in the “href” for the download link like so:
+
+```
+<a href="{exp:download_file:link file='/path/to/file/{audio-name}' template='/template_group/download/'}"}
+```
+
+`{audio-name}` is the custom field in my “Sermons” channel where I place the name of the MP3 file I’ve uploaded to the server.
+
+So I really love that add-on.
+
+[HTTP Header](http://devot-ee.com/add-ons/http-header)
+------------------------------------------------------
+
+This add-on serves a single purpose. I wanted to serve the correct HTTP headers on my 404 page. Again, I “could” accomplish this with PHP, but this plugin makes this dead simple. At the top of the 404 template you use: `{exp:http_header status="404"}`
+
+And that’s that.
+
+[Low Random](http://gotolow.com/addons/low-random)
+--------------------------------------------------
+
+I love Low’s EE add-ons. This one allows you to call random files or images. The EE template code for this is simple:
+
+```
+{exp:low_random:file folder="/server/path/to/folder"}
+```
+
+That’s it. I’m using it to serve a rotation of images on the sidebar of pages that do not have sidebar content.
+
+[Low Seg2Cat](http://gotolow.com/addons/low-seg2cat)
+----------------------------------------------------
+
+This is something I can’t believe I lived without before now. Normally in EE, you have to use a trigger word for categories, and usually that word is “category” but it creates awkwardness in the URL structure.
+
+For instance, most of the time, you want to have a particular template serving your categories, rather than the index template you would be using for your main entry listing. I mean you can (and I have) used the same index template for both standard listing and category listings, with some complicated variables which take a long time to debug, and have a performance cost. So normally you have something awkward like, `/template_group/categories/category/category_id`. Obviously it’s a little awkward to call the categories template, then use the category trigger word.
+
+Seg2Cat solves this by using a simple template variable like so:
+
+```
+{exp:channel:entries channel="channel_name" category="{segment_3_category_id}"}
+```
+
+The is the key there. That’s the Seg2Cat variable. When segment 3 of the URL is a category, it pulls the category ID into that spot. So it’s telling the Channel Entries tag to only display entries in that category ID. It’s brilliant!
+
+And for my specific purpose, I didn’t even want the word categories to be used because I’m using categories for my Pastor’s various sermons series. So I want the language and the URLs to be reflective of that. With Low Seg2Cat, this is all completely possible.
+
+[Low Reorder](http://gotolow.com/addons/low-reorder)
+----------------------------------------------------
+
+Ahh, my first paid EE add-on, but soooo worth it. Often on EE sites, you want Channel Entries to be displayed by date. So normally you don’t have to worry about reordering entries. But on the Heritage site, I have several items on the homepage that are single Channel Entries that might need to be re-ordered. If I order by date, and I want to reorder, I’d have to go and manually change the date on each entry. And sorting by custom field is no better because it’s the same problem.
+
+Low reorder creates a field type which you can add as a custom field to a Channel, which is completely hidden when editing entries, but which you call in the Channel tag in the “orderby” parameter.
+
+```
+{exp:channel:entries channel="homepageresources" orderby="resources-order" sort="desc"}
+```
+
+This custom field has a number in it, which is determined by dragging and dropping in the Low Reorder interface. Again, brilliant.
+
+Have I mentioned I Love Low’s plugins?
+
+[MD Detect Page Type](http://devot-ee.com/add-ons/md-detect-page-type)
+----------------------------------------------------------------------
+
+I used this to detect if the URL is a pagination URL.
+
+One of my goals was to design a really _really_ tight website. What I mean is, if the URL isn’t part of the structure, I want it to 404. As an example:
+
+The articles structure on the Heritage site looks like this
+
+- /articles - Lists 5 articles at a time, paginated.
+- /artciels/permalink/article_entry_url - article permalinks
+- /articles/category/category-url - lists articles in category
+
+The problem is that without some restrictions in place, invalid URLs after a `/template_group` won’t necessarily 404. If `/articles/the-worship-of-god` is not a valid URL to an article, then the template will just default to showing all the article entires, complete with pagination. This is no good, this is just a duplicate of the /articles URL and Google penalizes search results for it. I want a 404 if the URL is invalid. So one way to accomplish this is to place code in the index template that sends anything with more than one URL segment to 404 since that template should only be used to display the the index of article listings:
+
+_(note, ExpressionEngine is not displaying the if statement below when formatted with curly braces. Somehow the templating engine is processing it as EE Code even though it shouldn’t. I should report a bug. So pretend the if statements are wrapped in curly braces instead of brackets)_
+
+```
+[if segment_2 != ""]{redirect="404"}[/if]
+```
+
+So what I am doing there is detecting if segment_2 is not empty. If it’s not then the URL is invalid and should be 404ed. But wait, there’s a problem. Segment_2 is used for pagination (/articles/P5). The problem now is that with that code, a pagination URL is 404ed. That’s no good. As much as I love ExpressionEngine, not being able to tell EE to ignore pagination in segment variables like this is a serious limitation. Thankfully MD Detect Page Type comes to the rescue:
+
+_(same deal on the curly braces/brackets thing on the if statement)_
+
+```
+{exp:md_detect_page_type url_segment="{segment_2}"}{[if segment_2 != "" AND pagination_page != TRUE]{redirect="404"}[/if]{/exp:md_detect_page_type}
+```
+
+Now we’ve added a condition that says to only 404 if the URL isn’t a pagination URL and segment_2 is not empty. Perfect. Any other URL should 404, and now it does [2](#fn:eeaddons2) .
+
+[Tagger](http://www.devdemon.com/tagger/)
+-----------------------------------------
+
+Tagger is awesome. We wanted some way to make our sermons more searchable, since it’s an audio file, you sort of need keywords… something more to search than the title. Tagger has provided this in the form of searchable, clickable keywords/tags. There are only a couple things about the way it’s implemented that make it a _little_ harder to use than I wanted it to be, but once I understood the basics, it was fairly simple.
+
+[TruncHTML](http://utilitees.de/ee.php/trunchtml)
+-------------------------------------------------
+
+Very simple add-on that truncates text, but is HTML aware. I wanted to be able to display a little bit from a long article on the main articles listing, and have a click through to the permalink to read the full article. But I did not want to have two fields, one for the truncated summary that I would manually truncate, and another for the full text. There’s no reason the CMS can’t take care of that for me. And this plugin takes care of that.
+
+[SmartDown](http://experienceinternet.co.uk/software/smartdown/)
+----------------------------------------------------------------
+
+I really love [John Gruber’s Markdown](http://daringfireball.net/projects/markdown/). I like to write web stuff in Markdown, and Smartdown is the way to do it with ExpressionEngine. Smartdown is based on [PHP Markdown Extra](http://michelf.com/projects/php-markdown/extra/), which is basically just PHP Markdown with a few new tricks.
+
+I love SmartDown. I usually only use it for myself [3](#fn:eeaddons3) though because if I’m developing a site for someone else, they probably aren’t geeky enough to get MarkDown and want a full WYSIWYG editor [4](#fn:eeaddons4) .
+
+Conclusion
+----------
+
+I think this is the most add-ons I have ever used on an EE site. I don’t like to just add a bunch of add-ons to an EE install right off that bat that I may or may not use, I add them as I need to use them.
+
+But add-ons are definitely one of the beauties of EE. Though it will do a lot of stuff out of the box, there is also a vibrant developer community. And another nice thing is that Ellis Lab is committed to, and cultivates it’s third party dev community. In fact Ellis Lab really went out of their way to make third party add-ons better in EE 2.
+
+* * *
+
+1.  The `remove_path` parameter simply removes that path from the name of the file, otherwise, because of the way the add-on works, it would include the path in the file name [↩](#fnref:eeaddons1)
+
+2.  I have more on 404s, but I think I’m going to develop that into another article. [↩](#fnref:eeaddons2)
+
+3.  I’m pretty much the only one maintaining my Church’s website right now. If I ever bring anyone else in on the development and maintenance, I’ll make them use Markdown… [↩](#fnref:eeaddons3)
+
+4.  [Wygwam](http://pixelandtonic.com/wygwam) is the best, easiest to implement, and easiest to use WYSIWYG editor and I highly recommend it if you _must_ have WYSIWYG Channel entry formatting for like, your clients and stuff. I recently used Wygwam on a site I developed for my sister, [FrugalFarmWife.com](http://frugalfarmwife.com), and I was very happy with it. My only real complaint is that it does not convert inch and foot marks (as I refer to them) into proper typographic apostrophes and quotation marks. But most people don’t care as much about proper typography as I do so I live with it for client sites that need WYSIWYG editors. [↩](#fnref:eeaddons4)

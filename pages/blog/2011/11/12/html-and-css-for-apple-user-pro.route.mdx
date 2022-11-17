@@ -1,0 +1,80 @@
+---
+title: HTML and CSS for Apple User Pro
+type: article
+linkUrl: http://appleuserpro.com/site/html-and-css-for-apple-user-pro
+tags:
+  - ExpressionEngine
+  - Fun
+  - HTML/CSS
+  - Info
+---
+
+![appleuserpro-mobile](/assets/uploads/2011-11-12/appleuserpro-mobile.jpg)
+
+_(This article is going to be about HTML and CSS geekery so if you aren’t in to that sort of thing, feel free to pass.)_
+
+Since as a professional Apple User I use Apple devices to do HTML and CSS coding, and it is therefore of interest to me, I thought I would break down how I did the standard and mobile versions of this site.
+
+The first thing of note is that I have kept this site’s design intentionally simple. I wanted something that looked nice, and that wasn’t cluttered.
+
+The standard desktop version of this site is powered by HTML, CSS, and 4 template images:
+
+-   [Image 1](/assets/template_01.png) — Header of the site
+-   [Image 2](/assets/template_02.png) — Top of every article
+-   [Image 3](/assets/template_03.png) — Article repeating background
+-   [Image 4](/assets/template_04.png) — Footer for each article
+
+
+This was my initial (re)design. I intended to do a mobile version, but did not get around to it until last night. In my desire to keep things extremely simple, I decided to see if I could use the exact same HTML and simply serve a different stylesheet to iPhones and iPods Touch. So I implemented PHP code detection in the `<head>` section to determine whether to serve the standard CSS or the iPhone CSS like so:
+
+```php
+$iphone = strpos($_SERVER[‘HTTP_USER_AGENT’],”iPhone”);
+$ipod = strpos($_SERVER[‘HTTP_USER_AGENT’],”iPod”);
+
+if ($iphone||$ipod == true) { echo ‘
+<meta name=”viewport” content=”width=652, user-scalable=yes” />
+<meta name=”apple-mobile-web-app-capable” content=”yes” />
+<link rel=”stylesheet” href=”/styles/iphone” />’; }
+
+else { echo ‘<link rel=”stylesheet” href=”/styles/index” />’; }
+```
+
+You can see I set the width of the site to serve to iPhone to be 652 Pixels wide. This allowed me to incorporate the same width of my articles on the desktop version of the site (580, important for images I include in articles to fit properly) and have room for the template design. So those 4 template images become:
+
+-   [Image 1](/assets/template-iphone_01.png) — Header of the site
+-   [Image 2](/assets/template-iphone_02.png) — Top of every article
+-   [Image 3](/assets/template-iphone_03.png) — Article repeating background
+-   [Image 4](/assets/template-iphone_04.png) — Footer for each article
+
+Now how do I deal with the two column format that my articles are in on the standard desktop version (the main content on the left side, and the meta information and permalink on the right)? I’m serving the same HTML so how do I adjust it to work for iPhone? iPhones are longer than wide so left/right column division isn’t great. Well those two columns (`<div>`s) are simply floats as specified by the CSS like so:
+
+```css
+.entry-block {background-repeat: repeat-y; background-image: url(/assets/template_03.png); width: 900px; overflow: auto}
+
+.entry-main {width: 900px; background-repeat: no-repeat; background-image: url(/assets/template_02.png); overflow: auto}
+
+.entry-right-column {margin-right: 38px; margin-top: 24px; float: right; width: 210px;}
+
+.entry-left-column {margin-top: 24px; margin-left: 38px; width: 580px; float: left;}
+```
+
+So, a little tweaking of the CSS for those elements in the iPhone version should do the trick to make them stack instead. Like so:
+
+```css
+.entry-block {background-repeat: repeat-y; background-image: url(/assets/template-iphone_03.png); width: 652px; overflow: hidden}
+
+.entry-main {width: 652px; background-repeat: no-repeat; background-image: url(/assets/template-iphone_02.png); overflow: hidden}
+
+.entry-right-column { padding-bottom: 20px; margin-bottom: -1px; margin-top: 10px; padding-left: 26px; padding-top: 12px; border-top-style: solid; border-top-width: 1px; margin-left: 38px; width: 550px;}
+
+.entry-left-column { margin-bottom: -1px; padding-bottom: 10px; margin-left: 38px; margin-top: 24px; width: 570px;}
+```
+
+And that’s basically it. Of course I adjusted font sizes for iPhone and tweaked some things here and there. For a detailed comparison of the two stylesheets, you can find them here (please note the simplicity, and I think elegance of these stylesheets. I think they are the best I’ve done so far):
+
+-   [Standard Desktop Version](/styles/index)
+-   [iPhone Version](/styles/iphone)
+
+And here’s the basic stripped down HTML template (Again, I’m pretty proud of the simplicity and elegance):
+
+-   [Basic HTML Template](/assets/uploads/2011-11-12/basic-html-template.txt)

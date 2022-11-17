@@ -1,0 +1,287 @@
+---
+title: ExpressionEngine Basics
+type: article
+tags:
+  - ExpressionEngine
+  - Info
+---
+
+I wanted to do an article on how to power a Podcast with EE, but I realized I needed to cover the basics a little better first.
+
+When I first began work on my Church’s website, I began looking for a CMS that would be flexible enough to fit my needs. This was before I had discovered EE and I used no less then two obscure systems within the course of 6 months or so before realizing I needed something much more robust. I knew at this point that Wordpress was out (for me), I had already begun to loathe Wordpress. [1](#fn:eebasics1) After I discovered ExpressionEngine I knew this was the system I wanted to use. Even though in ExpressionEngine 1, the concept of Channels was still somewhat confusingly called “Weblogs” that concept of data agnostic content management was definitely there and any amount of reading up on EE at the time would quickly show the flexibility of Weblogs (and how badly it was named, Channels is a far more appropriate name for what you can do with this concept).
+
+Specifically, I needed a CMS that would let me enter data in one place, and have it propagate anywhere I needed it to. Of course this is also possible in Wordpress, but I find Wordpress conceptually flawed. There is no flexibility in terms of the type of content. There is simply no Channel concept. And there is no separation of templates. Wordpress uses a certain set of templates to render the website. Period.
+
+EE is in many ways, the polar opposite of this approach. Let’s look at the ExpressionEngine model. I don’t feel as if I did all that great of a job explaining this in my “[Why ExpressionEngine](http://appleuserpro.com/article/why-expression-engine)” article.
+
+There are 2 basic components to understanding the EE model. Those components are:
+
+1.  [Templates](http://expressionengine.com/user_guide/templates/index.html)
+2.  [Channels](http://expressionengine.com/user_guide/modules/channel/index.html)
+
+But there is of course far more to it than that. Let’s add to that.
+
+1.  Templates
+
+    -   [Snippets](http://expressionengine.com/user_guide/templates/globals/snippets.html)
+    -   [Global Variables](http://expressionengine.com/user_guide/templates/globals/user_defined.html)
+2.  Channels
+
+    -   [Field Groups](http://expressionengine.com/user_guide/cp/admin/channels/custom_channel_fields.html)
+    -   [Field Types](http://expressionengine.com/user_guide/cp/admin/channels/custom_fields_edit.html)
+    -   [Categories](http://expressionengine.com/user_guide/cp/admin/channels/category_management.html)
+3.  [Add-ons](http://devot-ee.com/) [2](#fn:eebasics2)
+
+
+So what are these things?
+
+Templates, Snippets, and Global Variables
+-----------------------------------------
+
+ExpressionEngine is, for better or for worse, usually considered to be best for someone that has moved beyond the beginner’s stage of website design. While this is somewhat of a mischaracterization [3](#fn:eebasics3) , it is not unfounded. EE used to come with a very basic template structure pre-installed, but I don’t even think it does that anymore. EE is, for all intents and purposes, a blank slate when you first install it. Unlike Wordpress and other popular Content Management Systems, there is no predefined template structure. You don’t go hunting for “sidebar.phtml,” or “footer.html” or “header.php” in some template directory somewhere. You define the templates yourself. Designers like me can rejoice! Seriously, do a little jig if you were not aware that ExpressionEngine was like this because I am bringing you freedom!
+
+### Templates and Template Groups
+
+To access Templates and Template Groups, from the EE control panel, navigate to “Design > Templates > Template Manager”. [4](#fn:eebasics4)
+
+Templates do just what it sounds like. You can use any HTML you want in a Template (or even PHP, though you have to enable the use of PHP, it’s disabled by default as a security feature). Templates exist in Template Groups. No Template may exist in ExpressionEngine outside of a Template Group. Every group has a Template called “index”. The “index” Template is the default Template for that group and if no Template is specified in the URL for a given Template Group, the “index” Template in that group is the one that is loaded.
+
+Templates and Groups are called in the URL structure like this:
+
+```
+http://some-site.com/template_group/template
+```
+
+In the case of Apple User Pro, I wanted to keep the URLs as short as possible, so for most URLs (all actually), I am only calling a Template Group, and because no Template is specified, EE loads the index Template of the group. The template structure for this site looks like:
+
+-   site
+
+    -   index
+-   article
+
+    -   index
+-   linked list
+
+    -   index
+-   page
+
+    -   index
+-   category
+
+    -   index
+-   archive
+
+    -   index
+-   feeds
+
+    -   index
+-   404
+
+    -   index
+
+So a permalink for an article looks like this:
+
+```
+http://appleuserpro.com/article/article_permalink_url
+```
+
+Or for a Linked List item
+
+```
+http://appleuserpro.com/linkedlist/linkedlist_permalink_url
+```
+
+### Snippets and Global Variables
+
+So, it’s great and all that Templates can contain HTML and whatnot, but that seems sort of burdensome to have a lot of different templates with what is often the same chunks of code in each. Ahh but this is where EE helps us out again. EE never forces any particular structure on the designer. With a system like Wordpress (for instance) the header template is always the header template. But with ExpressionEngine you break the code up into chunks only as you see fit. This is where Snippets and Global Variables come in.
+
+Global Variables are simply re-usable chunks of HTML code. For instance, my nav bar is in a Global Variable called gv-nav. [5](#fn:eebasics5) In my template, I simply place a call for the Global Variable with:
+
+```
+[gv-nav]
+```
+
+(_Note, those brackets should actually be curly braces, but EE is trying to parse the Global Variable instead of showing the code to call the Global Varialbe)_
+
+And now if I want to change something about the nav bar, I do it in one place.
+
+Here are the Global Variables I’m using on this site right now.
+
+#### gv-ganalytics
+
+It contains the following code and I place the call for it just before the closing body tag
+
+```
+<script type="text/javascript">
+
+var _gaq = _gaq || [];
+
+_gaq.push(['_setAccount', 'UA-7579302-6']);
+
+_gaq.push(['_trackPageview']);
+
+(function() {
+var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+
+</script>
+```
+
+#### gv-headrss
+
+Goes in the head tag. It’s just in case I ever need to change the location of my RSS feed.
+
+```
+<link rel="alternate" type="application/rss+xml" title="RSS" href="/feeds/index" />
+```
+
+#### gv-nav
+
+```
+<div id="nav"><a href="/">&nbsp;home&nbsp;</a> <div class="nav-word-spacer"></div> <a href="/archive">&nbsp;archive&nbsp;</a> <div class="nav-word-spacer"></div> <a href="mailto:feedback@appleuserpro.com">&nbsp;comments&nbsp;</a> <div class="nav-word-spacer"></div> <a href="/colophon">&nbsp;colophon&nbsp;</a> <div class="nav-word-spacer"></div> <a href="/feeds/index">&nbsp;rss feed&nbsp;</a></div>
+```
+
+#### gv-stylesheets
+
+```
+<!--[if !IE]>-->
+<meta name="viewport" content="width=652, user-scalable=yes" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<link media="screen and (max-device-width: 480px)" href="/styles/iphone.css" rel="stylesheet" />
+<!--<![endif]-->
+
+<link rel="stylesheet" media="screen and (min-device-width: 480px)" href="/styles/index.css" />
+
+<!--[if IE]>
+<link rel="stylesheet" type="text/css" href="/styles/index.css" />
+<![endif]-->
+```
+
+Snippets are similar in concept but can do more. Unlike Global Variables, EE Template code or PHP can be used in a Snippet. The reason that both exist is because Snippets have a bit higher cost in terms of performance. But still very powerful. So you would use a Global Variable for reusable HTML that does not include EE Template code or PHP. And a Snippet if you have a need for repeating code using either one of those.
+
+I utilize two Snippets on this site
+
+#### sn-footer
+
+The reason I use a snippet for the footer is because I have a date variable that pulls the current year from ExpressionEngine for the copyright.
+
+```
+<div id="footer">
+<p>This site is built on modern web standards and should work with any modern web browser<br />
+This site has been tested with <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home">Internet Explorer 9</a>, <a href="http://apple.com/safari/">Safari 5</a>, <a href="http://mozilla.org/en-US/firefox/new/">Firefox 7</a> and <a href="http://google.com/chrome">Chrome 14</a><br />
+powered by <a href="http://expressionengine.com/index.php?affiliate=tjdraper">Expression Engine</a> &mdash; built with <a href="http://www.panic.com/coda/">Coda</a></p>
+
+<p>copyright &copy; {current_time format="%Y"} — TJ Draper</p>
+</div>
+```
+
+#### sn-meta
+
+This is the part of the code that appears on the right side of each article or linked list item
+
+```
+<div>Posted on:</div>
+<div class="entry-date">{entry_date format=' %l, %F %j, %Y '}</div>
+<div class="categories"><strong>category:</strong><br />{categories backspace="8"}<a href="/category/{category_url_title}">{category_name}</a> &bull; {/categories}</div>
+<div class="permalink">{if channel_id=="9"}<a href="/article/{url_title}">permalink</a>{/if}{if channel_id=="13"}<a href="/linkedlist/{url_title}">permalink</a>{/if}</div>
+<div class="permalink"><a href="http://aupro.us/s/{entry_id}">short url</a></div>
+
+{if logged_in}<br /><div class="permalink"><a href="http://appleuserpro.com/admin.php?S=0&D=cp&C=content_publish&M=entry_form&channel_id={channel_id}&entry_id={entry_id}">Edit &raquo;</a></div>{/if}
+```
+
+Channels, Field Groups, Field Types, and Categories
+---------------------------------------------------
+
+Channels are the other half of ExpressionEngine. A Channel can be almost anything. To get started with a Channel, you create one, then you create a field group, add fields to it, assign it to the Channel and you’re off and running.
+
+### Fields
+
+Every Channel entry has some default fields.
+
+-   Title
+-   URL Title (the permalink, this may or may not be relevant depending on how you use the Channel)
+-   Entry Date
+
+And some other default items that aren’t fields really, but are part of the channel entry
+
+-   Status (usually open for closed, but you can define custom statuses too)
+-   Options (make entry sticky etc.)
+
+And there are a few more things, all of which, with the exception of the Title, URL Title and Entry Date can be hidden ore shown on a per-Channel basis. Beyond that you define custom fields for your Channel. The Fields on this site are very simple. Despite having three Channels (Article, Linked List, Page) I only have one field group which I assign to each channel. I have defined two fields in this field group.
+
+1.  Link URL
+2.  Body
+
+Only the Body is required. This is the field that is common to all three of my Channels. On my Page and Article Channel entry page, I have hidden the Link URL field as I don’t use it. That field is only used on the Linked List items. It’s where I paste the URL of the item I’m linking to.
+
+This site is fairly uncomplicated in it’s Channel field needs. But on the site I rolled out last week for my Church, I have 7 different field groups. And the field group I’m using for the sermons has 8 custom fields. Channels are extremely flexible.
+
+### Categories
+
+You can do a lot with categories, or you can choose not even to use them. I don’t have a category group assigned to my Page Channel. I have the same category group assigned to my Linked List and Article Channels. Categories are most often used for blogs, but you can use them for other things too (I’m using categories as the sermons series on my Church website).
+
+Bringing it all together.
+-------------------------
+
+Alright, so we have these two basic components, how do we bring it all together? That we do with the Channel Entries Tag. When you wish to call data from a Channel, you do so with this tag:
+
+```
+{exp:channel:entries channel="channel_short_name"}
+```
+
+And there’s all kinds of parameters we could use in that tag as well such as:
+
+```
+ orderby="date" sort="desc" limit="5" disable="category_fields|member_data"
+```
+
+_footnote on the disable parameter [6](#fn:eebasics6)_
+
+_There are many other parameters that can be used in that tag in the documentation._
+
+Everything between the opening and closing of that tag can loop. For instance, if the limit is set higher than 1, and the URL is not calling a specific Channel entry with the permalink, then everything in between the open and close of the Channel tag will loop based on the number of entries shown.
+
+Here is basically what the template code looks like to call the entries on the Apple User Pro home page (I did simplify some things for the sake of reading):
+
+```
+{exp:channel:entries channel="appleuserpro|linkedlist" orderby="date" sort="desc" limit="10" disable="category_fields|member_data"}
+
+<div class="entry-left-column">
+
+    <h1>[if channel_id == "9"]<a href="/article/{url_title}">&diams; {title}</a>[/if][if channel_id == "13"]<a href="{link-url}">&rarr; {title}</a>[/if]</h1>
+
+    {postcontent}
+
+</div>
+
+<div class="entry-right-column">
+    <div>Posted on:</div>
+    <div class="entry-date">{entry_date format=' %l, %F %j, %Y '}</div>
+    <div class="categories"><strong>category:</strong><br />{categories backspace="8"}<a href="/category/{category_url_title}">{category_name}</a> &bull; {/categories}</div>
+    <div class="permalink">[if channel_id == "9"]<a href="/article/{url_title}">permalink</a>[/if][if channel_id == "13"]<a href="/linkedlist/{url_title}">permalink</a>[/if]</div>
+    <div class="permalink"><a href="http://aupro.us/s/{entry_id}">short url</a></div>
+
+    [if logged_in]<br /><div class="permalink"><a href="http://appleuserpro.com/admin.php?S=0&D=cp&C=content_publish&M=entry_form&channel_id={channel_id}&entry_id={entry_id}">Edit &raquo;</a></div>[/if]
+
+{/exp:channel:entries}
+```
+
+_(please note that the if statements should be in curly braces, but EE is again trying to parse them so I had to switch to brackets)_
+
+And that’s it in a nutshell. I hope someone finds this useful, I love writing about it.
+
+* * *
+
+1.  See my previous entry on this subject: [Why ExpressionEngine](http://appleuserpro.com/article/why-expression-engine) [↩](#fnref:eebasics1)
+
+2.  I’ve built many EE sites without add-ons, but more and more, I’m finding add-ons that make things easier, or do things that I could’t do without them. [↩](#fnref:eebasics2)
+
+3.  There are templates out there for EE, but not nearly as many as there are for Wordpress. [↩](#fnref:eebasics3)
+
+4.  Templates can also be set to save as files within the directory structure of your server. I always set my templates to save as files so I can use [Coda](http://panic.com/coda/) to edit my Templates without resorting to copying and pasting all my code changes back and forth. [↩](#fnref:eebasics4)
+
+5.  In case you are wondering, I prefix all my Global Variables with “gv-” and all my Snippets with “sn-”. This helps me identify which is which if I happen to be working in a template and I see that one of the two has been called. You are absolutely not required to use the prefix. [↩](#fnref:eebasics5)
+
+6.  Anything not being used in the Channel Entry tag should be disabled. This will make the tag far lighter to call. If you aren’t going to call categories in this particular instance of the Channel Tag, disable to reduce overhead. Don’t need data from the member module? Disable it. I usually keep a text document of handy items and EE tags that I might use, and the things you can disable in the Channel tag are at the top. [↩](#fnref:eebasics6)

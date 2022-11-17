@@ -1,0 +1,36 @@
+---
+title: iPhone Push Notifications. Please fix them Apple!
+type: article
+tags:
+  - Opinion
+---
+
+_To kick things off, I am going to publish a modified version of an article I originally posted on my family blog about iPhone push notifications (the modifications are to bring it up to speed with iOS 4 now being released)._
+
+What are iPhone Push Notifications? They are a service that Apple provides for iPhone developers and users. Instead of each application on iPhone having it’s own service running to listen for incoming notification, Apple provides one service to listen for incoming notifications. Apple can this way insure that it is passive on the iPhone’s part, thereby maximizing battery life. And since it is one service running for the entire OS and any application that needs it, and not a background service for each app, it really is the maximum efficient way for apps to receive notifications while “in the background.”
+
+I actually really do like the concept of a single Push Notification service for the sake of battery life and phone performance. I use Push Notifications primarily for [BeejiveIM](http://itunes.apple.com/us/app/beejiveim-with-push/id291720439?mt=8) (Gtalk), [Pushmail](http://itunes.apple.com/us/app/pushmail/id324271854?mt=8) and [Facebook](http://itunes.apple.com/us/app/facebook/id284882215?mt=8). I’ll use BeejiveIM as an example of how this works.
+
+In order for me to stay signed in to Gtalk when BeejiveIM is “in the background” BeejiveIM’s servers must maintain my Gtalk account’s connection to the Gtalk server (I use quotation marks for “in the background” because the app is actually not running in the background, but frozen in the background in memory \[iOS 4 or later\] until such time as iOS reclaims that memory). If someone sends me an instant message, the BeejiveIM server through which my account is signed in, sends a notification to the Apple Push Notification Server (PNS), and the PNS pushes the notification to my phone where I see both a pop-up message, and a badge is placed on the app’s icon.
+
+If you followed that convoluted route an IM has to take to get to my iPhone, you might think this would be problematic, but I’ve never really had a problem with my account being signed in through Beejive’s middleman server. And for the most part it works really well.
+
+But here are the real draw backs. And the kicker is, these could be eliminated by better implementation (isn’t Apple supposed to excel at implementation?). Current implementation is better than nothing (certainly better than the iPhone OS 1 and 2 days where we had NOTHING) but I REALLY hope Apple expands Push Notifications soon.
+
+I would like to see 2 things ASAP:
+
+1\. Notification Management (and no more single mode disruptive notification popups)
+
+Push Notifications do not stack, but in the current implementation, if they did, it would be even worse! Because they popup over everything, and nothing else is accessible until the notification is dismissed. And if I got 10 notifications that stacked while my phone was in my pocket or something, I would have to acknowledge and dismiss each one. And of course, once I have acknowledged and dismissed a notification, it is gone, never to be seen again (this is true either way).
+
+So I want Notification Management. The way I want this to work is to have a place where all notifications are collected (push or local, missed calls, ALL notifications) and I can view them at any time, mark some or all as read etc.
+
+And then to replace disruptive popups, how about a double height status bar of a color not yet used by iPhone (yellow perhaps?), with text displaying the number of new notifications (double height green is for active calls when not viewing the call screen, double height red is for active VOIP calls, and double height blue is for an active tethering session).
+
+2\. I want the push notifications to wake the app in question so it can update with the new information
+
+You see, the push notification system shows me something is new, but the app receiving the push notification does not update with that new information until activated. The only thing the app gets is a badge with a number on the icon. So I have to wait for the app to pull that new info in when I open it. What we have right now with iOS 4 is saved state, essentially frozen in the background. So if you’ve opened this app recently, it will come right up and update itself with the new information that you received a push notification for. But this update may take some time, and it could have happened while your phone was in your pocket or something like that.
+
+So to fix this, how about to go along with the way Apple is approaching multitasking (freezing the app in active memory), let the push notification wake the app up in the background, update with the new information, then if the user hasn’t activated that app, let it go back to sleep. That way it’s ready to go when I open it.
+
+These two things seem simple to implement, and they seem like no brainers to me. And the lack of those two things really hurts the iPhone user experience. But Apple has had a habit of SLOWLY (painfully so) adding much needed features as we go so we will see what develops for iOS 5 I suppose. I can’t imagine Apple won’t expand on their way of approaching multi-tasking…

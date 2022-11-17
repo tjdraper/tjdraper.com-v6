@@ -1,0 +1,61 @@
+---
+title: Completely Remove index.php
+type: article
+tags:
+  - Annoyances
+  - ExpressionEngine
+  - Info
+---
+
+I am always on a quest to have specific aspects of the sites I build, both mine and the sites I build for others, behave in exactly the way I want. Sometimes I get obsessive over seemingly meaningless and small details. For a very long time I have been obsessed with URL control. I want my URLs to work in a specific way. For instance, on this site I want the year and the month to be in the permalink URLs. I like having that data in the URL when I glance at it. [1](#fn:eeulrs1) Thankfully, though not common, ExpressionEngine does have the means for me to create a way for this to work. [2](#fn:eeurls2)
+
+Another aspect of the URL I like to control is to remove index.php from the URLs. You see, everything in ExpressionEngine runs through the index.php file. Without any server side modifications, a typical ExpressionEngine URL looks like this:
+
+```
+http://mysite.com/index.php/template_group/template_or_url_title
+```
+
+Index.php is the door through which the entire front end of an ExpressionEngine site must go. Everything is called through index.php.
+
+I don’t like it. I don’t want it. It makes my URLs look ugly, it’s unfriendly and uncouth. No one cares that ExpressionEngine uses PHP to work. It’s an unnecessary and irritating part of the URL. Thankfully, as with all CMSes of this type, we can remove the index.php from the URL by rewriting the URL. We do this on typical LAMP servers with htaccess. So in my typical .htaccess file, I have this:
+
+```
+## remove index.php
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)$ /index.php/$1 [L]
+```
+
+Okay, so what is that? The first two lines are rewrite conditions. If the filename in the URL requested is not a file (!-f) and if it is not a folder/directory (!-d), then we apply the rewrite rule to transparently run the URL through index.php. So the URL demo from above can now be:
+
+```
+http://mysite.com/template_group/template_or_url_title
+```
+
+No index.php needed or required and the URL looks much more pretty. This is a standard way of doing things. You can find a tutorial on this in 5 seconds flat on a Google search. But there is a problem with this method that I had not considered until I read [this article](http://kevinthompson.info/blog/2011/03/04/completely-remove-index-php-from-expressionengine-urls.html) by Kevin Thompson:
+
+> While there are a number of known solutions for removing index.php from ExpressionEngine URLs, few developers realize that although URLs now resolve without index.php, the previous URLs including index.php also still exist.
+
+Right, I had never considered that for a second. I want to fix that right away. I do not like, and Google does not like (in terms of SEO) duplicate URLs for content. If your content is available at two distinct URLs it hurts your SEO and not only that but it’s confusing and irritating. I want the content to be available at one URL and one only. But with my htaccess rule, both URLs would work to get to the content. Omitting index.php was only an option, not a hard fact.
+
+Thankfully it only takes two lines added to my .htaccess file:
+
+```
+## Redirect requests that use index.php
+    RewriteCond %{THE_REQUEST} ^GET.*index\.php [NC]
+    RewriteRule (.*?)index\.php/*(.*) /$1$2 [R=301,L]
+```
+
+The condition is that if index.php is in the URL, rewrite the URL without and send a 301 code (permanent redirect). So for example, previously this URL would work to get to this article:
+
+```
+http://buzzingpixel.com/index.php/article/2013/02/completely-remove-index-php
+```
+
+But now, if you try that, it redirects to the URL without index.php in it. It’s simple, but much to my chagrin, it’s something I never thought of before. I’m glad it’s fixed now!
+
+* * *
+
+1.  Do you know how many people actually care about the URL? Hint, it’s not very many, only a geeky (nerdy?) few like me. [↩](#fnref:eeulrs1)
+
+2.  Notice I did not say ExpressionEngine _has_ this feature because I had to jump through a few hoops with the Channel Entries tag to make it work. I’m not doing anything hacky or undocumented, but it’s a little weird and not really the way it was intended to work. [↩](#fnref:eeurls2)

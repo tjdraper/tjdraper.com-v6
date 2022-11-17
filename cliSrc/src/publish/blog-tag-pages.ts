@@ -76,11 +76,14 @@ export default class BlogTagPages extends Command {
             .split('{tag}')
             .join(`'${tag}'`);
 
-        const dashedTag = tag.replace(' ', '-');
+        const dashedTag = tag.replace(' ', '-')
+            .split('?').join('');
 
         const thisTagPath = `${tagPath}/${dashedTag}`;
 
-        fs.mkdirSync(thisTagPath);
+        fs.mkdirSync(thisTagPath, {
+            recursive: true,
+        });
 
         fs.writeFileSync(
             `${thisTagPath}/index.route.tsx`,
@@ -98,7 +101,9 @@ export default class BlogTagPages extends Command {
                 .split('{tag}')
                 .join(`'${tag}'`);
 
-            fs.mkdirSync(pagePath);
+            fs.mkdirSync(pagePath, {
+                recursive: true,
+            });
 
             fs.writeFileSync(
                 `${pagePath}/${currentPageNum}.route.tsx`,

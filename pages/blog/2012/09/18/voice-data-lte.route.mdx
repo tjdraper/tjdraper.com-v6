@@ -1,0 +1,19 @@
+---
+title: No Simultaneous Voice and Data for CDMA/LTE iPhone 5
+type: linkedList
+linkUrl: http://bits.blogs.nytimes.com/2012/09/13/iphone-5-calls-data/
+tags:
+  - Info
+  - iPhone
+  - Linked
+---
+
+Believe it or not, there is actually a very good reason for it.
+
+> So why does Verizon’s Samsung Galaxy S III, a 4G LTE phone, juggle calls and data? Samsung added an extra antenna so that it pulls data from the 4G LTE network at the same time that it’s using another antenna to do voice, said Anand Shimpi, editor in chief of AnandTech.
+>
+> Then why didn’t Apple add another antenna? Its phone already has two antennas in an effort to improve reception, and it would have had to add a third antenna just for Verizon and Sprint phones to give them simultaneous data and calls, Mr. Shimpi explained. Leaving that third antenna out allows Apple to simplify the process of manufacturing the iPhone for multiple carriers. Plus, in the next two years, 4G LTE technology is supposed to evolve to support voice calls, which would render another antenna unnecessary.
+
+That's actually a bit over-simplified. The iPhone 5 is using a single, custom designed cellular chipset. This chip handles all the cellular radio needs of the phone, CDMA/EV-DO/LTE in the case of Verizon and Sprint, GSM/EDGE/UMTS/LTE in the case of the AT&T model. This chip can only be in one radio mode at a time. Currently none of the carriers support VoLTE (Voice over LTE) on their young and evolving LTE networks. In order to make a call on the Verizon/Sprint model, the chip must be in CDMA mode, which as we know does not support simultaneous voice and data. To make a call on the AT&T model, the chip must be in either GSM or UMTS mode. If you are in a 3G/UMTS area, you will have simultaneous voice and data on the UMTS network. Note that on either network, you cannot use LTE while on a call.
+
+Also note the situation with Verizon/Sprint CDMA is not like the situation with AT&T's GSM/EDGE (2G) network where incoming calls would simply be directed to voicemail when data was being used. Incoming calls will interrupt your data session and you can choose to answer or ignore and go back to using data. I still maintain that the simultaneous voice and data is not the killer feature people think it is. I have that capability on my current AT&T iPhone of course, and I use it so rarely that I don't care about the feature.

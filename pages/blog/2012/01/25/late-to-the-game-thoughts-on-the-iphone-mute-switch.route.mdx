@@ -1,0 +1,79 @@
+---
+title: Late to the game - thoughts on the iPhone mute switch
+type: article
+tags:
+  - Annoyances
+  - Apple Stupidity
+  - Opinion
+---
+
+So I’m a little late to this game, but that’s alright, I do have some thoughts I’d like to share.
+
+I will start with the background on this situation and link to various articles and responses. If you are aware of all this already and/or want to get straight to my thoughts on the matter, by all means [click here](#mytake).
+
+The discussions and arguments that have surrounded this event have, in my estimation, been very tame and well thought out. This is a rarity on the internet. But I have been pleasantly surprised by the civility of this discussion.
+
+Let’s dive in.
+
+First, it appears an older business man was given an iPhone to replace his BlackBerry. He was not aware of the fact that the iPhone mute switch is not actually a blanket mute, but a “Ringer/Silent” switch.
+
+[Ringing Finally Ended, but There’s No Button to Stop Shame →](http://www.nytimes.com/2012/01/13/nyregion/ringing-finally-stopped-but-concertgoers-alarm-persists.html)
+
+> The unmistakably jarring sound of an iPhone marimba ring interrupted the soft and spiritual final measures of Mahler’s Symphony No. 9 at the New York Philharmonic on Tuesday night. The conductor, Alan Gilbert, did something almost unheard-of in a concert hall: He stopped the performance. But the ringing kept on going, prompting increasingly angry shouts in the audience directed at the malefactor.
+> 
+> Actually, Patron X said he had no idea he was the culprit. He said his company replaced his BlackBerry with an iPhone the day before the concert. He said he made sure to turn it off before the concert, not realizing that the alarm clock had accidentally been set and would sound even if the phone was in silent mode.
+
+This prompted a fury of debate on the interwebz™. There were a lot of people who insisted the mute switch on the iPhone should mute everything, all the time, no exceptions. Then there were those that insisted the behavior of the switch is correct. John Gruber is in this camp.
+
+[On the Behavior of the iPhone Mute Switch →](http://daringfireball.net/2012/01/iphone_mute_switch_design)
+
+> I agree with Biancolo that this is a tricky trade-off, but I disagree with his suggestions. Adding alerts and confirmation prompts is seldom a good idea, and would not help at all when you toggle the mute switch without even looking at the iPhone. (I frequently toggle that switch without taking the phone out of my pocket.)
+> 
+> I think the current behavior of the iPhone mute switch is correct. You can’t design around every single edge case, and a new iPhone user who makes the reasonable but mistaken assumption that the mute switch silences everything, with an alarm set that he wasn’t aware of, and who is sitting in the front row of the New York Philharmonic when the accidental alarm goes off, is a pretty good example of an edge case.
+
+Andy Ihnatko responds to Gruber.
+
+[On the Behavior of the iPhone Mute Switch →](http://ihnatko.com/2012/01/14/daring-fireball-on-the-behavior-of-the-iphone-mute-switch/)
+
+> The Mute behavior of the iPhone is just wrong; it’s an important function and its behavior isn’t transparent. The correct answer is so clear to me. Whether the switch silences everything or just some things, the behavior is going to trip people up sometimes. It’s unavoidable. Apple can only choose how users get tripped up. The right answer to most feature design problems the one that puts more control in the hands of the user. If screwups are inevitable, then the iPhone should choose to screw up in a way where the user feels like he understands what went wrong, takes responsibility for that mistake, and knows how to avoid repeating it. I shouldn’t be forced to consult a little laminated wallet card every time I slide a two-state “Mute” switch, to remind myself of all of the iPhone’s independent exceptions to the concept of “silence.” I can’t review all pending alerts and notifications to anticipate future problems.
+> 
+> No. I should slide the switch to “Mute,” and then the phone goes SILENT. If I miss an appointment because I did that, it’s completely on me. If my phone disrupts a performance despite the fact that I took clear and deliberate action to prevent that from happening…that’s the result of sloppy design. Or arrogant design, which is harder to forgive.
+
+And I love this:
+
+> “Why not switch the phone off when you need complete silence?” comes the counter-argument. That’ll certainly work. But if you’re claiming that the Mute switch’s current behavior is correct, shouldn’t you argue that the iPhone should refuse to shut down if there are alarms and reminders scheduled?
+
+And Marco Arment defends Gruber.
+
+[Designing “Mute” →](http://www.marco.org/2012/01/14/mute)
+
+> The user told the iPhone to make noise by either scheduling an alarm or initiating an obviously noise-playing feature in an app.
+> 
+> The user also told the iPhone to be silent with the switch on the side.
+> 
+> **The user has issued conflicting commands, and the iPhone can’t obey both.**
+> 
+> It’s a typical design problem: it can’t be heavy and light and big and small. Neither decision will satisfy everyone all the time or cover every edge case: if Apple implemented Mute in Ihnatko’s preferred way, millions of people would be just as irritated when their scheduled alarms didn’t wake them up.
+
+And this prompted Dan Benjamin to blog for the first time in a while.
+
+[MUTE MEANS MUTE →](http://hivelogic.com/articles/mute/)
+
+> Here’s my take: Physical settings should always trump and override software settings. If you’ve flipped a switch, you’ve told the iPhone something very important, just like when you flip a switch in the real world. When you turn off a light, you expect the lights to go off and stay off. When you hit the mute button on your TV, you expect it to stay muted, even if your favorite show comes on and you miss the first 5 minutes because you didn’t hear it.
+
+And finally, here’s:
+
+My take
+-------
+
+I don’t quite fully agree with anyone I’ve linked to here. I’m probably most closely aligned with Ihnatko and Benjamin, but I don’t fully agree with them either.
+
+Here’s the problem, mute simply can’t be a binary setting of “Speaker on” or “Speaker off”. At the very least, if that were the case, then iCloud’s “Find my iPhone” would fail to function as intended. If you truly can’t find your iPhone — say it slid into the cushions of the couch but you don’t know where you were when you lost it — then you want “Find my iPhone” to make noise regardless of the mute switch setting. I am fairly certain we could all agree to that.
+
+What’s more; there may be times when I want to set an alarm that is very important and I want it to go off regardless of the mute switch setting. This doesn’t happen very often, but I have had occasion for this to happen.
+
+But most of the time I do want the mute switch to mute _everything_. I may have set an alarm I don’t remember setting. If I’m in the theatre, I want the mute switch to override everything. If I’m in a really important meeting, I want to mute the phone **no matter what**. This is where I agree with Ihnatko. And I agree that the current behavior of the mute switch isn’t transparent. I was burned by this once very early on in ownership of my first iPhone. To me, mute meant mute… **everything**. And an alarm went off when I wasn’t expecting it to. It was a lesson learned about my new phone, but it was very annoying because I thought I had taken care of the situation because I had been diligent to mute my iPhone.
+
+However, I have an ingenious way to make it completely transparent to the user, and to put the full responsibility of the noisemaking of the device on the user. And in a completely user friendly way. Here’s what I propose. Make the decision of whether an alarm overrides the mute switch a per-alarm setting. This is so obvious to me. It would be a simple iOS style on/off switch in the alarm. It must be immediately visible to the user. The text should simply read “Override Silent Switch”. And with a setting of on/off, that should be pretty apparent what it does. But as Apple sometimes does in iOS, they could have small, more grayish text underneath with more explanation.
+
+This is the perfect solution to me because it allows the user to delineate an alarm that must always get attention vs. those that should be quiet when you want the phone to be quiet.

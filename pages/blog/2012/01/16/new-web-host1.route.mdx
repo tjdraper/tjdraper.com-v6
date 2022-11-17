@@ -1,0 +1,36 @@
+---
+title: New Web Host
+type: article
+tags:
+  - Annoyances
+  - Blog News
+  - Info
+---
+
+Well, that was quite a rough ride.
+
+For several years I’ve been with [HostingZoom](https://www.hostingzoom.com/) and was fairly happy. At this point however, I _heartily_ recommend that you stay away from them. They have obviously changed management, or something. Let me walk you through it briefly.
+
+I’ve been noticing degraded performance on the server for several weeks. At some point I realized that the problem was not going to be cleared up on it’s own. In cPanel I can see server load and so I started going to cPanel and looking at server load any time I felt that server performance was worse than it should be. Server load was _very_ high during these times. And it was becoming more often the case than not that my sites were very sluggish.
+
+I finally opened a support ticket on the January 7 asking why server load was so high, pointing out how slowly my sites were running, and asking politely if they could do something about it. I got a reply from Support Level 1 saying they were escalating to Level 2 as they could not resolve my situation. Same with Level 2, they escalated me to Level 3. Finally, after many hours Level 3 support replied back that the server was under _some_ load but there was not a lot they could do about it as there were no abuses to suspend from any of the accounts, and that they were closely monitoring the situation (for all the good that does).
+
+By January 11 the server load was constantly high, and by high I mean really high. Website performance was really bad, often taking 80 to 90 seconds before a site would even start loading. I posted to the support ticket again asking about the situation. Response? They wanted a URL to the site that was slow so they could assist me better. They do not see any such high resource usage on the server.
+
+Well, now I’m annoyed, how is it possible that I know more about what’s happening to the server than the server admins? I responded with URLs to 4 of the sites hosted on the account. They replied that they are closely monitoring the situation. And if I felt the server was having repeated load issues they could migrate me to one of their other servers.
+
+Thorough the next day, I documented the high server load with screenshots of the high load situation in cPanel and posted it to my support ticket. Finally, FINALLY, tech support acknowledges a problem. They report to me that they have checked into the issue and have found 2 bad drives in the RAID which was causing the server performance issues. Not particularly reassuring, but I am at least glad they have found an issue to fix.
+
+And that was the last I saw of my sites for 48 hours [1](#fn:webhost1). This is where a good chunk of my support ticket turns into a back and forth. My requesting information, demanding to know “why my sites are down for this long?“ “why can’t I access cPanel” “why can’t I access my databases?” “why does SSH keep closing the connection on me” etc. The reply was always, “kindly hold on while the RAID rebuilds” etc.
+
+After 48 hours, I realized that HostingZoom was no longer the host for me. I got a couple of recommendations from people I trust, but ultimately decided to go with [BlueHost](http://www.bluehost.com/). The recommendation came from someone I trusted and the prices seemed sane. I was able to do some FTP downloading from the HostingZoom server as long as I babysat the download, sometimes the server would close the connection, or simply fail to respond or whatever. I got to a place where all I was waiting on were my databases because I couldn’t access cPanel, phpMyAdmin, or SSH.
+
+Finally after several rounds with tech support, they gave me a SQL dump of all my databases last night at about 11:45. I stayed up for a couple hours uploading databases, making the final tweaks, and testing the sites on the new server. Then I set the name servers to the new host and went to bed.
+
+So here we are on the new host. My decision was validated when, this morning, HostingZoom informed me that the server was completely back up to speed, and the couple of sites I still haven’t been able to transfer were not loading. A quick look at the server overview on the HZ client dashboard revealed the the “http service” was down. Unbelievable.
+
+Here’s to hoping this new host will work out better.
+
+* * *
+
+1.  The sites would occasionally load, but mostly they were throwing error 500 messages. [↩](#fnref:webhost1)

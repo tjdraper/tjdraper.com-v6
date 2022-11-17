@@ -1,0 +1,88 @@
+---
+title: ExpressionEngine URL Shortener Revisited
+type: article
+tags:
+  - ExpressionEngine
+  - Follow-up
+  - HTML/CSS
+---
+
+This is a follow up to [my previous article on creating a URL shortener with ExpressionEngine](/blog/2011/12/14/just-how-flexible-is-expressionengine). It turns out I was doing it the _really_ complicated way. My new way uses all EE code and doesn’t require any PHP. The only thing I’m using that isn’t included by default in ExpressionEngine is a plugin called [HTTP Header](http://devot-ee.com/add-ons/http-header). I use this to set the header to 301.
+
+I still use the short domain name “aurpro.us” hosted on the same server. From the original article:
+
+> One ExpressionEngine install on two domains
+> -------------------------------------------
+>
+> The next step is to copy the index.php and .htaccess file from Apple User Pro’s web-root to the aupro.us web-root. But we aren’t quite done yet. Since I’m copying the index.php from the main site, the system path is already declared in the document, but there are some other variables I need to configure. Lines 89 through 93 of EE’s index.php contain some variables that are commented out.
+>
+> ```
+> //  $assign_to_config['template_group'] = '';
+> //  $assign_to_config['template'] = '';
+> //  $assign_to_config['site_index'] = '';
+> //  $assign_to_config['site_404'] = '';
+> //  $assign_to_config['global_vars'] = array(); // This array must be associative
+> ```
+>
+> For this purpose, I only need two of those. I need to declare the `template_group and “template” to override the defaults I have set in the EE control panel. That way, if someone loads up aupro.us without anything more to the URL, EE will not serve the default template, but will instead load my URL shortening template and redirect them to the Apple User Pro home page.
+>
+> So I configured like so:
+>
+> ```
+> $assign_to_config['template'] = 'u';
+> $assign_to_config['site_index'] = 'index';
+> ```
+
+So that’s all the same except I changed my template group to “s”. S stands for Short URL (to me anyway). I kept the “u” template group around and simply embedded the “s/index” template for backward compatibility with older shortening URLs.
+
+```
+{embed="s/index"}
+```
+
+So, here is my much simplified way to use short URLs with EE.
+
+First we’ll use the HTTP Header plugin I talked about:
+
+```
+{exp:http_header status="301"}
+```
+
+Next we’ll call the appropriate channels.
+
+```
+{exp:channel:entries channel="appleuserpro|linkedlist" limit="1" disable="categories|category_fields|custom_fields|member_data|pagination" require_entry="yes"}
+```
+
+The require entry is very important to the next bit of code. If no entry is called when visiting aupro.us, I want it to redirect to appleuserpro.com. So I use:
+
+```
+{if no_results}{redirect="/"}{/if}
+```
+
+Next, we need to call a redirect for the entry.
+
+```
+{if channel_id=="9"}{redirect="article/{entry_date format='%Y'}/{entry_date format='%m'}/{url_title}"}{/if}
+
+{if channel_id=="13"}{redirect="linkedlist/{entry_date format='%Y'}/{entry_date format='%m'}/{url_title}"}{/if}
+```
+
+Now in my case, because I’m using two Channels for my content here on Apple User Pro, one for Articles, and one for my Linked List, I have to use some “if” statements to redirect to the right URL. If you are only using one channel, you can just remove the if statements and the second redirect, change to your appropriate URL format, and you’re good to go. But as you see, in my case, I have to figure out which channel the entry being called is in, then either redirect to the Article URL, or the Linked List URL. Even so, it’s fairly straight forward.
+
+And finally, all that’s left to do is close the Channel Entries Tag:
+
+```
+{/exp:channel:entries}
+```
+
+And that’s it.
+
+And one more thing I’ll reiterate from the original article. It’s very easy to add a short URL to your entries. Here’s how I do it:
+
+```
+<a href="http://aupro.us/s/{entry_id}">Short URL</a>
+```
+
+As long as that code is within the Channel Entries tag for the entry in question, `{entry_id}` will call the entry ID number.
+
+And that’s the short URL; much easier than my first round of code. But isn’t that how things go? You always learn new, more efficient, and better ways of doing things.

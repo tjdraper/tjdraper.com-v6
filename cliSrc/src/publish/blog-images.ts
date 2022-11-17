@@ -1,6 +1,6 @@
 import { Command } from '@oclif/core';
 import style from 'cli-color';
-import fs from 'fs';
+import fs from 'fs-extra';
 import path from 'path';
 import getFilesFromDirectory from '../../../pages/FileSystem/getFilesFromDirectory';
 import { BlogDirectory, BlogFolderName } from '../../../pages/blog/BlogData/constants';
@@ -29,6 +29,15 @@ export default class BlogImages extends Command {
                 '.GIF',
             ],
         });
+
+        fs.emptyDirSync(`${ImagesDirectory}/${BlogFolderName}`);
+
+        fs.writeFileSync(
+            `${ImagesDirectory}/${BlogFolderName}/.gitignore`,
+            `*
+!.gitignore
+`,
+        );
 
         files.forEach((file) => {
             let hasStarted = false;

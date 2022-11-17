@@ -1,0 +1,34 @@
+---
+title: iTunes 10 (for OS X)
+type: article
+tags:
+  - Opinion
+---
+
+(I have not used iTunes 10 for Windows, and have no plans to do so. It will eventually happen, but I just don’t care. As such, this is only for the OS X version of iTunes 10. I have no idea how much of this carries to the Windows version.)
+
+I personally don’t know yet whether iTunes 10 is still a carbon app, but it is certainly much more responsive in this trip around the block than iTunes 9, 8, or 7 were. It feels so much more responsive that I almost have to believe it has \*finally\* been ported to the Cocoa API. My expreince has been that Cocoa apps are much more responsive, and it’s certainly the same level of improvement we saw when the Finder was (finally) ported to Cocoa in Snow Leopard. It’s kind of ironic either way that such a major staple app to Apple has been Carbon for so long! In fact Steve Jobs called out Adobe recently in his open letter on Flash for being slow to adopt the Cocoa API, pointing out the fact that they \*just\* went OS X native (Cocoa) with CS5. I didn’t disagree with Steve, I just found it ironic (and iTunes isn’t/wasn’t the only major app of Apple’s left that is still Carbon!).
+
+But in any event, whether it has been transitioned to Cocoa, or it is still a Carbon app, it is a lot more responsive. I have yet to have a major hang up yet. And I also find syncing my iPhone takes less time.
+
+There have also been some UI “improvements.” I’m okay with most of them, but there are two things that really bug me.
+
+Among those that I’m okay with is the new icon. I personally like it. It feels more modern and fits in with the other icons in my Dock nicely.
+
+As for the two that bug me, one has been present since iTunes 8 (or was it 7?). The Scroll bars! Now, I don’t actually mind the scroll bars so much as I hate that they are different from the rest of the scroll bars in OS X.
+
+Let me stray just a bit off focus for a minute and speak of the Aqua interface for a moment. When the Aqua interface was introduced it received mixed reviews, some loved it’s candy like appearance, even more thought it was garish and ugly. But even for those that loved it, the longer one used it, the more “in the way” and “attention attracting” the interface seemed to be. The problem is that an interface should never get in the way or attract undue attention. I think that it should indeed look nice and elegant, but the original Aqua interface was quite a bit over the top. Now, in 2010, Aqua has been refined quite a lot. I’m fairly happy with where it is at. But a few “candy” like elements remain in the Aqua interface. Though more refined, the four main elements that are stilly candy-ish are “traffic light” window buttons, dialog buttons, and scroll bars. I’m not a huge fan of any of these elements at this stage of OS X’s life. But they aren’t awful and are working just fine. We also see that the look of Snow Leopard is more internally consistent than any previous iteration of OS X, which is quite welcome. For many years it seemed Apple couldn’t decide on the correct overall look of the OS, and the result was inconsistency throughout the OS (anyone remember brushed metal? ugh! Never could tell what a window was going to look like!). Now, the look is fairly stabilized.
+
+And now the stage is set.
+
+A couple versions ago, Apple introduced a new look for the scroll bars in iTunes. At the time, many thought the scroll bars in the next version of OS X might look like these new iTunes scroll bars. But that has not happened. The scroll bars in iTunes remain completely inconsistent with the rest of the OS. While I don’t mind the look of them, and even kind of prefer them over the Aqua Candy scroll bars currently used in the rest of OS X, I prefer consistency more.
+
+Okay, second gripe. One thing Apple excelled at in the early days, and still does pretty good at in a lot of ways, is maximizing muscle memory. I’m referring specifically to the window control buttons. I have for a long time loathed the inconsistency of the green maximize button throughout OS X, and have a utility installed that makes it behave the same way for all applications… except iTunes. Because iTunes does not let the OS control it’s window apparently! The green button toggles mini-player mode. Only by holding the Option key can you make the green button behave as it should. So that has been an inconsistency of the window controls on iTunes for a while. But now something new is messed up with the buttons. They are VERTICAL! Let me repeat that. VERTICAL. NO. OTHER. WINDOW. IN. OS X. HAS. VERTICAL. BUTTONS! In this layout, Red X, close button is on top, Yellow Minimize button is in the middle, Green Zoom (actually mini player toggle) is on bottom. This completely breaks the muscle memory trained in to every OS X user. Not to mention it doesn’t make any sense. Window controls ALWAYS belong on the top left horizontal plane of a window in OS X.
+
+Thankfully there is a way to get the correct window controls back. Quit iTunes, then open a Terminal Window (/Applications/Utilities/Terminal.app), and paste this command:
+
+_defaults write com.apple.iTunes full-window -1_
+
+Now press Enter. Re-Open iTunes and the window controls will be restored to their proper places.
+
+Depsite these complaints, I do like iTunes 10 overall, specifically it’s better responsiveness and faster syncing. Hopefully Apple will get their act together on these UI inconsistencies.

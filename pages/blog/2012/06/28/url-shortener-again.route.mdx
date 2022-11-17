@@ -1,0 +1,108 @@
+---
+title: >
+  You're going to talk about the URL shortener again?
+type: article
+tags:
+  - Design
+  - ExpressionEngine
+  - Fun
+  - HTML/CSS
+---
+
+Yeah, pretty much. Because it’s geeky, and I’m geeky so I’m going to talk about it.
+
+You might recall that I [talked about it when I first redesigned Apple User Pro](/article/2011/12/just-how-flexible-is-expressionengine). It turned out I was using way too much PHP and making things hard on myself. So I [followed up and talked about how to do it the easy way with all native EE code](/article/2012/02/ee-url-shortener), and one plugin ([HTTP Header](http://devot-ee.com/add-ons/http-header)).
+
+But when I went for the rebrand to BuzzingPixel I wanted to simplify further from the end user perspective. One thing I never liked with any version of the URL shortener is that I had to include the template group in the URL like this:
+
+```
+http://aupro.us/s/1219
+```
+
+Where “s” is the template group and the index template of the “s” template group is used by default. But who wants that template group in the URL? It’s extra. The entry ID is the only thing I want in the URL, that silly template group is just an annoyance. The only reason I ever included it was because as much as I love ExpressionEngine, and as flexible as it is in most ways, it can be hard to wrestle with it’s URL structure. URL structure is part of the design in my opinion, and I have been able to design the URL structure pretty well in most areas of this site, but I have never been happy with the URL shortener structure.
+
+I have tried unsuccessfully in the past to remove the template group from the URL with htaccess re-writes but I have been unsuccessful. I even spent several hours trying to figure it out when designing the current BuzzingPixel design. I finally gave up on htaccess in disgust and went and watched a movie. But the next day I had a brain wave and **I solved it!** You will notice that short URLs no longer include the template group. Here’s how:
+
+We still need to copy the index.php file from the main site root to the short URL site root. And you’ll need to remove index.php with htaccess. I’m actually removing www and trailing slashes as well. Here’s what my htaccess file looks like:
+
+```
+## remove www
+    RewriteCond %{HTTP_HOST} ^www.bzpxl.us [NC]
+    RewriteRule ^(.*)$ http://bzpxl.us/$1 [L,R=301]
+
+## remove trailing slash
+    ## check if file or directory exists first
+        RewriteCond %{REQUEST_FILENAME} !-f
+        RewriteCond %{REQUEST_FILENAME} !-d
+    ## if not file or directory remove the slash
+        RewriteCond %{HTTP_HOST} !^\.bzpxl\.com$ [NC]
+        RewriteRule ^(.+)/$ http://%{HTTP_HOST}/$1 [R=301,L]
+
+## remove index.php
+    ## check if file or directory exists first
+        RewriteCond %{REQUEST_FILENAME} !-f
+        RewriteCond %{REQUEST_FILENAME} !-d
+    ## if not file or directory remove index.php
+        RewriteRule ^(.*)$ /index.php/$1 [L]
+```
+
+It’s probably not necessary to check for files and directories on my short URL site since nothing else lives there, but this is actually a pretty typical htaccess file for me, I copied and pasted then modified the main URL.
+
+As I talked about in the previous articles, you need to modify the index.php file with some custom variables. But this is where I made the critical change that allows me to remove the template group from the URL altogether. Normally, ExpressionEngine requires a template group in the URL. But if there isn’t one in the URL then ExpressionEngine presents the 404 page. This was my “eureka” moment. I should create a new template group called anything I want (I called it shortener), and then using the custom config variable in index.php, override the default 404 page and assign my custom template as 404.
+
+```
+$assign_to_config['site_404'] = 'shortener/index';
+```
+
+Now when the short URL with Entry ID is used, it’s sent to the 404 template. The 404 template has the appropriate code magic to redirect to the full URL.
+
+```
+{exp:http_header status="301"}
+
+{exp:channel:entries entry_id="{segment_1}" disable="categories|category_fields|member_data|pagination"}
+{if no_results}{redirect="/"}{/if}
+
+{if channel_id=="9"}{redirect="/article/{entry_date format='%Y/%m'}/{url_title}"}{/if}
+
+{if channel_id=="13"}{redirect="/linkedlist/{entry_date format='%Y/%m'}/{url_title}"}{/if}
+
+{/exp:channel:entries}
+```
+
+That’s not very much code at all. And for a lot of uses, you won’t even need to detect the Channel ID. I have to because I have two channels with two different URL structures, the Linked List, and the Article Channel.
+
+So what’s going on. Well, first I’m using the HTTP Header plugin to change the header status to 301 instead of 404.
+
+```
+{exp:http_header status="301"}
+```
+
+Next I’m opening the channel entries tag and instead of assigning a Channel or Channels, I’m telling the tag to use the first URL segment as the entry ID.
+
+```
+{exp:channel:entries entry_id="{segment_1}" disable="categories|category_fields|member_data|pagination"}
+```
+
+Then I’m redirecting to the site homepage if there are no results (this is just in case someone visits the short URL without the entry ID or some such thing).
+
+```
+{if no_results}{redirect="/"}{/if}
+```
+
+Next, in my case, I need to determine which channel the entry is in and redirect appropriately.
+
+```
+{if channel_id=="9"}{redirect="/article/{entry_date format='%Y/%m'}/{url_title}"}{/if}
+
+{if channel_id=="13"}{redirect="/linkedlist/{entry_date format='%Y/%m'}/{url_title}"}{/if}
+```
+
+And finally, I close the channel entries tag.
+
+```
+{/exp:channel:entries}
+```
+
+If in the future I want to add channels and sections to the site that use short URLs, it’s as simple as adding another conditional line of code to detect the channel ID and redirect appropriately to the correct URL.
+
+And that is a really simple URL shortener based on the Channel Entry ID with no template group in the url.
