@@ -1,5 +1,3 @@
-import Link from 'next/link';
-
 const TagsMarkup = ({ tags }: { tags: Array<string> }) => (
     <>
         Tags:
@@ -7,12 +5,12 @@ const TagsMarkup = ({ tags }: { tags: Array<string> }) => (
         {tags.map((tag, index) => (
             <span key={`blog-tag-${tag}`}>
                 {index !== 0 && ', '}
-                <Link
+                <a
                     href={`/blog/tag/${tag.split(' ').join('-')}`}
                     className="text-tjd-red-500 hover:underline"
                 >
                     {tag}
-                </Link>
+                </a>
             </span>
         ))}
     </>

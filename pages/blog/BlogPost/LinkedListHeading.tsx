@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import { MetaData } from '../BlogData/Post';
 
 const Component = (
@@ -11,14 +10,14 @@ const Component = (
 
     return (
         <div className="prose">
-            <Link
+            <a
                 href={metaData.linkUrl}
                 className="font-bold text-xl"
             >
                 {metaData.linkTitle}
                 {' '}
                 &rarr;
-            </Link>
+            </a>
         </div>
     );
 };

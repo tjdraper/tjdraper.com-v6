@@ -1,5 +1,4 @@
 import { HomeIcon } from '@heroicons/react/20/solid';
-import Link from 'next/link';
 
 export interface Breadcrumb {
     name: string;
@@ -14,10 +13,10 @@ const Breadcrumbs = (
         <ol className="mx-auto flex w-full max-w-5xl space-x-4 px-4 sm:px-6 lg:px-8">
             <li className="flex">
                 <div className="flex items-center">
-                    <Link href="/" className="text-gray-400 hover:text-gray-500">
+                    <a href="/" className="text-gray-400 hover:text-gray-500">
                         <HomeIcon className="h-5 w-5 flex-shrink-0" aria-hidden="true" />
                         <span className="sr-only">Home</span>
-                    </Link>
+                    </a>
                 </div>
             </li>
             {breadcrumbs.map((page, i) => {
@@ -49,13 +48,13 @@ const Breadcrumbs = (
                                 }
 
                                 return (
-                                    <Link
+                                    <a
                                         href={page.href}
                                         className="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700"
                                         aria-current={isCurrent ? 'page' : undefined}
                                     >
                                         {page.name}
-                                    </Link>
+                                    </a>
                                 );
                             })()}
                         </div>

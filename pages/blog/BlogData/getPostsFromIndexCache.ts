@@ -1,9 +1,14 @@
+import fs from 'fs-extra';
 import { GetPostsProps, Results } from './getPosts';
 import Post from './Post';
-import { DefaultPerPage } from './constants';
+import { BlogDirectory, DefaultPerPage } from './constants';
 
 const getPostsFromIndexCache = async (props?: GetPostsProps): Promise<Results> => {
-    const jsonData = await import('./IndexCache.json');
+    const jsonData = JSON.parse(
+        fs.readFileSync(
+            `${BlogDirectory}/BlogData/IndexCache.json`,
+        ).toString(),
+    );
 
     const jsonResults = jsonData as unknown as Results;
 
