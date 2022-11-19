@@ -16,6 +16,8 @@ const Page = (
 
     const date = new Date(`${yyyy}-${mm}-${dd}T13:00:00`);
 
+    const author = metaData.author || 'TJ';
+
     return (
         <>
             <Breadcrumbs breadcrumbs={[
@@ -46,7 +48,7 @@ const Page = (
             })()}
             <Content
                 heading={{
-                    preHeading: `Posted by TJ on ${date.toLocaleDateString()}`,
+                    preHeading: `Posted by ${author} on ${date.toLocaleDateString()}`,
                     preHeading2: metaData.tags?.length
                         ? <TagsMarkup tags={metaData.tags} />
                         : null,

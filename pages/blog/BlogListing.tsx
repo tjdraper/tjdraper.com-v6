@@ -82,6 +82,8 @@ const BlogListing: CustomPage = (
 
                             const date = new Date(`${yyyy}-${mm}-${dd}T13:00:00`);
 
+                            const author = post.author || 'TJ';
+
                             return (
                                 <div key={post.title} className="flex flex-col overflow-hidden rounded-lg shadow-lg">
                                     <a href={post.uri} className="block flex-shrink-0">
@@ -123,9 +125,16 @@ const BlogListing: CustomPage = (
                                         </div>
                                         <div className="mt-6 flex items-center">
                                             <div className="flex space-x-1 text-sm text-gray-500">
-                                                <time dateTime={`${yyyy}-${mm}-${dd}`}>
-                                                    {date.toLocaleDateString()}
-                                                </time>
+                                                <div>
+                                                    <p className="text-sm font-medium text-gray-900">
+                                                        Posted by
+                                                        {' '}
+                                                        {author}
+                                                    </p>
+                                                    <time dateTime={`${yyyy}-${mm}-${dd}`}>
+                                                        {date.toLocaleDateString()}
+                                                    </time>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

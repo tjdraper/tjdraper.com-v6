@@ -4,6 +4,7 @@ enum PostType {
 }
 
 export interface MetaData {
+    author?: string;
     uri: string;
     title: string;
     type: PostType;
