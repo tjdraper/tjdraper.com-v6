@@ -1,4 +1,5 @@
 import { marked } from 'marked';
+import widont from 'widont';
 
 const Content = (
     {
@@ -49,7 +50,7 @@ const Content = (
                                                         if (typeof heading.preHeading === 'string' || heading.preHeading instanceof String) {
                                                             const content = heading.preHeading as string;
 
-                                                            return marked.parseInline(content);
+                                                            return <span dangerouslySetInnerHTML={{ __html: String(widont(marked.parseInline(content))).toString() }} />;
                                                         }
 
                                                         return heading.preHeading;
@@ -68,7 +69,7 @@ const Content = (
                                                         if (typeof heading.preHeading2 === 'string' || heading.preHeading2 instanceof String) {
                                                             const content = heading.preHeading2 as string;
 
-                                                            return marked.parseInline(content);
+                                                            return <span dangerouslySetInnerHTML={{ __html: String(widont(marked.parseInline(content))).toString() }} />;
                                                         }
 
                                                         return heading.preHeading2;
@@ -87,7 +88,7 @@ const Content = (
                                                         if (typeof heading.heading === 'string' || heading.heading instanceof String) {
                                                             const content = heading.heading as string;
 
-                                                            return marked.parseInline(content);
+                                                            return <span dangerouslySetInnerHTML={{ __html: String(widont(marked.parseInline(content))).toString() }} />;
                                                         }
 
                                                         return heading.heading;
@@ -109,7 +110,7 @@ const Content = (
                                             if (typeof heading.content === 'string' || heading.content instanceof String) {
                                                 const content = heading.content as string;
 
-                                                return marked.parseInline(content);
+                                                return <span dangerouslySetInnerHTML={{ __html: String(widont(marked.parseInline(content))).toString() }} />;
                                             }
 
                                             return heading.content;

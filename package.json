@@ -63,7 +63,8 @@
         "turndown": "^7.1.1",
         "turndown-plugin-gfm": "^1.0.2",
         "typescript": "4.8.4",
-        "unified": "^10.1.2"
+        "unified": "^10.1.2",
+        "widont": "^0.3.3"
     },
     "devDependencies": {
         "@babel/core": "^7.20.2",

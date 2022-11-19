@@ -1,5 +1,6 @@
 import { marked } from 'marked';
 import Image from 'next/image';
+import widont from 'widont';
 import IndexData from './BlogData/IndexData';
 import * as PageData from './PageData.md';
 import Pagination from '../Pagination/Pagination';
@@ -70,9 +71,10 @@ const BlogListing: CustomPage = (
             <div className="relative px-4 pt-10 pb-20 sm:px-6 lg:px-8 lg:pb-28">
                 <div className="relative mx-auto max-w-7xl">
                     <div className="text-center">
-                        <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-                            {marked.parseInline(heading)}
-                        </h2>
+                        <h2
+                            className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl"
+                            dangerouslySetInnerHTML={{ __html: String(widont(marked.parseInline(heading))).toString() }}
+                        />
                     </div>
                     <div className="mx-auto mt-12 grid max-w-lg gap-5 lg:max-w-none lg:grid-cols-3">
                         {indexData.posts.map((post) => {
@@ -112,9 +114,10 @@ const BlogListing: CustomPage = (
                                                 })()}
                                             </p>
                                             <a href={post.uri} className="mt-2 block group">
-                                                <p className="text-xl font-semibold text-gray-900 group-hover:text-tjd-red-500">
-                                                    {post.title}
-                                                </p>
+                                                <p
+                                                    className="text-xl font-semibold text-gray-900 group-hover:text-tjd-red-500"
+                                                    dangerouslySetInnerHTML={{ __html: String(widont(marked.parseInline(post.title))).toString() }}
+                                                />
                                                 {/* <p className="mt-3 text-base text-gray-500">excerpt</p> */}
                                             </a>
                                         </div>

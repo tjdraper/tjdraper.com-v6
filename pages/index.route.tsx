@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import { marked } from 'marked';
+import widont from 'widont';
 import FamilyBanner from './index/index-family-banner.jpg';
 import * as PageData from './index/PageData.md';
 import Content from './Layout/Content';
@@ -19,16 +20,19 @@ const Page: CustomPage = () => {
             <div className="mx-auto mt-2 max-w-7xl px-4 sm:mt-4 sm:px-6">
                 <div className="text-center">
                     <h1 className="mx-auto max-w-2xl tracking-tight text-gray-900">
-                        <span className="block font-bold text-4xl sm:text-5xl mb-3">
-                            {marked.parseInline(data.heading)}
-                        </span>
-                        <span className="block text-tjd-red-500 text-md sm:text-xl">
-                            {marked.parseInline(data.subHeading)}
-                        </span>
+                        <span
+                            className="block font-bold text-4xl sm:text-5xl mb-3"
+                            dangerouslySetInnerHTML={{ __html: String(widont(marked.parseInline(data.heading))).toString() }}
+                        />
+                        <span
+                            className="block text-tjd-red-500 text-md sm:text-xl"
+                            dangerouslySetInnerHTML={{ __html: String(widont(marked.parseInline(data.subHeading))).toString() }}
+                        />
                     </h1>
-                    <p className="mx-auto mt-2 max-w-md text-base text-gray-500 sm:text-lg md:mt-3 md:max-w-4xl">
-                        {marked.parseInline(data.subHeading2)}
-                    </p>
+                    <p
+                        className="mx-auto mt-2 max-w-md text-base text-gray-500 sm:text-lg md:mt-3 md:max-w-4xl"
+                        dangerouslySetInnerHTML={{ __html: String(widont(marked.parseInline(data.subHeading2))).toString() }}
+                    />
                 </div>
             </div>
             <div className="relative py-6">
