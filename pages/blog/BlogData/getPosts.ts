@@ -51,70 +51,83 @@ const getPosts = async (props?: GetPostsProps): Promise<Results> => {
     // eslint-disable-next-line no-eval
     const remarkGfm = await (eval('import("remark-gfm")') as Promise<typeof import('remark-gfm')>);
 
-    let posts = await Promise.all(files.map(async (file) => {
-        let hasStarted = false;
+    // eslint-disable-next-line no-useless-catch
+    try {
+        let posts = await Promise.all(files.map(async (file) => {
+            let hasStarted = false;
 
-        const uri = `/${file.split('/').filter((part) => {
-            if (!hasStarted && part !== BlogFolderName) {
-                return false;
+            const uri = `/${file.split('/').filter((part) => {
+                if (!hasStarted && part !== BlogFolderName) {
+                    return false;
+                }
+
+                hasStarted = true;
+
+                return true;
+                // eslint-disable-next-line newline-per-chained-call
+            }).join('/').split('.').at(0)}`;
+
+            const rawMarkdown = String(fs.readFileSync(file)).toString();
+
+            // eslint-disable-next-line no-useless-catch
+            try {
+                const renderedMarkdown = await unified()
+                    .use(remarkParse.default)
+                    .use(remarkFrontmatter.default)
+                    .use(remarkParseFrontmatter)
+                    .use(remarkGfm.default)
+                    .use(remarkRehype.default, { allowDangerousHtml: true })
+                    .use(rehypeRaw.default)
+                    .use(rehypeSanitize.default)
+                    .use(rehypeStringify.default)
+                    .process(rawMarkdown);
+
+                const frontMatter = renderedMarkdown.data.frontmatter as MetaData;
+
+                const metaData = transformFrontMatterToMetaData(
+                    frontMatter,
+                    uri,
+                );
+
+                return {
+                    ...metaData,
+                    body: String(renderedMarkdown).toString(),
+                };
+            } catch (e) {
+                // eslint-disable-next-line no-console
+                console.log(rawMarkdown);
+
+                throw e;
             }
+        })) as Array<Post>;
 
-            hasStarted = true;
+        if (props?.tag) {
+            posts = posts.filter((post) => {
+                const tagIndex = post.tags?.indexOf(String(props.tag));
 
-            return true;
-            // eslint-disable-next-line newline-per-chained-call
-        }).join('/').split('.').at(0)}`;
+                if (tagIndex === undefined) {
+                    return false;
+                }
 
-        const rawMarkdown = String(fs.readFileSync(file)).toString();
+                return tagIndex >= 0;
+            });
+        }
 
-        const renderedMarkdown = await unified()
-            .use(remarkParse.default)
-            .use(remarkFrontmatter.default)
-            .use(remarkParseFrontmatter)
-            .use(remarkGfm.default)
-            .use(remarkRehype.default, { allowDangerousHtml: true })
-            .use(rehypeRaw.default)
-            .use(rehypeSanitize.default)
-            .use(rehypeStringify.default)
-            .process(rawMarkdown);
+        const limit = props?.limit || DefaultPerPage;
 
-        const frontMatter = renderedMarkdown.data.frontmatter as MetaData;
+        const start = props?.offset || 0;
 
-        const metaData = transformFrontMatterToMetaData(
-            frontMatter,
-            uri,
-        );
+        const end = start + limit;
+
+        const results = posts.slice(start, end);
 
         return {
-            ...metaData,
-            body: String(renderedMarkdown).toString(),
+            totalPosts: posts.length,
+            posts: results,
         };
-    })) as Array<Post>;
-
-    if (props?.tag) {
-        posts = posts.filter((post) => {
-            const tagIndex = post.tags?.indexOf(String(props.tag));
-
-            if (tagIndex === undefined) {
-                return false;
-            }
-
-            return tagIndex >= 0;
-        });
+    } catch (e) {
+        throw e;
     }
-
-    const limit = props?.limit || DefaultPerPage;
-
-    const start = props?.offset || 0;
-
-    const end = start + limit;
-
-    const results = posts.slice(start, end);
-
-    return {
-        totalPosts: posts.length,
-        posts: results,
-    };
 };
 
 export default getPosts;

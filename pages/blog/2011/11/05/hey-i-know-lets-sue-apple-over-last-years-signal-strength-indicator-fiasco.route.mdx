@@ -3,6 +3,7 @@ title: >
   Hey, I know, let's sue Apple over last year's signal strength indicator fiasco
 type: linkedList
 linkUrl: http://goo.gl/3AFwv
+linkedTitle: Information Week
 tags:
   - iPhone
   - Opinion
@@ -13,12 +14,12 @@ tags:
 
 Right, okay, where do I start?
 
-Let’s start here; cellular signal strength is measured in [dBm](http://goo.gl/P95gB), not those bars you see on your phone’s display. Those bars, in fact, are completely arbitrary. For instance a phone manufacture will say, well let’s see, -50dBm to -70dBm is average signal when the phone is near a tower, call quality is great at those signal strengths so we will display 5 bars at that dBM range (or 4 bars, or 6 bars or whatever).” And from there they develop a scale where the bars start to drop based on the correlation to dBm. The algorithms get a lot more complicated than that, but that’s basically it. It’s complete arbitrary. To be sure, carriers (such as AT&T) have recommended bar signal indicator to actual dBm, but it’s still all arbitrary.
+Let’s start here: cellular signal strength is measured in [dBm](http://goo.gl/P95gB), not those bars you see on your phone’s display. Those bars, in fact, are completely arbitrary. For instance a phone manufacture will say, well let’s see, -50dBm to -70dBm is average signal when the phone is near a tower, call quality is great at those signal strengths so we will display 5 bars at that dBM range (or 4 bars, or 6 bars or whatever).” And from there they develop a scale where the bars start to drop based on the correlation to dBm. The algorithms get a lot more complicated than that, but that’s basically it. It’s complete arbitrary. To be sure, carriers (such as AT&T) have recommended bar signal indicator to actual dBm, but it’s still all arbitrary.
 
 Now, originally, Apple’s 3G signal strength indications were fairly skewed to show strong signal until the dBm got pretty weak, but again, who sets the standard on these things? And with most digital 3G technologies, signal strength doesn’t make any difference to data speed or call quality until signal is weaker than -110 dBm so I’m sure the thinking at Apple was to display good signal strength until the signal was weak enough to start degrading the user experience. That thinking was/is fundamentally flawed, [1](#sigstrength-fn1) but I don’t see how anyone could sue over this. It’s software, it’s an algorithm. Get over it people!
 
 > The lawsuit does not seek restitution for call quality or reception troubles, presumably because AT&T bears most of the responsibility for that. Rather, it seeks recompense for the effect the faulty signal calculation method ostensibly has on the iPhone’s resale value. “The value of an iPhone with a fatally flawed Signal Strength Meter is less than the value of the same iPhone without the flaw,” the complaint states.
-> 
+>
 > Evidently, it would be too much trouble to download the iOS update that fixed the erroneous signal strength formula.
 
 Precisely. Apple did conform their (arbitrary) algorithm to AT&T’s (arbitrary) algorithm. Admittedly, it was silly of Apple to use such a skewed algorithm, but this is not a “fatal flaw.” A simple software update to all 3G capable iPhones “fixed” this so called “fatal flaw.”

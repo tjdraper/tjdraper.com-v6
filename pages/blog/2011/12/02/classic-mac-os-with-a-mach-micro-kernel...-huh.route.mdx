@@ -1,7 +1,6 @@
 ---
-title: Classic Mac OS with a Mach Microkernel&#8230; Huh?
+title: Classic Mac OS with a Mach Microkernel… Huh?
 type: article
-linkUrl: http://appleuserpro.com/site/classic-mac-os-with-a-mach-micro-kernel...-huh
 tags:
   - Opinion
   - Ranting
@@ -9,21 +8,21 @@ tags:
 
 I am not happy!
 
-I have been listening to the Audiobook version of Walter Isaacson’s Steve Jobs biography. And as a Mac geek, I am offended…
+I have been listening to the Audiobook version of Walter Isaacson's Steve Jobs biography. And as a Mac geek, I am offended…
 
-The narrator of the Steve Jobs Bioography Audiobook keeps referring to Mac OS X as Mac OS “EX.” Get it through your heads people! The “X” is a Roman Numeral and is pronounced “Ten.” Besides the fact that if you say Mac OS ”EX” too fast it doesn’t sound very good, it is simply incorrect to pronounce in this way.
+The narrator of the Steve Jobs Bioography Audiobook keeps referring to Mac OS X as Mac OS "EX." Get it through your heads people! The "X" is a Roman Numeral and is pronounced "Ten." Besides the fact that if you say Mac OS "EX" too fast it doesn't sound very good, it is simply incorrect to pronounce in this way.
 
-I’m also also upset with Walter Isaacson himself for managing to completely mangle the technical origins of OS X, claiming that OS X is not based on NeXTSTEP, but is rather a modified version of classic Mac OS, incorporating the Mach Microkernel [1](#mach-fn1). I mean it doesn’t even make any sense. How do you take Classic Mac OS and put a Mach Microkernel in it? It would no longer be Classic Mac OS.
+I'm also upset with Walter Isaacson himself for managing to completely mangle the technical origins of OS X, claiming that OS X is not based on NeXTSTEP, but is rather a modified version of classic Mac OS, incorporating the Mach Microkernel [1](#mach-fn1). I mean it doesn't even make any sense. How do you take Classic Mac OS and put a Mach Microkernel in it? It would no longer be Classic Mac OS.
 
-Isaacson is completely wrong. Mac OS X is the continuing evolution of NeXTSTEP/OPENSTEP, which system Apple acquired in it’s purchase of Steve Job’s company, NeXT Computer Inc. There is no part of the Classic Mac OS codebase in OS X.
+Isaacson is completely wrong. Mac OS X is the continuing evolution of NeXTSTEP/OPENSTEP, which system Apple acquired in it's purchase of Steve Job's company, NeXT Computer Inc. There is no part of the Classic Mac OS codebase in OS X.
 
-OS X’s codebase is from NeXTSTEP. OS X is NeXTSTEP. There is just no plainer way to say it.
+OS X's codebase is from NeXTSTEP. OS X is NeXTSTEP. There is just no plainer way to say it.
 
-Isaacson confusedly points out that OS X could run most Classic Mac OS applications “as is” or with a small amount of work to port the application. While it is “technically” true that OS X could run Classic Mac OS apps, it is also misleading in the way it is blithely stated and used in conjunction with his previous statement that OS X is an evolution of the Classic Mac OS. The reason OS X was able to run unmodified OS 9 software was because of the OS 9 emulation layer that was built in to OS X. Back in those days, a full, working copy of OS 9 was required for the emulation layer. OS X would actually boot OS 9 and run it in emulation so that Classic Mac OS apps could run. Not unlike VMWare fusion does with Windows so that a Mac can run Windows apps within OS X.
+Isaacson confusedly points out that OS X could run most Classic Mac OS applications "as is" or with a small amount of work to port the application. While it is "technically" true that OS X could run Classic Mac OS apps, it is also misleading in the way it is blithely stated and used in conjunction with his previous statement that OS X is an evolution of the Classic Mac OS. The reason OS X was able to run unmodified OS 9 software was because of the OS 9 emulation layer that was built in to OS X. Back in those days, a full, working copy of OS 9 was required for the emulation layer. OS X would actually boot OS 9 and run it in emulation so that Classic Mac OS apps could run. Not unlike VMWare fusion does with Windows so that a Mac can run Windows apps within OS X.
 
-The “or with a small amount of work to port the application” part would be the dreaded Carbon API. A necessary transitional step, but transitional all the same. The native API for OS X has always been what is now called Cocoa. Many developers with years of established codebases did take the route of porting to the Carbon API because it was much less work and a native Mac OS X app could be produced in relatively short order. The good developers then, after completing this port, began work on writing their software in the Cocoa API.
+The "or with a small amount of work to port the application" part would be the dreaded Carbon API. A necessary transitional step, but transitional all the same. The native API for OS X has always been what is now called Cocoa. Many developers with years of established codebases did take the route of porting to the Carbon API because it was much less work and a native Mac OS X app could be produced in relatively short order. The good developers then, after completing this port, began work on writing their software in the Cocoa API.
 
-In any event, it’s hard for me not to over react to this blatant error and call the factuality of the entire book into question now.
+In any event, it's hard for me not to over react to this blatant error and call the factuality of the entire book into question now.
 
 * * *
 

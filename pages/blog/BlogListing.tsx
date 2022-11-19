@@ -97,7 +97,7 @@ const BlogListing: CustomPage = (
                                                 );
                                             }
 
-                                            return <div className="bg-tjd-red-100 h-48 w-full object-cover" />;
+                                            return <div className="bg-gray-100 h-48 w-full object-cover" />;
                                         })()}
                                     </a>
                                     <div className="flex flex-1 flex-col justify-between bg-white p-6">
