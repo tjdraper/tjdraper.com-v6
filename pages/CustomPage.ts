@@ -8,6 +8,7 @@ export enum ComponentType {
 
 interface ComponentProperties {
     type?: ComponentType;
+    pageTitle?: string;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

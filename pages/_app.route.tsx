@@ -33,7 +33,10 @@ const App = ({ Component, pageProps }: Props) => {
     // If it's ComponentType.standardPage, put the AppShell around it
     if (type === ComponentType.standardPage) {
         return (
-            <AppShell activeNavItem={`/${seg1}`}>
+            <AppShell
+                pageTitle={pageProps.pageTitle}
+                activeNavItem={`/${seg1}`}
+            >
                 <Component {...pageProps} />
             </AppShell>
         );
@@ -47,8 +50,13 @@ const App = ({ Component, pageProps }: Props) => {
         uri,
     );
 
+    pageProps.pageTitle = metaData.title;
+
     return (
-        <AppShell activeNavItem={`/${seg1}`}>
+        <AppShell
+            pageTitle={pageProps.pageTitle}
+            activeNavItem={`/${seg1}`}
+        >
             <BlogPost metaData={metaData}>
                 <Component {...pageProps} />
             </BlogPost>

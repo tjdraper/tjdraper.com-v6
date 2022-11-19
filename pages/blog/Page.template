@@ -5,6 +5,18 @@ export async function getStaticProps () {
     const currentPageNum = {pageNum};
     const tag = {tag};
 
+    const tagVar = tag;
+
+    let pageTitle = 'Blog';
+
+    if (tag) {
+        pageTitle = `Tagged “${tagVar}” | ${pageTitle}`;
+    }
+
+    if (currentPageNum > 1) {
+        pageTitle = `Page ${String(currentPageNum).toString()} | ${pageTitle}`;
+    }
+
     return {
         props: {
             indexData: await getIndexData({
@@ -12,6 +24,7 @@ export async function getStaticProps () {
                 tag,
             }),
             tag,
+            pageTitle,
         },
     };
 }
