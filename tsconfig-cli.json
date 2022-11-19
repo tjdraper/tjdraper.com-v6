@@ -13,6 +13,7 @@
         "outDir": "cliSrc/dist",
         "rootDir": ".",
         "strict": true,
-        "target": "es2019"
+        "target": "es2019",
+        "resolveJsonModule": true
     }
 }

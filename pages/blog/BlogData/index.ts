@@ -4,8 +4,6 @@ import getTotalPosts from './getTotalPosts';
 import getIndexData from './getIndexData';
 import getPosts from './getPosts';
 
-// const getPostBySlug = (slug: string) => {};
-
 export {
     constants,
     getPosts,

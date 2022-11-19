@@ -2,9 +2,9 @@ import { Command } from '@oclif/core';
 import style from 'cli-color';
 import path from 'path';
 import fs from 'fs-extra';
-import { getPosts } from '../../../pages/blog/BlogData';
 import Post from '../../../pages/blog/BlogData/Post';
 import { DefaultPerPage } from '../../../pages/blog/BlogData/constants';
+import getPostsFromIndexCache from '../../../pages/blog/BlogData/getPostsFromIndexCache';
 
 const projectRoot = process.cwd();
 const templatePath = path.join(projectRoot, 'pages', 'blog', 'Page.template');
@@ -18,7 +18,7 @@ export default class BlogTagPages extends Command {
             'Publishing blog tag pages…',
         ));
 
-        const posts = await getPosts({
+        const posts = await getPostsFromIndexCache({
             limit: 999999999999999,
         });
 

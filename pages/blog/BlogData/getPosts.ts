@@ -5,13 +5,13 @@ import getFilesFromDirectory from '../../FileSystem/getFilesFromDirectory';
 import { BlogDirectory, BlogFolderName, DefaultPerPage } from './constants';
 import transformFrontMatterToMetaData from './transformFrontMatterToMetaData';
 
-interface GetPostsProps {
+export interface GetPostsProps {
     limit?: number;
     offset?: number;
     tag?: string | null | undefined;
 }
 
-interface Results {
+export interface Results {
     totalPosts: number;
     posts: Array<Post>;
 }

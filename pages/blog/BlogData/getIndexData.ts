@@ -1,7 +1,6 @@
 import IndexData from './IndexData';
-// eslint-disable-next-line import/no-cycle
-import { getPosts } from './index';
 import { DefaultPerPage } from './constants';
+import getPostsFromIndexCache from './getPostsFromIndexCache';
 
 interface GetIndexDataProps {
     currentPageNum?: number;
@@ -15,7 +14,7 @@ const getIndexData = async (props?: GetIndexDataProps): Promise<IndexData> => {
     const offset = (currentPageNum * perPage) - perPage;
     const tag = props?.tag || null;
 
-    const results = await getPosts({
+    const results = await getPostsFromIndexCache({
         limit: perPage,
         offset,
         tag,
