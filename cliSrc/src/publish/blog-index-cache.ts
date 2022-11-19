@@ -23,7 +23,7 @@ export default class BlogIndexCache extends Command {
         fs.writeFileSync(blogIndexCachePath, JSON.stringify(posts));
 
         this.log(style.green(
-            'blog index cache published',
+            'Blog index cache published',
         ));
     }
 }

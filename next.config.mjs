@@ -8,6 +8,13 @@ export default {
     poweredByHeader: false,
     reactStrictMode: true,
     swcMinify: true,
+    redirects: async () => ([
+        {
+            source: '/blog/feed',
+            destination: '/blog/feed.xml',
+            permanent: true,
+        },
+    ]),
     pageExtensions: ['.jpg', 'route.ts', 'route.tsx', 'route.md', 'route.mdx'],
     webpack: (config, options) => {
         config.module.rules.push({

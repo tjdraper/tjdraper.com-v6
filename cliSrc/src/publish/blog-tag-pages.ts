@@ -18,13 +18,13 @@ export default class BlogTagPages extends Command {
             'Publishing blog tag pages…',
         ));
 
-        const posts = await getPostsFromIndexCache({
+        const results = await getPostsFromIndexCache({
             limit: 999999999999999,
         });
 
         const tags = [] as Array<string>;
 
-        posts.posts.forEach((post) => {
+        results.posts.forEach((post) => {
             post.tags?.forEach((tag) => {
                 if (tags.indexOf(tag) >= 0) {
                     return;
@@ -46,11 +46,11 @@ export default class BlogTagPages extends Command {
         );
 
         tags.forEach((tag) => {
-            this.processTag(tag, template, posts.posts);
+            this.processTag(tag, template, results.posts);
         });
 
         this.log(style.green(
-            'blog tag pages published',
+            'Blog tag pages published',
         ));
     }
 

@@ -20,7 +20,7 @@ interface NavItem {
 const navigation = [
     { name: 'Home', href: '/', type: NavType.Local },
     { name: 'Blog', href: '/blog', type: NavType.Local },
-    { name: 'RSS Feed', href: '/blog/feed', type: NavType.Local },
+    { name: 'RSS Feed', href: '/blog/feed.xml', type: NavType.Local },
 ] as Array<NavItem>;
 
 const AppShell = (

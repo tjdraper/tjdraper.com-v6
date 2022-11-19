@@ -8,11 +8,12 @@
         "start": "yarn run publish && next start",
         "lint": "next lint && stylelint --allow-empty-input 'pages/**/*.css' 'styles/**/*.css'",
         "build-cli": "rm -rf cliSrc/dist && yarn tsc --project tsconfig-cli.json",
-        "publish": "yarn build-cli && yarn publish-blog-index-cache && yarn publish-blog-images && yarn publish-blog-pages && yarn publish-blog-tag-pages",
+        "publish": "yarn build-cli && yarn publish-blog-index-cache && yarn publish-blog-images && yarn publish-blog-pages && yarn publish-blog-tag-pages && yarn publish-blog-rss-feed",
         "publish-blog-index-cache": "./cli publish blog-index-cache",
         "publish-blog-images": "./cli publish blog-images",
         "publish-blog-pages": "./cli publish blog-pages",
-        "publish-blog-tag-pages": "./cli publish blog-tag-pages"
+        "publish-blog-tag-pages": "./cli publish blog-tag-pages",
+        "publish-blog-rss-feed": "./cli publish blog-rss-feed"
     },
     "oclif": {
         "bin": "cli",
@@ -59,6 +60,7 @@
         "remark-parse-frontmatter": "^1.0.3",
         "remark-rehype": "^10.1.0",
         "remark-smartypants": "^2.0.0",
+        "rss": "^1.2.2",
         "sanitize-html": "^2.7.3",
         "turndown": "^7.1.1",
         "turndown-plugin-gfm": "^1.0.2",
@@ -82,6 +84,7 @@
         "@types/react": "^18.0.25",
         "@types/react-dom": "^18.0.8",
         "@types/revalidator": "^0.3.8",
+        "@types/rss": "^0.0.29",
         "@types/sanitize-html": "^2.6.2",
         "@typescript-eslint/eslint-plugin": "^5.42.0",
         "@typescript-eslint/parser": "^5.42.0",
