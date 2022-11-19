@@ -17,6 +17,7 @@ export default class BlogRssFeed extends Command {
         ));
 
         const siteUrl = 'https://www.tjdraper.com';
+        // const siteUrl = 'http://localhost:3000';
 
         const feed = new RSS({
             title: 'TJDraper.com',
@@ -37,9 +38,21 @@ export default class BlogRssFeed extends Command {
 
             const date = new Date(`${yyyy}-${mm}-${dd}T13:00:00`);
 
+            let body = '';
+
+            if (post.imagePath) {
+                body += `<p><img src="${siteUrl}${post.imagePath}" alt="${post.title}"></p>`;
+            }
+
+            if (post.linkUrl && post.linkTitle) {
+                body += `<h2><a href="${post.linkUrl}">${post.linkTitle} →</a></h2>`;
+            }
+
+            body += post.body;
+
             feed.item({
                 title: post.title,
-                description: post.body,
+                description: body,
                 url: siteUrl + post.uri,
                 date,
                 categories: post.tags,
