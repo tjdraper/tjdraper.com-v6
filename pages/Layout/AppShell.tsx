@@ -67,12 +67,12 @@ const AppShell = (
                                     </div>
                                     <div className="hidden md:flex md:space-x-10">
                                         {navigation.map((item) => {
-                                            let classes = 'font-medium';
+                                            let classes = 'font-medium border-b-2';
 
                                             if (activeNavItem === item.href) {
-                                                classes += ' border-b-2 border-black';
+                                                classes += ' border-black';
                                             } else {
-                                                classes += ' text-tjd-red-500 hover:text-tjd-red-300 hover:border-b-2 hover:border-tjd-red-300';
+                                                classes += ' text-tjd-red-500 hover:text-tjd-red-300 hover:border-b-2 hover:border-tjd-red-300 border-transparent';
                                             }
 
                                             if (item.type === NavType.External) {
