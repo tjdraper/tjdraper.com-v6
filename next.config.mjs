@@ -1,6 +1,7 @@
 import remarkFrontmatter from 'remark-frontmatter';
 import smartypants from 'remark-smartypants';
 import remarkGfm from 'remark-gfm';
+import redirects from './redirects.json' assert { type: 'json' };
 
 const remarkMDXNext = await import('remark-mdx-next');
 
@@ -14,7 +15,7 @@ export default {
             destination: '/blog/feed.xml',
             permanent: true,
         },
-    ]),
+    ].concat(redirects)),
     pageExtensions: ['.jpg', 'route.ts', 'route.tsx', 'route.md', 'route.mdx'],
     webpack: (config, options) => {
         config.module.rules.push({
