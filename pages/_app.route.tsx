@@ -13,11 +13,6 @@ interface Props extends AppProps {
 const App = ({ Component, pageProps }: Props) => {
     const router = useRouter();
 
-    // Check for 404
-    if (pageProps.statusCode === 404) {
-        return <Component {...pageProps} />;
-    }
-
     // Check the component type
     const { type } = Component;
 
