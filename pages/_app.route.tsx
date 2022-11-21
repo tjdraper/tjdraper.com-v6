@@ -50,6 +50,7 @@ const App = ({ Component, pageProps }: Props) => {
     return (
         <AppShell
             pageTitle={pageProps.pageTitle}
+            summaryImage={metaData.imagePath ? `https://www.tjdraper.com${metaData.imagePath}` : undefined}
             activeNavItem={`/${seg1}`}
         >
             <BlogPost metaData={metaData}>
