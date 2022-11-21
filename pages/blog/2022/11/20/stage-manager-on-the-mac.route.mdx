@@ -1,0 +1,123 @@
+---
+title: Stage Manager on the Mac
+type: article
+image: mac-stage-manager.png
+tags:
+  - Apple
+  - iPad
+  - Mac
+  - Reviews
+---
+
+In _macOS 13 Ventura_, Apple introduced something called, _Stage Manager_ to macOS. I will be talking almost exclusively about Stage Manager on the Mac even though Apple introduced a very similar (but not identical) feature called Stage Manager on iPadOS.
+
+_Stage Manager_ is a great concept. In fact, as executed, it's almost good. Almost. If it was better executed, it would be great. As it stands now, it's a very frustrating experience.
+
+## The State of Window Management
+
+For many years I've been annoyed with the state of Window management on the Mac. During the years of 2017—2020 I spent a lot of time working on Windows (10), and window management over on that side of the computing OS world has its own issues. Oh, Microsoft solves some of the problems that Apple doesn't seem to care to solve, but not many of them, and not to my satisfaction. Overall, my experience in modern Windows was that Microsoft has "caught up" to Apple in many ways, but I still prefer the Mac (and I'm back to using the Mac full time in case anyone is wondering).
+
+The problem neither Microsoft nor Apple have been very interested in solving (up until Apple's Stage Manager) is the "window sets" problem. When I'm working on something, I tend to have multiple apps and multiple windows involved in that "something." And very often, I'll reach a point where I want or need to switch to something else for a while, but I want those window and app states preserved.
+
+### Multiple Desktops
+
+For some time, Windows and macOS have both had a concept called "multiple desktops" (Apple calls it _Spaces_, but it's the same concept. The problem is, as implemented, neither option really solves the problems well[^1].
+
+With Spaces on macOS, each display gets its own space, and you can have many spaces per-display. When you open an app that wasn't previously open, it opens in the current space. The trouble is that it "bounces" around a lot. Let's say I open a Safari window in one of my spaces, then open a Safari window in another space. When I `cmd + tab` to Safari, it will switch to the space with the Safari window that was most recently active. It's not great. And the only way I can see or switch spaces is by activating mission control, or swiping from side to side in a linear fashion
+
+![macOS Spaces](/images/blog/drafts/stage-manager/macos-spaces.jpg)
+
+With multiple desktops on Windows, each "desktop" spans all your displays, and (usually) each desktop acts like its own computer context. As far as that desktop knows, no other apps exist besides what's currently in that desktop. If you click a pinned app in the task bar, or open an app that may or may not be open in another space, it will also open an instance in your current desktop. I said "usually" because some apps seem incompatible with this. There's the occasional app that is limited to one window, and it will only ever open on one desktop. Which isn't great. I also found that, despite that fact that my Windows computer was _very_ beefy, using two desktops made the computer feel a lot slower. Using three brought the computer to its knees.
+
+![Windows 10 Multiple Desktops](/images/blog/drafts/stage-manager/windows-10-multiple-desktops.jpg)
+
+So as you can see, I've been a little nonplussed by that window grouping landscape.
+
+## Enter: Stage Manager
+
+When Apple announced Stage Manager, and demoed its abilities, I was really thrilled and impressed with what I was seeing. It looked like, more or less, what I was looking for, conceptually. Windows can be arranged in sets, and you can switch back and forth between sets of windows arranged exactly the way you like them.
+
+Well, the reality has been something of a glass of icy cold water in the face. When I first installed Ventura, I immediately enabled Stage Manager, and for a bit, maybe even a day, I really enjoyed it. But eventually, I had to turn it off. And even though I try it again once in a while, I eventually have to turn it off again.
+
+Thankfully, disabling stage manager appears to return everything to the previous, long-running, tried and true window management behaviors. And while I may be frustrated with that status quo, I know how to navigate and get along with it very well.
+
+### Terminology
+
+In order to talk about Stage Manager, I must define the terms I'll be using to talk about things. [John Gruber](https://daringfireball.net/) observed on an episode of [The Talk Show](https://daringfireball.net/thetalkshow/) (I don't remember which one so I can't link it directly, sorry) that the lack of clear terminology by Apple itself regarding Stage Manager may be an indication of what's gone wrong with Stage manager. I tend to agree.
+
+Regardless, here's the terminology to understand:
+
+#### Stage
+
+A stage is where a window (or a group of windows) are.
+
+#### Strip
+
+![Stage Manager Strip](/images/blog/drafts/stage-manager/mac-stage-manager-strip.jpg)
+
+As far as I can tell, there is no official name for the thing on the left side of the screen(s) where the thumbnails/piles are visible. However, the common nomenclature bing used around the web seems to be strip so that's what I'll call it.
+
+#### Thumbnails
+
+In the strip, you see thumbnails.
+
+In [Apple's official support document](https://support.apple.com/en-us/HT213315), Apple refers to the things you see on the left side of the screen as "thumbnails." But when this document does so, it's only referring to a single app being present on each stage. The document does cover the ability to drag from the "thumbnails" to create groups of windows on your current stage and never re-labels the thumbnails in the strip on the side. However, the internet seems to be calling those…
+
+#### Piles
+
+A pile is a group of windows in the strip.
+
+### What are the issues?
+
+1. **It has a problem I would describe as "bouncy"**
+
+What I mean by this is, by default, every time you open a new app, it gets its own stage, which causes it to "bounce" to a new stage. Very often, most of the time in fact, I want an app to open in the current stage. There is currently no way to prompt this behavior. If you click on an app in the Dock, or `cmd + tab` to it, one of two things happens: 1. If the app is not running, a new stage is created and the app is placed in that stage, or 2. If the app is already running and has a window, the stage of the most recently active window for that app will be bounced to (sound familiar, Spaces users?)
+
+And Finder has a problem whereby it might spawn a window for, say, decompressing a zip file. And guess what, that little bitty window gets its own stage, and that stage is brought to the fore for that tiny little window. Not fun.
+
+Additionally, sometimes, for no discernible reason, the stage you're currently working in will "bounce" away and another stage will become active. This is almost certainly a bug, but it's a huge, frustrating one. And even if they fix this one bug, there's still the myriad other problems.
+
+2. **It behaves a bit strangely on multiple displays**
+
+Actually, it behaves a lot strangely on multiple displays. That may be the primary reason I have disabled Stage Manager, actually.
+
+Sometimes trying to drag a window from a pile or thumbnail in the strip on one display to a stage on another display results in that window disappearing entirely. Getting it back can be frustrating or impossible. Often I have to quit the app and open it again. Sometimes invoking Mission Control to show all Windows and clicking on the window will bring it back in a state where it's half-on one of the displays. Sometimes not.
+
+Sometimes, when clicking on a pile to make it the active stage on one display, causes the stage to switch on another display too. That is _never_ what you want.
+
+Sometimes clicking on a thumbnail or pile does nothing. I put this issue here in the multiple displays section because I've never had it happen when using Stage Manager on a single display.
+
+3. **It's nearly impossible to move a window of an app to a new stage if there are no other app's windows in the current stage**
+
+The problem is that Apple conceives of stages as being for an app. The idea that you could have multiple windows from various different apps grouped together seems almost an after-thought.
+
+Let's use Safari as an example. Let's say I have Safari, and only Safari open in a stage. I click `cmd + n` for a new Safari Window and I want to put that window in a new stage by itself. Impossible. The "Remove from set" item in the "Window" menu is grayed out. Since Apple doesn't allow you to have empty stages, you can't go to an empty stage and drag that window's thumbnail to an empty stage. You simply cannot separate multiple windows of the same app into multiple stages. If you're working with one app, you must always be in the same context, according to Apple, I guess 🙄.
+
+4. **Unplugging displays, then plugging them back in results in a HUGE MESS**
+
+I know [John Siracusa](https://hypercritical.co/) frowns on this whole idea of using a laptop as your primary computer, plugged into displays sometimes, other times not. But I think the entire reason he objects to the concept so much is because Apple is SO BAD at remembering multiple display state. And Apple has not departed from the status quo here. If you are using multiple displays at your desk with stage manager turned on and arranged just the way you want it, and you leave your desk and disconnect your computer from the display(s), when you plug back in in 1 second, 5 seconds, or 1 day, your piles will be a completely scattered disaster. Assuming Apple will never fix this issue, because Apple has always had problems of this nature with  multiple displays, it would be nice if you could drag piles from one display to another, but…
+
+5. **Stages/Thumbnails/Piles can't be dragged to different displays**
+
+Like, seriously, what the heck? Such a basic, basic, basic feature. Non-existent. Because no one ever wants to use a group of windows an a different display, right?
+
+6. **There's no way to see all the piles you have if they don't fit in the strip**
+
+So, if you have 7 piles, but only 4 fit on your display, tough noogies.
+
+7. **Thumbnails/piles cannot be labeled**
+
+This, by the way, has been a long standing complaint of mine with Spaces/Multiple Desktop as well. And Apple has carried that baffling decision forward. And why not? No one knows, I suppose.
+
+## So, What Now?
+
+I don't know where we go from here. Apple has a long history of shipping partially baked window management features on the Mac, then never returning to them to polish them up or make them work properly. Stage Manager has a lot of promise. It's so close to doing what I want and need it to do. Quite frankly, it's baffling that it's shipped in the state it's in. My list of complaints here can be considered a wish list of things I want Apple to address or fix. Will they? Who knows?
+
+Funnily enough, many of these issues don't exist with Stage manager for iPadOS[^2]. It's not "bouncy" on iPad, multiple displays currently aren't supported by iPadOS, so no worry about dragging piles between displays, and moving apps into and out of stages is quite easy on iPad.
+
+If Apple can work out these issues that I've outlined, I'd love to return to Stage Manager. I pine for a solution to the issues Stage Manager is trying to address.
+
+Help us, Apple-wan Kenobi, you're our only hope.
+
+[^1]: Microsoft's implementation of multiples desktop's, I do find to be a little better than Apple's.
+[^2]: Of course, Stage Manager on iPad OS has it's own set of issues.

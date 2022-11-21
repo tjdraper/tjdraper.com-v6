@@ -3,7 +3,7 @@
     "version": "6.0.0",
     "private": true,
     "scripts": {
-        "dev": "yarn run publish && next dev && echo",
+        "dev": "yarn run publish && next dev",
         "build": "yarn run publish && next build",
         "start": "yarn run publish && next start",
         "lint": "next lint && stylelint --allow-empty-input 'pages/**/*.css' 'styles/**/*.css'",
