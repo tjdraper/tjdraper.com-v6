@@ -104,13 +104,17 @@ const getPosts = async (props?: GetPostsProps): Promise<Results> => {
         const unorderedPosts = {} as { [key: string]: Post };
 
         preliminaryPosts.forEach((post) => {
-            let key = '';
+            const uriParts = post.uri.split('/');
+
+            const slug = uriParts.pop();
+
+            let key = uriParts.join('/');
 
             if (post.order) {
-                key += `${post.order}-`;
+                key += `/${post.order}-${slug}`;
+            } else {
+                key += `/${slug}`;
             }
-
-            key += post.uri;
 
             unorderedPosts[key] = post;
         });
