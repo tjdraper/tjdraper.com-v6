@@ -53,7 +53,7 @@ const getPosts = async (props?: GetPostsProps): Promise<Results> => {
 
     // eslint-disable-next-line no-useless-catch
     try {
-        let posts = await Promise.all(files.map(async (file) => {
+        const preliminaryPosts = await Promise.all(files.map(async (file) => {
             let hasStarted = false;
 
             const uri = `/${file.split('/').filter((part) => {
@@ -100,6 +100,28 @@ const getPosts = async (props?: GetPostsProps): Promise<Results> => {
                 throw e;
             }
         })) as Array<Post>;
+
+        const unorderedPosts = {} as { [key: string]: Post };
+
+        preliminaryPosts.map((post) => {
+            let key = '';
+
+            if (post.order) {
+                key += `${post.order}-`;
+            }
+
+            key += post.uri;
+
+            unorderedPosts[key] = post;
+        });
+
+        const keys = Object.keys(unorderedPosts);
+
+        keys.sort();
+
+        let posts = keys.map((key) => unorderedPosts[key]);
+
+        posts.reverse();
 
         if (props?.tag) {
             posts = posts.filter((post) => {
