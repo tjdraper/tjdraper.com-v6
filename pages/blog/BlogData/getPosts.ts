@@ -103,7 +103,7 @@ const getPosts = async (props?: GetPostsProps): Promise<Results> => {
 
         const unorderedPosts = {} as { [key: string]: Post };
 
-        preliminaryPosts.map((post) => {
+        preliminaryPosts.forEach((post) => {
             let key = '';
 
             if (post.order) {
