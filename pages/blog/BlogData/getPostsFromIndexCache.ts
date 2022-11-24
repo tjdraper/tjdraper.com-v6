@@ -1,16 +1,14 @@
-import fs from 'fs-extra';
+// eslint-disable-next-line eslint-comments/disable-enable-pair
+/* eslint-disable no-eval */
 import { GetPostsProps, Results } from './getPosts';
 import Post from './Post';
-import { BlogDirectory, DefaultPerPage } from './constants';
+import { DefaultPerPage } from './constants';
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+import JsonData from './IndexCache.json' assert {type: 'json'};
 
 const getPostsFromIndexCache = async (props?: GetPostsProps): Promise<Results> => {
-    const jsonData = JSON.parse(
-        fs.readFileSync(
-            `${BlogDirectory}/BlogData/IndexCache.json`,
-        ).toString(),
-    );
-
-    const jsonResults = jsonData as unknown as Results;
+    const jsonResults = JsonData as unknown as Results;
 
     let posts = jsonResults.posts as unknown as Array<Post>;
 
