@@ -79,6 +79,7 @@
         "@babel/core": "^7.20.2",
         "@babel/eslint-parser": "^7.19.1",
         "@babel/preset-env": "^7.20.2",
+        "@tailwindcss/forms": "^0.5.3",
         "@tailwindcss/typography": "^0.5.7",
         "@tailwindcss/ui": "^0.7.2",
         "@types/cli-color": "^2.0.2",

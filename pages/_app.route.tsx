@@ -1,6 +1,5 @@
 import './global.css';
 import type { AppProps } from 'next/app';
-import { useRouter } from 'next/router';
 import CustomPage, { ComponentType } from './CustomPage';
 import AppShell from './Layout/AppShell';
 import transformFrontMatterToMetaData from './blog/BlogData/transformFrontMatterToMetaData';

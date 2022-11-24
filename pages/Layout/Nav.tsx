@@ -22,10 +22,10 @@ const navigation = [
                 name: 'Tags',
                 href: '/blog/tags',
             },
-            // {
-            //     name: 'Search',
-            //     href: '/blog/search',
-            // },
+            {
+                name: 'Search',
+                href: '/blog/search',
+            },
         ],
     },
     {
