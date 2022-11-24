@@ -5,13 +5,14 @@ import CustomPage, { ComponentType } from './CustomPage';
 import AppShell from './Layout/AppShell';
 import transformFrontMatterToMetaData from './blog/BlogData/transformFrontMatterToMetaData';
 import BlogPost from './blog/BlogPost/BlogPost';
+import useUri from './Url/useUri';
 
 interface Props extends AppProps {
     Component: CustomPage;
 }
 
 const App = ({ Component, pageProps }: Props) => {
-    const router = useRouter();
+    const { path } = useUri();
 
     // Check the component type
     const { type } = Component;
@@ -21,17 +22,10 @@ const App = ({ Component, pageProps }: Props) => {
         return <Component {...pageProps} />;
     }
 
-    const uri = router.pathname;
-
-    const seg1 = uri.substring(1).split('/').at(0);
-
     // If it's ComponentType.standardPage, put the AppShell around it
     if (type === ComponentType.standardPage) {
         return (
-            <AppShell
-                pageTitle={pageProps.pageTitle}
-                activeNavItem={`/${seg1}`}
-            >
+            <AppShell pageTitle={pageProps.pageTitle}>
                 <Component {...pageProps} />
             </AppShell>
         );
@@ -42,7 +36,7 @@ const App = ({ Component, pageProps }: Props) => {
 
     const metaData = transformFrontMatterToMetaData(
         pageProps,
-        uri,
+        path,
     );
 
     pageProps.pageTitle = metaData.title;
@@ -50,8 +44,11 @@ const App = ({ Component, pageProps }: Props) => {
     return (
         <AppShell
             pageTitle={pageProps.pageTitle}
-            summaryImage={metaData.imagePath ? `https://www.tjdraper.com${metaData.imagePath}` : undefined}
-            activeNavItem={`/${seg1}`}
+            summaryImage={
+                metaData.imagePath
+                    ? `https://www.tjdraper.com${metaData.imagePath}`
+                    : undefined
+            }
         >
             <BlogPost metaData={metaData}>
                 <Component {...pageProps} />
