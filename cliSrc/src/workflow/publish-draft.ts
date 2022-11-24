@@ -33,6 +33,20 @@ export default class PublishDraft extends Command {
             choices,
         });
 
+        const { success } = await this.publishFromSlug(slug);
+
+        if (!success) {
+            return;
+        }
+
+        this.log(style.green('Post published'));
+    }
+
+    async publishFromSlug (slug: string): Promise<{
+        success: boolean;
+        publishedDir: string;
+        finalPostPath: string;
+    }> {
         const selectedDir = `${draftsPath}/${slug}`;
 
         const currentDate = new Date();
@@ -56,7 +70,11 @@ export default class PublishDraft extends Command {
         if (fs.existsSync(finalPostPath)) {
             this.error(style.red('Publish path exists'));
 
-            return;
+            return {
+                success: false,
+                publishedDir: '',
+                finalPostPath: '',
+            };
         }
 
         const filesToPublish = await getFilesFromDirectory({
@@ -74,6 +92,10 @@ export default class PublishDraft extends Command {
 
         fs.removeSync(selectedDir);
 
-        this.log(style.green('Post published'));
+        return {
+            success: true,
+            publishedDir,
+            finalPostPath,
+        };
     }
 }

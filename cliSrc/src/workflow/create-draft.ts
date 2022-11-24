@@ -11,6 +11,22 @@ export default class CreateDraft extends Command {
     static summary = 'Creates a draft post';
 
     async run (): Promise<void> {
+        const { slug, success, draftFilePath } = await this.create();
+
+        if (!success) {
+            return;
+        }
+
+        this.log(style.green(`Draft created at ${draftFilePath}`));
+
+        this.log(style.green(`Run \`yarn dev\` and view at http://localhost:3000/blog/drafts/${slug}/${slug}`));
+    }
+
+    async create (): Promise<{
+        slug: string;
+        success: boolean;
+        draftFilePath: string;
+    }> {
         // eslint-disable-next-line no-eval
         const { default: InputPrompt } = await (eval('import("inquirer")') as Promise<typeof import('inquirer')>);
 
@@ -23,7 +39,11 @@ export default class CreateDraft extends Command {
         if (!title) {
             this.error(style.red('Title is required'));
 
-            return;
+            return {
+                slug: '',
+                success: false,
+                draftFilePath: '',
+            };
         }
 
         let { slug } = await InputPrompt.prompt({
@@ -79,7 +99,11 @@ export default class CreateDraft extends Command {
         if (fs.existsSync(draftFilePath)) {
             this.error(style.red('Draft path exists'));
 
-            return;
+            return {
+                slug: '',
+                success: false,
+                draftFilePath: '',
+            };
         }
 
         fs.mkdirSync(
@@ -152,8 +176,10 @@ linkUrl: ${linkUrl.trim()}
 
         fs.writeFileSync(draftFilePath, fileContent);
 
-        this.log(style.green(`Draft created at ${draftFilePath}`));
-
-        this.log(style.green(`Run \`yarn dev\` and view at http://localhost:3000/blog/drafts/${slug}/${slug}`));
+        return {
+            slug,
+            success: true,
+            draftFilePath,
+        };
     }
 }
