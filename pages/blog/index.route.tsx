@@ -1,22 +1,16 @@
+import { GetStaticProps } from 'next';
 import { getIndexData } from './BlogData';
-import BlogListing from './BlogListing';
+import BlogListing, { BlogListingProps } from './BlogListing';
 
-export async function getStaticProps () {
-    const currentPageNum = 1;
-    const tag = null;
-
-    const pageTitle = 'Blog';
-
-    return {
-        props: {
-            indexData: await getIndexData({
-                currentPageNum,
-                tag,
-            }),
-            tag,
-            pageTitle,
-        },
-    };
+interface Props extends BlogListingProps {
+    pageTitle: string;
 }
+
+export const getStaticProps: GetStaticProps<Props> = async () => ({
+    props: {
+        indexData: await getIndexData(),
+        pageTitle: 'Blog',
+    },
+});
 
 export default BlogListing;

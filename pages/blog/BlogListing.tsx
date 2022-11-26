@@ -12,14 +12,16 @@ interface PageDataMarkdown {
     tagHeading: string;
 }
 
+export interface BlogListingProps {
+    indexData: IndexData;
+    tag?: string | null | undefined;
+}
+
 const BlogListing: CustomPage = (
     {
         indexData,
         tag,
-    }: {
-        indexData: IndexData;
-        tag?: string | null | undefined;
-    },
+    }: BlogListingProps,
 ) => {
     const data = PageData as unknown as PageDataMarkdown;
 
