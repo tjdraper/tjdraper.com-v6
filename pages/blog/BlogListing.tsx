@@ -6,6 +6,7 @@ import Pagination from '../Pagination/Pagination';
 import CustomPage, { ComponentType } from '../CustomPage';
 import Breadcrumbs, { Breadcrumb } from '../Layout/Breadcrumbs';
 import BlogListingCard from './BlogListingCard';
+import slugifyTag from './BlogData/SlugifyTag';
 
 interface PageDataMarkdown {
     heading: string;
@@ -30,7 +31,7 @@ const BlogListing: CustomPage = (
     let basePath = '/blog';
 
     if (tag) {
-        basePath += `/tag/${tag.split(' ').join('-')}`;
+        basePath += `/tag/${slugifyTag(tag)}`;
     }
 
     if (indexData.currentPageNum > 1) {
@@ -42,10 +43,16 @@ const BlogListing: CustomPage = (
         ];
 
         if (tag) {
-            breadcrumbs.push({
-                name: `Tagged ${tag}`,
-                href: `/blog/tag/${tag.split(' ').join('-')}`,
-            });
+            breadcrumbs.push(
+                {
+                    name: 'Tags',
+                    href: '/blog/tags',
+                },
+                {
+                    name: `Tagged ${tag}`,
+                    href: `/blog/tag/${slugifyTag(tag)}`,
+                },
+            );
         }
 
         breadcrumbs.push({ name: `Page ${indexData.currentPageNum}` });
@@ -54,6 +61,10 @@ const BlogListing: CustomPage = (
             {
                 name: 'Blog',
                 href: '/blog',
+            },
+            {
+                name: 'Tags',
+                href: '/blog/tags',
             },
         ];
 

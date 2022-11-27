@@ -1,3 +1,5 @@
+import slugifyTag from './BlogData/SlugifyTag';
+
 const TagsMarkup = ({ tags }: { tags: Array<string> }) => (
     <>
         Tags:
@@ -6,7 +8,7 @@ const TagsMarkup = ({ tags }: { tags: Array<string> }) => (
             <span key={`blog-tag-${tag}`}>
                 {index !== 0 && ', '}
                 <a
-                    href={`/blog/tag/${tag.split(' ').join('-')}`}
+                    href={`/blog/tag/${slugifyTag(tag)}`}
                     className="text-tjd-red-500 hover:underline"
                 >
                     {tag}

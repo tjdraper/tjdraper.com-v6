@@ -36,7 +36,7 @@ export const getStaticPaths: GetStaticPaths<Params> = async () => {
 export const getStaticProps: GetStaticProps<Props, Params> = async (
     { params}
 ) => {
-    let currentPageNum = parseInt(params?.pageNum || '0');
+    const currentPageNum = parseInt(params?.pageNum || '0');
 
     return {
         props: {

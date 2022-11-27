@@ -9,10 +9,9 @@
         "lint": "next lint && stylelint --allow-empty-input 'pages/**/*.css' 'styles/**/*.css'",
         "build-cli": "yarn build-cli-ensure-index-cache-file && rm -rf cliSrc/dist && yarn tsc --project tsconfig-cli.json",
         "build-cli-ensure-index-cache-file": "if [ ! -f pages/blog/BlogData/IndexCache.json ]; then echo '{}' > pages/blog/BlogData/IndexCache.json; fi",
-        "publish": "yarn build-cli && yarn publish-blog-index-cache && yarn build-cli && yarn publish-blog-images && yarn publish-blog-tag-pages && yarn publish-blog-rss-feed && yarn publish-blog-redirects",
+        "publish": "yarn build-cli && yarn publish-blog-index-cache && yarn build-cli && yarn publish-blog-images && yarn publish-blog-rss-feed && yarn publish-blog-redirects",
         "publish-blog-index-cache": "./cli publish blog-index-cache",
         "publish-blog-images": "./cli publish blog-images",
-        "publish-blog-tag-pages": "./cli publish blog-tag-pages",
         "publish-blog-rss-feed": "./cli publish blog-rss-feed",
         "publish-blog-redirects": "./cli publish blog-redirects"
     },

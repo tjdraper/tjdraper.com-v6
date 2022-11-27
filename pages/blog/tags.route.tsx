@@ -2,6 +2,7 @@ import { ChevronRightIcon } from '@heroicons/react/20/solid';
 import CustomPage, { ComponentType } from '../CustomPage';
 import getPostsFromIndexCache from './BlogData/getPostsFromIndexCache';
 import Breadcrumbs from '../Layout/Breadcrumbs';
+import slugifyTag from './BlogData/SlugifyTag';
 
 type Tags = { [key: string]: {
     name: string;
@@ -22,7 +23,7 @@ export async function getStaticProps () {
 
             unorderedTags[tagLower] = unorderedTags[tagLower] || {
                 name: tag,
-                slug: tag.split(' ').join('-'),
+                slug: slugifyTag(tag),
                 totalEntries: 0,
             };
 
