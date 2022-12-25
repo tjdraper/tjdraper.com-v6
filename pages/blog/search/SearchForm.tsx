@@ -15,7 +15,6 @@ const SearchForm = ({ q }: { q?: string }) => (
                             name="q"
                             id="q"
                             className="block w-full rounded-md border-gray-300 shadow-sm focus:border-tjd-red-500 focus:ring-tjd-red-500 sm:text-sm"
-                            placeholder="you@example.com"
                             defaultValue={q}
                         />
                     </div>
