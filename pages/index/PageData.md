@@ -6,13 +6,13 @@ subHeading2: On this site you'll find an eclectic collection of writings on soft
 
 ## Site Background
 
-This site originated as a Blogspot blog[^blogspotaddress] back in 2005 just a couple months before Rachel and I were married. I wanted a place to post pictures, write thoughts about things, and generally anything I find interesting. I also started wanting to get more familiar with web design and things. I ended up hacking the theme of that blog to death.
+This site originated as a Blogspot blog[^blogspotaddress] back in 2005 just a couple months before Rachel and I were married. I wanted a place to post pictures, write thoughts about things, and generally anything I find interesting. I also started wanting to get more familiar with building for the web. In the end, I hacked that that blog to death.
 
-At some point I got my own domain, and the blog existed as a subset of the main domain (tjdraper.com/blog). I don't remember what I was doing with the main site. I do remember the design was horrible, and so was my design taste. I was still publishing the blog through [Blogger](https://www.blogger.com). Then I decided that the main focus of the site should be the blog. I also wanted a better publishing system; you know, a full CMS. I went with [ExpressionEngine](https://expressionengine.com/) Core (discontinued) because of it's ease of use and flexibility for designers (ExpressionEngine went on to be a huge part of my life). I copied and pasted about 2 years of blog posts by hand from Blogger to ExpressionEngine.[^blogspotcopypaste]
+At some point I got my own domain, built a website, and the blogspot existed as a subset of the main domain (tjdraper.com/blog). I don't remember what I was doing with the main site. I do remember the design was horrible, and so was my design taste. I was still publishing the blog through [Blogger](https://www.blogger.com). Then I decided that the main focus of the site should be the blog. I also wanted a better publishing system; you know, a full CMS. I went with [ExpressionEngine](https://expressionengine.com/) Core (discontinued) because of it's ease of use and flexibility for designers (ExpressionEngine went on to be a huge part of my life). I copied and pasted about 2 years of blog posts by hand from Blogger to ExpressionEngine.[^blogspotcopypaste]
 
 With the upgrade to ExpressionEngine 2, EllisLab killed the free for non-commercial use ExpressionEngine Core. I like free software if it's good, but I also understand the need for good software to be paid for. So I bit the bullet and purchased ExpressionEngine 2.
 
-This site remained and ExpressionEngine 2 site long after EE 3, 4, 5, 6, and now 7 came out. It was time to do something.
+This site remained an ExpressionEngine 2 site long after EE 3, 4, 5, 6, and now 7 came out. It was time to do something.
 
 Over the years, as I've started writing more and more custom software, and using more and different/interesting tools, I've used EE less and less (though I still love it and write add-ons for it). And I just haven't been publishing to this site (since 2015, until this new iteration in November of 2022) because it just felt like a pain and a slog to log into such an old control panel.
 
